@@ -1,6 +1,12 @@
 let canvas;
 let ctx; 
-let character = new MovableObject();
+let character = new Character();
+let enemies = [
+    new Zombies(),
+    new Zombies(),
+    new Zombies(),
+]
+
 
 function init(){
     canvas =document.getElementById('canvas');
