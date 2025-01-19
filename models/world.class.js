@@ -6,6 +6,39 @@ class World {
     new Zombies()
 ];
 
+moon =[
+  new Moon()
+];
+
+stars = [
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),  
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star(),
+  new Star()
+];
+
   canvas;
   ctx;
 
@@ -24,7 +57,13 @@ draw(){
       this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
     });
 
-
+    this.stars.forEach(star => {
+      this.ctx.drawImage(star.img, star.x, star.y, star.width, star.height);
+    });
+    
+    this.moon.forEach(m => {
+      this.ctx.drawImage(m.img, m.x, m.y, m.width, m.height);
+    });
 
     let self = this;
     requestAnimationFrame(function(){
