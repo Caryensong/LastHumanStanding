@@ -1,5 +1,5 @@
 class Character extends MovableObject{
-
+   speed = 4;
    humanWalking = [
          './img/human/Walking/0_Fallen_Angels_Walking_002.png',
          './img/human/Walking/0_Fallen_Angels_Walking_003.png',
@@ -24,22 +24,35 @@ class Character extends MovableObject{
          './img/human/Walking/0_Fallen_Angels_Walking_022.png',
          './img/human/Walking/0_Fallen_Angels_Walking_023.png',
    ];
+   world;
 
      constructor(){
         super().loadImage('./img/human/Walking/0_Fallen_Angels_Walking_001.png');
         this.loadImages(this.humanWalking);
 
-        this.animation();
+        this.animate();
      }
 
-     animation(){
+     animate(){
+
       setInterval(() => {
+         if(this.world.keyboard.RIGHT){ 
+            this.x +=this.speed;
+         }
+         if(this.world.keyboard.LEFT){ 
+            this.x -=this.speed;
+         }
+       }, 1000 / 60);
+      
+
+      setInterval(() => {
+         if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT){ 
          let i = this.currentImage % this.humanWalking.length;
          let path = this.humanWalking[i];
          this.img =this.imageCache[path];
          this.currentImage++;
-      }, 100);
-
+         }
+      }, 20);
      }
 
     jump(){
