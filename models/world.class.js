@@ -10,23 +10,16 @@ moon =[
   new Moon()
 ];
 
-stars = [
-  new Star(),
-  new Star(),
-  new Star(),
-  new Star(),
-  new Star(),
-  new Star(),
-  new Star(),
-  new Star(),
-  new Star(),
-  new Star()
+clouds = [
+  new Cloud('./img/background/cloud.png', 0, 0.1),
+  new Cloud('./img/background/cloud1.png', 0, 0.2),
 ];
 
 backgroundObjects = [
-  new BackgroundObject('./img/background/4.png', 0, 290),
-  new BackgroundObject1('./img/background/3.png', 0, 290)
-
+  new BackgroundObject('./img/background/3.png', 0, 0.1),
+  new BackgroundObject('./img/background/4.png', 0, 0.5),
+  new BackgroundObject('./img/background/2.png', 0, 0.9),
+  new BackgroundObject('./img/background/stars.png', 0, 1),
 ];
 
   canvas;
@@ -41,11 +34,9 @@ backgroundObjects = [
 draw(){
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.addObjectToMap(this.backgroundObjects);
-    this.addObjectToMap(this.backgroundObjects);
-    this.addToMap(this.character);
-
+    this.addToMap(this.character)
     this.addObjectToMap(this.enemies);
-    this.addObjectToMap(this.stars);
+    this.addObjectToMap(this.clouds);
     this.addObjectToMap( this.moon);
   
 
@@ -61,7 +52,15 @@ draw(){
     });
 
   }
+
   addToMap(mo){
-    this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+    if (mo instanceof BackgroundObject) {
+      this.ctx.globalAlpha = mo.opacity;
+  } else {
+      this.ctx.globalAlpha = 1; // Full opacity for other objects
   }
+
+    this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+    this.ctx.globalAlpha = 1;
+}
 }
