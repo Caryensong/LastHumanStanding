@@ -11,8 +11,8 @@ moon =[
 ];
 
 clouds = [
-  new Cloud('./img/background/cloud.png', 0, 0.1),
-  new Cloud('./img/background/cloud1.png', 0, 0.2),
+  new Cloud('./img/background/cloud.png', 0, 0.4),
+  new Cloud('./img/background/cloud1.png', 0, 0.5)
 ];
 
 backgroundObjects = [
@@ -33,11 +33,12 @@ backgroundObjects = [
 
 draw(){
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.addObjectToMap(this.backgroundObjects);
+    this.addObjectToMap(this.backgroundObjects);   
+    this.addObjectToMap( this.moon);
+    this.addObjectToMap(this.clouds);
     this.addToMap(this.character)
     this.addObjectToMap(this.enemies);
-    this.addObjectToMap(this.clouds);
-    this.addObjectToMap( this.moon);
+   
   
 
     let self = this;
@@ -54,7 +55,7 @@ draw(){
   }
 
   addToMap(mo){
-    if (mo instanceof BackgroundObject) {
+    if (mo instanceof BackgroundObject || mo instanceof Cloud) {
       this.ctx.globalAlpha = mo.opacity;
   } else {
       this.ctx.globalAlpha = 1; // Full opacity for other objects
