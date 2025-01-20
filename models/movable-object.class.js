@@ -4,10 +4,12 @@ class MovableObject {
     img;
     width =150;
     height = 150;
+    speed = 0.15;
     imageCache = {};
-
+    currentImage = 0;
+    
     loadImage(path){
-        this.img = new Image();
+        this.img = new Image();  //this.img = document.getElementByID ('image') <img id = "image" scr>
         this.img.src = path;
     }
 
@@ -24,6 +26,9 @@ class MovableObject {
     }
 
     moveLeft(){
-
+        setInterval(()=>{
+            this.x -= this.speed;
+    
+        }, 1000/ 60);
     }
 }
