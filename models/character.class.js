@@ -1,5 +1,6 @@
 class Character extends MovableObject{
-   speed = 4;
+   speed = 4;  
+   world;
    humanWalking = [
          './img/human/Walking/0_Fallen_Angels_Walking_002.png',
          './img/human/Walking/0_Fallen_Angels_Walking_003.png',
@@ -24,8 +25,7 @@ class Character extends MovableObject{
          './img/human/Walking/0_Fallen_Angels_Walking_022.png',
          './img/human/Walking/0_Fallen_Angels_Walking_023.png',
    ];
-   world;
-
+ 
      constructor(){
         super().loadImage('./img/human/Walking/0_Fallen_Angels_Walking_001.png');
         this.loadImages(this.humanWalking);
@@ -38,9 +38,11 @@ class Character extends MovableObject{
       setInterval(() => {
          if(this.world.keyboard.RIGHT){ 
             this.x +=this.speed;
+            this.otherDirection = false;
          }
          if(this.world.keyboard.LEFT){ 
-            this.x -=this.speed;
+            this.x -= this.speed;
+            this.otherDirection = true;
          }
        }, 1000 / 60);
       
