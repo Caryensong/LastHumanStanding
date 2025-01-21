@@ -24,17 +24,16 @@ class Zombies extends MovableObject{
     }
 
     animation(){
-        this.moveLeft();
+        setInterval(()=>{     
+            this.moveLeft();
+            this.otherDirection = false;
+        }, 1000/ 60);
+   
 
         setInterval(() => {
           this.playAnimation(this.zombieWalking);
            this.walking_sound.play();
         }, 250);
-
-    // animation(){
-    //    setInterval(() => {
-    //     this.x -= 0.1;
-    //    }, 1000 / 60); 
   }
 
 }
