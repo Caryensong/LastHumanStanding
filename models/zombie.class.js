@@ -27,10 +27,7 @@ class Zombies extends MovableObject{
         this.moveLeft();
 
         setInterval(() => {
-           let i = this.currentImage % this.zombieWalking.length;
-           let path = this.zombieWalking[i];
-           this.img =this.imageCache[path];
-           this.currentImage++;
+          this.playAnimation(this.zombieWalking);
            this.walking_sound.play();
         }, 250);
 

@@ -2,6 +2,7 @@ class Character extends MovableObject{
    speed = 4;  
    world;
    walking_sound= new Audio('./audio/Walking1.mp3');
+
    humanWalking = [
          './img/human/Walking/0_Fallen_Angels_Walking_002.png',
          './img/human/Walking/0_Fallen_Angels_Walking_003.png',
@@ -30,7 +31,7 @@ class Character extends MovableObject{
      constructor(){
         super().loadImage(this.humanWalking[0]);
         this.loadImages(this.humanWalking);
-
+this.applyGravaty();
         this.animate();
      }
 
