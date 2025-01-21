@@ -1,8 +1,10 @@
-class World {       
-  character = new Character();
+class World { 
+  character = new Character(); 
+  start = level1.start;      
   enemies = level1.enemies;
   moon = level1.moon;
   clouds = level1.clouds;
+ 
   backgroundObjects = level1.backgroundObjects;
   canvas;
   ctx;
@@ -29,6 +31,7 @@ draw(){
     this.addObjectToMap(this.backgroundObjects);   
     this.addObjectToMap( this.moon);
     this.addObjectToMap(this.clouds);
+    this.addObjectToMap(this.start);
 
     this.addToMap(this.character)
     this.addObjectToMap(this.enemies);
