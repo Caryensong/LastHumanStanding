@@ -12,7 +12,9 @@ moon =[
 
 clouds = [
   new Cloud('./img/background/cloud.png', 0, 0.4),
-  new Cloud('./img/background/cloud1.png', 0, 0.5)
+  new Cloud('./img/background/cloud1.png', 0, 0.5),
+  new Cloud('./img/background/cloud.png', 720, 0.4),
+  new Cloud('./img/background/cloud1.png', 720, 0.5)
 ];
 
 backgroundObjects = [
@@ -20,11 +22,16 @@ backgroundObjects = [
   new BackgroundObject('./img/background/4.png', 0, 0.5),
   new BackgroundObject('./img/background/2.png', 0, 0.9),
   new BackgroundObject('./img/background/stars.png', 0, 1),
+  new BackgroundObject('./img/background/3.1.png', 720, 0.1),
+  new BackgroundObject('./img/background/4.1.png', 720, 0.5),
+  new BackgroundObject('./img/background/2.1.png', 720, 0.9),
+  new BackgroundObject('./img/background/stars.png', 7200, 1),
 ];
 
   canvas;
   ctx;
   keyboard;
+  camera_x = 0;
 
   constructor(canvas, keyboard){
     this.ctx = canvas.getContext('2d');
@@ -40,13 +47,17 @@ setWorld(){
 
 draw(){
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    this.ctx.translate(this.camera_x, 0);
+
     this.addObjectToMap(this.backgroundObjects);   
     this.addObjectToMap( this.moon);
     this.addObjectToMap(this.clouds);
+
     this.addToMap(this.character)
     this.addObjectToMap(this.enemies);
-   
-  
+
+    this.ctx.translate(-this.camera_x, 0);
 
     let self = this;
     requestAnimationFrame(function(){
