@@ -28,7 +28,7 @@ class Character extends MovableObject{
    ];
  
      constructor(){
-        super().loadImage('./img/human/Walking/0_Fallen_Angels_Walking_001.png');
+        super().loadImage(this.humanWalking[0]);
         this.loadImages(this.humanWalking);
 
         this.animate();
@@ -54,10 +54,7 @@ class Character extends MovableObject{
 
       setInterval(() => {
          if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT){ 
-         let i = this.currentImage % this.humanWalking.length;
-         let path = this.humanWalking[i];
-         this.img =this.imageCache[path];
-         this.currentImage++;
+            this.playAnimation(this.humanWalking);
          }
       }, 20);
      }

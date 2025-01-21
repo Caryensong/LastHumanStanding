@@ -14,7 +14,7 @@ class Zombies extends MovableObject{
     ];
 
     constructor(){
-        super().loadImage('./img/zombie3/walk/Walk1.png');
+        super().loadImage(this.zombieWalking[0]);
         this.loadImages(this.zombieWalking);
 
         this.x = 200 + Math.random()* 500;
