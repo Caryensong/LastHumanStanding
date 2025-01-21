@@ -1,12 +1,11 @@
 class Start extends MovableObject{
-x= -60;
-y= 345
-height = 80;
-width = 80;
 
-constructor(imagePath){
+constructor(imagePath, x, y, width, height){
     super().loadImage(imagePath);
-
+    this.x = x;
+    this.y = y;
+    this.width =width;
+    this.height =height;
 }
 
 }

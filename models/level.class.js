@@ -3,8 +3,8 @@ class Level {
     enemies;
     moon;
     clouds;
- 
     backgroundObjects;
+    level_end_x=1400;
 
     constructor(start, enemies, moon, clouds,  backgroundObjects){  
         this.start = start;
