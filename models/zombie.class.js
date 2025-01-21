@@ -2,6 +2,7 @@ class Zombies extends MovableObject{
     width=55;
     height=80;
     y= 345;
+    walking_sound= new Audio('./audio/zombie_walk.mp3');
     zombieWalking =[
         './img/zombie3/walk/Walk1.png',
         './img/zombie3/walk/Walk2.png',
@@ -30,6 +31,7 @@ class Zombies extends MovableObject{
            let path = this.zombieWalking[i];
            this.img =this.imageCache[path];
            this.currentImage++;
+           this.walking_sound.play();
         }, 250);
 
     // animation(){

@@ -1,6 +1,7 @@
 class Character extends MovableObject{
    speed = 4;  
    world;
+   walking_sound= new Audio('./audio/Walking1.mp3');
    humanWalking = [
          './img/human/Walking/0_Fallen_Angels_Walking_002.png',
          './img/human/Walking/0_Fallen_Angels_Walking_003.png',
@@ -36,13 +37,16 @@ class Character extends MovableObject{
      animate(){
 
       setInterval(() => {
+         this.walking_sound.pause();
          if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){ 
             this.x +=this.speed;
             this.otherDirection = false;
+            this.walking_sound.play();
          }
          if(this.world.keyboard.LEFT && this.x > -100 ){ 
             this.x -= this.speed;
             this.otherDirection = true;
+            this.walking_sound.play();
          }
          this.world.camera_x = -this.x + 100;
        }, 1000 / 60);
