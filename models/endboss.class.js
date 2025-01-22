@@ -8,7 +8,7 @@ class Endboss extends MovableObject {
     bottom:40
 }
 
-  endboss_Walking = [
+  Images_Walking = [
     "./img/endboss/Walking/0_Golem_Walking_000.png",
     "./img/endboss/Walking/0_Golem_Walking_001.png",
     "./img/endboss/Walking/0_Golem_Walking_002.png",
@@ -32,8 +32,8 @@ class Endboss extends MovableObject {
   ];
 
   constructor() {
-    super().loadImage(this.endboss_Walking[0]);
-    this.loadImages(this.endboss_Walking);
+    super().loadImage(this.Images_Walking[0]);
+    this.loadImages(this.Images_Walking);
     this.x = 700;
     this.y = 175;
     this.height = 300;
@@ -50,7 +50,7 @@ class Endboss extends MovableObject {
 
 
     setInterval(() => {
-      this.playAnimation(this.endboss_Walking);
+      this.playAnimation(this.Images_Walking);
       this.walking_sound.play();
     }, 100);
   }

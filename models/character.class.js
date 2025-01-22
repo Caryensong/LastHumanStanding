@@ -3,6 +3,7 @@ class Character extends MovableObject{
    world;
    walking_sound= new Audio('./audio/Walking1.mp3');
    jump_sound =new Audio ('./audio/jump.mp3');
+   hurt_sound =new Audio ('./audio/human_pain.mp3');
 
    offset={
       top: 30,
@@ -11,7 +12,7 @@ class Character extends MovableObject{
       bottom:20
   }
 
-   humanWalking = [
+   Images_Walking = [
          './img/human/Walking/0_Fallen_Angels_Walking_002.png',
          './img/human/Walking/0_Fallen_Angels_Walking_003.png',
          './img/human/Walking/0_Fallen_Angels_Walking_004.png',
@@ -36,7 +37,7 @@ class Character extends MovableObject{
          './img/human/Walking/0_Fallen_Angels_Walking_023.png',
    ];
 
-   humanJumping= [
+   Images_Jumping= [
       './img/human/Jump Start/0_Fallen_Angels_Jump Start_000.png',
       './img/human/Jump Start/0_Fallen_Angels_Jump Start_001.png',
       './img/human/Jump Start/0_Fallen_Angels_Jump Start_002.png',
@@ -56,7 +57,7 @@ class Character extends MovableObject{
       './img/human/Falling Down/0_Fallen_Angels_Falling Down_005.png',
    ];
 
-   humanDying=[
+   Images_Dead=[
       './img/human/Dying/0_Fallen_Angels_Dying_000.png',
       './img/human/Dying/0_Fallen_Angels_Dying_001.png',
       './img/human/Dying/0_Fallen_Angels_Dying_002.png',
@@ -74,7 +75,7 @@ class Character extends MovableObject{
       './img/human/Dying/0_Fallen_Angels_Dying_014.png'
    ];
 
-   humanHurts=[
+   Images_Hurt=[
       './img/human/Hurt/0_Fallen_Angels_Hurt_000.png',
       './img/human/Hurt/0_Fallen_Angels_Hurt_001.png',
       './img/human/Hurt/0_Fallen_Angels_Hurt_002.png',
@@ -90,10 +91,11 @@ class Character extends MovableObject{
    ];
  
      constructor(){
-        super().loadImage(this.humanWalking[0]);
-        this.loadImages(this.humanWalking);
-        this.loadImages(this.humanJumping);
-        this.loadImages(this.humanDying);
+        super().loadImage(this.Images_Walking[0]);
+        this.loadImages(this.Images_Walking);
+        this.loadImages(this.Images_Jumping);
+        this.loadImages(this.Images_Dead);
+        this.loadImages(this.Images_Hurt);
         this.applyGravaty();
         this.animate();
      }
@@ -125,14 +127,16 @@ class Character extends MovableObject{
       
 
       setInterval(() => {
-
-         if(this.isDead()){
-            this.playAnimation(this.humanDying);
+        if(this.isDead()){
+            this.playAnimation(this.Images_Dead);
+         } else if(this.isHurt()){
+            this.hurt_sound.play();
+            this.playAnimation(this.Images_Hurt);
          } else if(this.isAboveGround()){
-            this.playAnimation(this.humanJumping);
+            this.playAnimation(this.Images_Jumping);
          } else{
              if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT){ 
-            this.playAnimation(this.humanWalking);
+            this.playAnimation(this.Images_Walking);
          }
          }
       }, 20);
