@@ -26,7 +26,6 @@ class Zombies extends MovableObject{
     animation(){
         setInterval(()=>{     
             this.moveLeft();
-            this.otherDirection = false;
         }, 1000/ 60);
    
 
