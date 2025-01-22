@@ -10,6 +10,7 @@ class MovableObject {
     otherDirection = false;
     speedY= 0;
     acceleration=2.5;
+    energy = 100;
 
     offset={
         top:0,
@@ -89,4 +90,16 @@ class MovableObject {
     jump(){
         this.speedY = 25;
     }
+
+    hit(){
+        this.energy -=5;
+        if(this.energy < 0){
+            this.energy =0;
+        }
+    }
+
+    isDead(){
+        return this.energy == 0;
+    }
+    
 }

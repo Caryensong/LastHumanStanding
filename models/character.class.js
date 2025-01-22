@@ -54,13 +54,46 @@ class Character extends MovableObject{
       './img/human/Falling Down/0_Fallen_Angels_Falling Down_003.png',
       './img/human/Falling Down/0_Fallen_Angels_Falling Down_004.png',
       './img/human/Falling Down/0_Fallen_Angels_Falling Down_005.png',
+   ];
 
+   humanDying=[
+      './img/human/Dying/0_Fallen_Angels_Dying_000.png',
+      './img/human/Dying/0_Fallen_Angels_Dying_001.png',
+      './img/human/Dying/0_Fallen_Angels_Dying_002.png',
+      './img/human/Dying/0_Fallen_Angels_Dying_003.png',
+      './img/human/Dying/0_Fallen_Angels_Dying_004.png',
+      './img/human/Dying/0_Fallen_Angels_Dying_005.png',
+      './img/human/Dying/0_Fallen_Angels_Dying_006.png',
+      './img/human/Dying/0_Fallen_Angels_Dying_007.png',
+      './img/human/Dying/0_Fallen_Angels_Dying_008.png',
+      './img/human/Dying/0_Fallen_Angels_Dying_009.png',
+      './img/human/Dying/0_Fallen_Angels_Dying_010.png',
+      './img/human/Dying/0_Fallen_Angels_Dying_011.png',
+      './img/human/Dying/0_Fallen_Angels_Dying_012.png',
+      './img/human/Dying/0_Fallen_Angels_Dying_013.png',
+      './img/human/Dying/0_Fallen_Angels_Dying_014.png'
+   ];
+
+   humanHurts=[
+      './img/human/Hurt/0_Fallen_Angels_Hurt_000.png',
+      './img/human/Hurt/0_Fallen_Angels_Hurt_001.png',
+      './img/human/Hurt/0_Fallen_Angels_Hurt_002.png',
+      './img/human/Hurt/0_Fallen_Angels_Hurt_003.png',
+      './img/human/Hurt/0_Fallen_Angels_Hurt_004.png',
+      './img/human/Hurt/0_Fallen_Angels_Hurt_005.png',
+      './img/human/Hurt/0_Fallen_Angels_Hurt_006.png',
+      './img/human/Hurt/0_Fallen_Angels_Hurt_007.png',
+      './img/human/Hurt/0_Fallen_Angels_Hurt_008.png',
+      './img/human/Hurt/0_Fallen_Angels_Hurt_009.png',
+      './img/human/Hurt/0_Fallen_Angels_Hurt_010.png',
+      './img/human/Hurt/0_Fallen_Angels_Hurt_011.png'
    ];
  
      constructor(){
         super().loadImage(this.humanWalking[0]);
         this.loadImages(this.humanWalking);
         this.loadImages(this.humanJumping);
+        this.loadImages(this.humanDying);
         this.applyGravaty();
         this.animate();
      }
@@ -92,7 +125,10 @@ class Character extends MovableObject{
       
 
       setInterval(() => {
-         if(this.isAboveGround()){
+
+         if(this.isDead()){
+            this.playAnimation(this.humanDying);
+         } else if(this.isAboveGround()){
             this.playAnimation(this.humanJumping);
          } else{
              if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT){ 
