@@ -1,9 +1,9 @@
 class MovableObject {
     x = 10;
-    y = 210;
+    y = 220;
     img;
-    width =150;
-    height = 150;
+    width= 75;
+    height = 120;
     speed = 0.15;
     imageCache = {};
     currentImage = 0;
@@ -34,13 +34,14 @@ class MovableObject {
     }
 
     drawFrame(ctx){
+        if(this instanceof Character || this instanceof Zombies || this instanceof Endboss){
         ctx.globalAlpha = 1;  
         ctx.beginPath();
         ctx.lineWidth = "4";
         ctx.strokeStyle = "green";
         ctx.rect(this.x, this.y, this.width, this.height);
         ctx.stroke();
-        
+     }   
     }
 
     loadImages(arr){

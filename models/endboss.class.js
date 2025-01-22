@@ -28,8 +28,8 @@ class Endboss extends MovableObject {
     this.loadImages(this.endboss_Walking);
     this.x = 700;
     this.y = 135;
-    this.height = 350;
-    this.width = 280;
+    this.height = 300;
+    this.width = 205;
     this.speed = 0.3;
     this.otherDirection = true;
     this.animate();

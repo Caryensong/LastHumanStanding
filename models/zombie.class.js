@@ -31,7 +31,7 @@ class Zombies extends MovableObject{
 
         setInterval(() => {
           this.playAnimation(this.zombieWalking);
-           this.walking_sound.play();
+          this.walking_sound.play();
         }, 250);
   }
 
