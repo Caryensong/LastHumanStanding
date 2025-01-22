@@ -4,6 +4,13 @@ class Character extends MovableObject{
    walking_sound= new Audio('./audio/Walking1.mp3');
    jump_sound =new Audio ('./audio/jump.mp3');
 
+   offset={
+      top: 30,
+      left:40,
+      right:40, 
+      bottom:20
+  }
+
    humanWalking = [
          './img/human/Walking/0_Fallen_Angels_Walking_002.png',
          './img/human/Walking/0_Fallen_Angels_Walking_003.png',

@@ -26,7 +26,7 @@ checkCollisions(){
       console.log('collision with CHaracter', enemy);
     }
     });
-  }, 1000);
+  }, 200);
 }
 
 draw(){

@@ -2,14 +2,21 @@ class MovableObject {
     x = 10;
     y = 220;
     img;
-    width= 75;
-    height = 120;
+    width= 155;
+    height = 140;
     speed = 0.15;
     imageCache = {};
     currentImage = 0;
     otherDirection = false;
     speedY= 0;
     acceleration=2.5;
+
+    offset={
+        top:0,
+        left:0,
+        right:0, 
+        bottom:0
+    }
     
     applyGravaty(){
         setInterval(() => {
@@ -39,16 +46,21 @@ class MovableObject {
         ctx.beginPath();
         ctx.lineWidth = "4";
         ctx.strokeStyle = "green";
-        ctx.rect(this.x, this.y, this.width, this.height);
+        ctx.rect(
+            this.x + this.offset.left,
+            this.y + this.offset.top,
+            this.width - this.offset.left - this.offset.right,
+            this.height - this.offset.top - this.offset.bottom
+        );
         ctx.stroke();
      }   
-    }
+    } 
 // Character.isColliding(zombie)
     isColliding(mo){
-        return this.x + this.width > mo.x &&
-                this.y + this.height > mo.y &&
-                this.x < mo.x && 
-                this.y < mo.y + mo.height;
+        return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+            this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+            this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
     }
 
     loadImages(arr){

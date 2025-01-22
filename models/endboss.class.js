@@ -1,5 +1,13 @@
 class Endboss extends MovableObject {
   walking_sound = new Audio("./audio/monster_step.mp3");
+
+  offset={
+    top: 65,
+    left:90,
+    right:90, 
+    bottom:40
+}
+
   endboss_Walking = [
     "./img/endboss/Walking/0_Golem_Walking_000.png",
     "./img/endboss/Walking/0_Golem_Walking_001.png",
@@ -27,9 +35,9 @@ class Endboss extends MovableObject {
     super().loadImage(this.endboss_Walking[0]);
     this.loadImages(this.endboss_Walking);
     this.x = 700;
-    this.y = 135;
+    this.y = 175;
     this.height = 300;
-    this.width = 205;
+    this.width = 305;
     this.speed = 0.3;
     this.otherDirection = true;
     this.animate();
