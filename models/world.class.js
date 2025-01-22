@@ -57,10 +57,9 @@ draw(){
     this.flipImage(mo);
   }
   
-  // mo.draw(this.ctx);
-    this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
-    this.ctx.globalAlpha = 1;  
-    
+  mo.draw(this.ctx);
+  mo.drawFrame(this.ctx);
+  
     if(mo.otherDirection){
     this.flipImageBack(mo);
     }
