@@ -98,6 +98,8 @@ class Character extends MovableObject{
         this.loadImages(this.Images_Hurt);
         this.applyGravaty();
         this.animate();
+
+        this.isDeadAlready = false;
      }
 
      animate(){
@@ -128,7 +130,14 @@ class Character extends MovableObject{
 
       setInterval(() => {
         if(this.isDead()){
+         if(!this.isDeadAlready){
+            this.isDeadAlready = true;
             this.playAnimation(this.Images_Dead);
+            this.walking_sound.pause();
+            this.hurt_sound.play();
+         }
+            
+   
          } else if(this.isHurt()){
             this.hurt_sound.play();
             this.playAnimation(this.Images_Hurt);

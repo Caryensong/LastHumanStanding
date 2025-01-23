@@ -17,9 +17,30 @@ body{
 
 canvas{
     background: linear-gradient(to bottom, rgb(0, 5, 27) 50%, rgb(112, 112, 112) 90%, rgb(35, 75, 102) 100%);
+    display: block;
 }
 
 h1{
     color: rgb(0, 0, 0);
     font-family: 'defused', Arial, Helvetica, sans-serif;
+    text-shadow: 2px 2px 8px rgb(255, 196, 0);
+    text-align: center;
+} 
+
+
+/* Smartphone------- */
+
+@media only screen and (max-width: 720px){
+    canvas{
+        width: 100%;
+    }
 }
+    
+/* Smartphone -------- */
+
+@media only screen and (max-width: 480px){
+    canvas{
+        height: 100vh;
+    }
+}
+    
