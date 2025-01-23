@@ -5,7 +5,7 @@ class Level {
     moon;
     clouds;
     backgroundObjects;
-    level_end_x=1400;
+    level_end_x=2160;
 
     constructor(statusBar, start, enemies, moon, clouds,  backgroundObjects){  
         this.statusBar = statusBar;

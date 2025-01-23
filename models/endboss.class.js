@@ -47,14 +47,23 @@ class Endboss extends MovableObject {
 
     setInterval(() => {
       const distance = Math.abs(world.character.x - this.x);
-      if (distance < 400) {
+
+      if (distance <= 400) {
         setInterval(() => {
-          this.moveLeft();
+          if (world.character.x < this.x) {
+          this.moveLeft(); // Richtung Spieler (links)
+        } else if(world.character.x > this.x) {
+          this.moveRight(); // Richtung Spieler (rechts)
+          this.otherDirection = false;
+        
+        }
         }, 1000 / 25);
 
-        this.playAnimation(this.Images_Slashing);
+  
+      this.playAnimation(this.Images_Slashing);
         this.walking_sound.play();
-        this.hadFirstContact = true;
+      } else {
+        this.walking_sound.pause(); // Stoppe Sound, wenn außerhalb der Distanz
       }
 
     }, 100);

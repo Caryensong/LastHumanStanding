@@ -37,7 +37,10 @@ const level1 = new Level(
         new BackgroundObject('./img/background/3.1.png', 1440, 0.1),
         new BackgroundObject('./img/background/4.1.png', 1440, 0.5),
         new BackgroundObject('./img/background/2.1.png', 1440, 0.9),
-        new BackgroundObject('./img/background/stars.png', 1440, 1),
+        new BackgroundObject('./img/background/stars.png', 2160, 1),
+        new BackgroundObject('./img/background/3.1.png', 2160, 0.1),
+        new BackgroundObject('./img/background/4.1.png', 2160, 0.5),
+        new BackgroundObject('./img/background/2.1.png', 2160, 0.9),
     ]
 
 
