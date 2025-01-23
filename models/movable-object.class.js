@@ -26,21 +26,7 @@ class MovableObject extends DrawableObject {
         return this.y < 300;
      }
 
-    drawFrame(ctx){
-        if(this instanceof Character || this instanceof Zombies || this instanceof Endboss){
-        ctx.globalAlpha = 1;  
-        ctx.beginPath();
-        ctx.lineWidth = "4";
-        ctx.strokeStyle = "green";
-        ctx.rect(
-            this.x + this.offset.left,
-            this.y + this.offset.top,
-            this.width - this.offset.left - this.offset.right,
-            this.height - this.offset.top - this.offset.bottom
-        );
-        ctx.stroke();
-     }   
-    } 
+
 // Character.isColliding(zombie)
     isColliding(mo){
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
