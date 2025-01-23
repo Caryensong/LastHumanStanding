@@ -1,5 +1,9 @@
 const level1 = new Level(
     [
+        new StatusBar(10, 0, 'life'),  
+        new StatusBar(10, 29, 'poison')
+    ],
+    [
         new Start('./img/background/Start.png', -60, 345, 80, 80),
         
     ],

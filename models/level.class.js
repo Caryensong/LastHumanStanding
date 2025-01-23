@@ -1,4 +1,5 @@
 class Level {   
+    statusBar;
     start;
     enemies;
     moon;
@@ -6,7 +7,8 @@ class Level {
     backgroundObjects;
     level_end_x=1400;
 
-    constructor(start, enemies, moon, clouds,  backgroundObjects){  
+    constructor(statusBar, start, enemies, moon, clouds,  backgroundObjects){  
+        this.statusBar = statusBar;
         this.start = start;
         this.enemies = enemies;
         this.moon = moon;

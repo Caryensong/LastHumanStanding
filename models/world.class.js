@@ -5,7 +5,7 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
-  statusBar = new StatusBar();
+  // statusBar = new StatusBar();
 
   constructor(canvas, keyboard){
     this.ctx = canvas.getContext('2d');
@@ -26,8 +26,13 @@ checkCollisions(){
     if(this.character.isColliding(enemy)){
       this.character.hit();
       console.log(this.character.energy)
+      
+      const lifeBar = this.level.statusBar.find((bar) => bar.type === 'life');
+      if (lifeBar) {
+        lifeBar.setPercentage(this.character.energy);
+      }
     }
-    });
+  });
   }, 200);
 }
 
@@ -42,7 +47,11 @@ draw(){
     this.addObjectToMap(this.level.start);
 
     this.ctx.translate(-this.camera_x, 0);  //camera Back
-    this.addToMap(this.statusBar);
+
+    this.level.statusBar.forEach((statusBar) => {
+      this.addToMap(statusBar); // Jede StatusBar einzeln hinzufügen
+  });
+
     this.ctx.translate(this.camera_x, 0);   //camera forwards
 
     this.addToMap(this.character);
