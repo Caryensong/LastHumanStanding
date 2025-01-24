@@ -8,6 +8,14 @@ const level1 = new Level(
         
     ],
     [
+        new PoisonObjects(10, 200),
+        new PoisonObjects(10, 200),
+        new PoisonObjects(720, 200),
+        new PoisonObjects(720, 200 ),
+        new PoisonObjects(1440, 200),
+        new PoisonObjects(1440, 200)
+    ],
+    [
         new Zombies(), 
         new Zombies(), 
         new Zombies(),
@@ -20,7 +28,9 @@ const level1 = new Level(
         new Cloud('./img/background/cloud.png', 0, 0.4),
         new Cloud('./img/background/cloud1.png', 0, 0.5),
         new Cloud('./img/background/cloud.png', 720, 0.4),
-        new Cloud('./img/background/cloud1.png', 720, 0.5)
+        new Cloud('./img/background/cloud1.png', 720, 0.5),
+        new Cloud('./img/background/cloud.png', 1440, 0.4),
+        new Cloud('./img/background/cloud1.png', 1440, 0.5)
     ],
     [   new BackgroundObject('./img/background/3.1.png', -720, 0.1),
         new BackgroundObject('./img/background/4.1.png', -720, 0.5),

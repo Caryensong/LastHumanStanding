@@ -6,6 +6,7 @@ class Endboss extends MovableObject {
     left: 90,
     right: 60,
     bottom: 40
+
   }
 
   Images_Slashing = [

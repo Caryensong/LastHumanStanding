@@ -89,7 +89,6 @@ class Character extends MovableObject{
       './img/human/Hurt/0_Fallen_Angels_Hurt_010.png',
       './img/human/Hurt/0_Fallen_Angels_Hurt_011.png'
    ];
- 
      constructor(){
         super().loadImage(this.Images_Walking[0]);
         this.loadImages(this.Images_Walking);

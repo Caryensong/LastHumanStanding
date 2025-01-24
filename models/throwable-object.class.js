@@ -1,5 +1,12 @@
 class ThrowableObject extends MovableObject{
 
+    offset = {
+        top: 0,
+        left: 10,
+        right: 10,
+        bottom: 0
+      }
+
     constructor(x, y){
         super().loadImage('./img/poison/1.png');
         this.x = x;
@@ -8,7 +15,6 @@ class ThrowableObject extends MovableObject{
         this.width = 50;
         this.throw();
         
-
     }
 
     throw(){

@@ -33,7 +33,10 @@ check(){
 checkThrowObjects(){
   if(this.keyboard.D){
     let bottle = new ThrowableObject(this.character.x + 65 , this.character.y + 50);
-    this.throwableObjects.push(bottle);
+    this.throwableObjects.push(bottle);   //neue flasche wird hinzugefügt
+    if( this.throwableObjects.length > 5){
+      this.throwableObjects.shift();
+    }
   }
 }
 
@@ -61,6 +64,7 @@ draw(){
     this.addObjectToMap( this.level.moon);
     this.addObjectToMap(this.level.clouds);
     this.addObjectToMap(this.level.start);
+    this.addObjectToMap(this.level.objects);
     this.addObjectToMap(this.throwableObjects);
 
     this.ctx.translate(-this.camera_x, 0);  //camera Back

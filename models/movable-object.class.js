@@ -5,7 +5,6 @@ class MovableObject extends DrawableObject {
     acceleration=2.5;
     energy = 100;
     lastHit = 0;
- 
 
     offset={
         top:0,
@@ -25,7 +24,7 @@ class MovableObject extends DrawableObject {
 
      isAboveGround(){
         if(this instanceof ThrowableObject){
-            return this.y < 370;
+            return true;
         } else{
             return this.y < 300;
         }
