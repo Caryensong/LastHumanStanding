@@ -1,7 +1,9 @@
 const level1 = new Level(
     [
-        new StatusBar(10, 0, 'life'),  
-        new StatusBar(10, 29, 'poison')
+        new StatusBar(10, 0, 200, 40, 'life'),  
+        new StatusBar(10, 29, 200, 40, 'poison'),
+        new StatusBar(480, 5, 200, 70, 'endbossLife')
+
     ],
     [
         new Start('./img/background/Start.png', -60, 345, 80, 80),

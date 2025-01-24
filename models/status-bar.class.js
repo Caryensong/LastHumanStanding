@@ -1,6 +1,4 @@
 class StatusBar extends DrawableObject {
-     width = 200;
-     height = 40;
 
     Images_Life = [
         'img/Life/0.png',
@@ -20,21 +18,43 @@ class StatusBar extends DrawableObject {
         'img/poisoned bubbles/100.png',
     ];
 
+    Images_EndBoss =[
+        './img/endboss/statusbar/0.png',
+        './img/endboss/statusbar/20.png',
+        './img/endboss/statusbar/40.png',
+        './img/endboss/statusbar/60.png',
+        './img/endboss/statusbar/80.png',
+        './img/endboss/statusbar/100.png',
+    ];
+
     precentage = 100;
     poisonPercentage = 0;
+    endBossPercentage = 100;
 
-    constructor(x, y, type = 'life') {
+    constructor(x, y, width, height, type = 'life') {
         super();
         this.x = x;
         this.y = y;
+        this.width =width;
+        this.height = height;
         this.type = type; 
         this.loadImages(this.Images_Life);
         this.loadImages(this.Images_Poison);
+        this.loadImages(this.Images_EndBoss);
         if (this.type === 'life') {
             this.setPercentage(100); // Leben starten mit 100%
         } else if (this.type === 'poison') {
             this.setPoisonPersentage(0); // Gift startet mit 0%
+        } else if (this.type === 'endbossLife'){
+            this. setEndbossPercentage(100);
         }
+    }
+
+    setEndbossPercentage(endBossPercentage){
+        if(this.type !== 'endbossLife') return;
+        this.endBossPercentage = endBossPercentage;
+        let path = this.Images_EndBoss[this.resolveImageIndex()];
+        this.img = this.imageCache[path];
     }
 
 
