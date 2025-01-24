@@ -30,7 +30,9 @@ const level1 = new Level(
         new Cloud('./img/background/cloud.png', 720, 0.4),
         new Cloud('./img/background/cloud1.png', 720, 0.5),
         new Cloud('./img/background/cloud.png', 1440, 0.4),
-        new Cloud('./img/background/cloud1.png', 1440, 0.5)
+        new Cloud('./img/background/cloud1.png', 1440, 0.5),
+        new Cloud('./img/background/cloud.png', 2160, 0.4),
+        new Cloud('./img/background/cloud1.png', 2160, 0.5)
     ],
     [   new BackgroundObject('./img/background/3.1.png', -720, 0.1),
         new BackgroundObject('./img/background/4.1.png', -720, 0.5),
