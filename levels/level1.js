@@ -21,7 +21,6 @@ const level1 = new Level(
         new Zombies(), 
         new Zombies(), 
         new Zombies(),
-        new Endboss()
     ],
     [
         new Moon()

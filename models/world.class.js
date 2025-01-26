@@ -1,6 +1,7 @@
 class World { 
   character = new Character(); 
   level= level1;
+  endboss = new Endboss();
   canvas;
   ctx;
   keyboard;
@@ -36,6 +37,8 @@ checkThrowObjects(){
     this.throwableObjects.push(bottle);   //neue flasche wird hinzugefügt
     if( this.throwableObjects.length > 5){
       this.throwableObjects.shift();
+      console.log(this.throwableObjects);
+      
     }
   }
 }
@@ -77,6 +80,7 @@ draw(){
 
     this.addToMap(this.character);
     this.addObjectToMap(this.level.enemies);
+    this.addToMap(this.endboss);
 
     this.ctx.translate(-this.camera_x, 0);
 
