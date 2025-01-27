@@ -39,7 +39,7 @@ checkThrowObjects() {
         
           const poisonBar = this.level.statusBar.find((bar) => bar.type === 'poison');
           if (poisonBar) {
-              let poisonPercentage = 100 - (this.throwableObjects.length / 5) * 100;
+              let poisonPercentage = (100 - (this.throwableObjects.length / 5) * 100);
               console.log('Thrown bottles:', poisonPercentage);
               poisonBar.setPoisonPercentage(poisonPercentage);
           }
@@ -48,14 +48,20 @@ checkThrowObjects() {
 } 
 
 checkCollisions(){
-    this.level.enemies.forEach((enemy)=>{
-    if(this.character.isColliding(enemy)){
-        this.character.hit();
-        console.log(this.character.energy)
+    this.level.enemies.forEach((enemy, index) => {
+      if(this.character.isColliding(enemy)) {
+        if (this.character.isZombieColliding(enemy)){
+          console.log("Zombie von oben getroffen!");
+        this.level.enemies.splice(index, 1); // Entferne den Zombie
+       // Charakter springt nach oben
+        }else{
+          this.character.hit();
+          console.log("Charakter wurde getroffen", this.character.energy)
         
-        const lifeBar = this.level.statusBar.find((bar) => bar.type === 'life');
-        if (lifeBar) {
+          const lifeBar = this.level.statusBar.find((bar) => bar.type === 'life');
+          if (lifeBar) {
           lifeBar.setPercentage(this.character.energy);
+        }
       }
     }
   });

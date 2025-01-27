@@ -40,12 +40,10 @@ class MovableObject extends DrawableObject {
     }
 
 //Zombies .isColliding from Character on the Top
-isZombieColliding(mo){
-    return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
-        this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
-        this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
-        this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
+    isZombieColliding(mo) {
+    return (this.y + this.height - this.offset.bottom < mo.y +mo.height); // Charakter muss nach unten fallen
 }
+
 
 
     playAnimation(images){
