@@ -4,9 +4,8 @@ class World {
   endboss = new Endboss();
   canvas;
   ctx;
-  keyboard;
   camera_x = 0;
-  // statusBar = new StatusBar();
+  keyboard;
   throwableObjects = [];
   lastThrowTime;
 

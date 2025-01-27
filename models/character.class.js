@@ -164,6 +164,7 @@ class Character extends MovableObject{
          
          if (this.world.keyboard.D){
             this.playAnimation(this.Images_Throwing);
+            this.sounds.JUMP.play();
          }
 
          this.world.camera_x = -this.x + 100;
