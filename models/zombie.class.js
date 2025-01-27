@@ -1,7 +1,9 @@
 class Zombies extends MovableObject{
+    static zombiePositions = []; // Array, um Positionen aller Zombies zu speichern
     width=55;
     height=80;
     y= 345;
+    isDead = false;
    
     walking_sound= new Audio('./audio/zombie_walk.mp3');
 
@@ -39,22 +41,54 @@ class Zombies extends MovableObject{
         this.loadImages(this.Images_Dead);
         this.loadImages(this.Images_Hurt);
 
-        this.x = 200 + Math.random()* 500;
-        this.speed = 0.08 + Math.random() *0.25;
+        this.x = this.generateRandomPosition(); // Verwende die neue Methode für zufällige Position
+        this.speed = 0.08 + Math.random() * 0.25;
         this.animation();
+    }
 
+    generateRandomPosition() {
+        let minDistance = 100; // Mindestabstand zwischen Zombies
+        let x;
+
+        do {
+            x = 200 + Math.random() * 500; // Generiere zufällige Position
+        } while (Zombies.zombiePositions.some(pos => Math.abs(pos - x) < minDistance));
+
+        Zombies.zombiePositions.push(x); // Speichere die Position in der Liste
+        return x;
     }
 
     animation(){
         setInterval(()=>{     
-            this.moveLeft();
+            if(!this.isDead){
+                this.moveLeft();  
+            }
         }, 1000/ 60);
    
 
         setInterval(() => {
-          this.playAnimation(this.Images_Walking);
-          this.walking_sound.play();
+            if(!this.isDead){
+                this.playAnimation(this.Images_Walking);
+                this.walking_sound.play();
+            }
         }, 250);
-  }
+    }
 
+    playDeadAnimation(onAnimationComplete) {
+        this.isDying = true; // Setze den Zombie-Status auf "stirbt"
+        let currentFrame = 0;
+        this.width=100;
+        this.height=60;
+        this.y = 360; 
+
+        const deadAnimationInterval = setInterval(() => {
+            if (currentFrame < this.Images_Dead.length) {
+                this.img = this.imageCache[this.Images_Dead[currentFrame]];
+                currentFrame++;
+            } else {
+                clearInterval(deadAnimationInterval); // Animation beendet
+                if (onAnimationComplete) onAnimationComplete(); // Callback aufrufen
+            }
+        }, 100); // 150ms pro Frame
+    }
 }

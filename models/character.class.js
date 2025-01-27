@@ -1,6 +1,8 @@
 class Character extends MovableObject {
    speed = 4;
    world;
+   isSlashing = false;
+
    sounds = {
       WALK: new Audio('./audio/Walking1.mp3'),
       JUMP: new Audio('./audio/jump.mp3'),
@@ -171,6 +173,7 @@ class Character extends MovableObject {
          }
 
          if (this.world.keyboard.S) {
+            this.isSlashing = true;
             this.playAnimation(this.Images_Slashing);
             this.offset = {
                top: 30,
@@ -179,6 +182,9 @@ class Character extends MovableObject {
                bottom: 20
             };
             this.world.checkSlashingCollisions(); 
+            setTimeout(() => {
+               this.isSlashing = false;
+           }, 1500); // Slashing dauert 500ms
          }
 
          if (this.world.keyboard.D) {

@@ -24,10 +24,10 @@ setWorld(){
 }
 
 check(){
-  setInterval(() => {
+  setInterval(() => { 
     this.checkCollisions();
     this.checkThrowObjects();
-    this.checkSlashingCollisions();
+   
   }, 200);
 }
 
@@ -51,6 +51,11 @@ checkThrowObjects() {
 checkCollisions(){
     this.level.enemies.forEach((enemy, index) => {
       if(this.character.isColliding(enemy)) {
+          if (this.character.isSlashing) {
+              console.log("Slashing verhindert verletzung.");
+              return; // Kein Schaden, wenn Slashing aktiv ist
+          }
+
         if (this.character.isZombieColliding(enemy)){
           console.log("Zombie von oben getroffen!");
         this.level.enemies.splice(index, 1); // Entferne den Zombie
@@ -74,7 +79,10 @@ checkSlashingCollisions() {
           // Überprüfe, ob der Slashing-Treffer den Zombie trifft
           if (this.character.isSlashingColliding(enemy)) {
               console.log("Zombie wurde vom Schwert getroffen!");
-              this.level.enemies.splice(index, 1); // Zombie töten
+             
+              enemy.playDeadAnimation(() => {
+                this.level.enemies.splice(index, 1); 
+              });
           }
       }
   });
