@@ -7,10 +7,11 @@ class ThrowableObject extends MovableObject{
         bottom: 0
       }
 
-    constructor(x, y){
+    constructor(x, y, character){
         super().loadImage('./img/poison/1.png');
         this.x = x;
         this.y = y;
+        this.character = character;
         this.height = 50;
         this.width = 50;
         this.throw();
@@ -21,7 +22,12 @@ class ThrowableObject extends MovableObject{
         this.speedY = 30;
         this.applyGravaty();
         setInterval(() => {
-            this.x += 10;
+            if(this.character.otherDirection === true){
+               this.x -= 10; 
+            } else {
+                this.x += 10; 
+            }
+            
             
         }, 40);
 

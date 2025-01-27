@@ -33,7 +33,7 @@ check(){
 checkThrowObjects() {
   if (this.keyboard.D && this.throwableObjects.length < 5) {
       if (!this.lastThrowTime || Date.now() - this.lastThrowTime > 500) {
-          let bottle = new ThrowableObject(this.character.x + 90, this.character.y + 50);
+          let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 50, this.character);
           this.throwableObjects.push(bottle);
           this.lastThrowTime = Date.now();
         
