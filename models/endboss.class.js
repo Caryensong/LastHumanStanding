@@ -1,5 +1,5 @@
 class Endboss extends MovableObject {
-  walking_sound = new Audio("./audio/monster_step.mp3");
+ Walk = new Audio("./audio/monster_step.mp3");
 
   offset = {
     top: 65,
@@ -62,9 +62,10 @@ class Endboss extends MovableObject {
 
   
       this.playAnimation(this.Images_Slashing);
-        this.walking_sound.play();
+        this.Walk.play();
+        this.Walk.volume = 0.5;
       } else {
-        this.walking_sound.pause(); // Stoppe Sound, wenn außerhalb der Distanz
+        this.Walk.pause(); // Stoppe Sound, wenn außerhalb der Distanz
       }
 
     }, 100);

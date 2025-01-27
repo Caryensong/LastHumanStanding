@@ -1,9 +1,11 @@
 class Character extends MovableObject{
    speed = 4;  
    world;
-   walking_sound= new Audio('./audio/Walking1.mp3');
-   jump_sound =new Audio ('./audio/jump.mp3');
-   hurt_sound =new Audio ('./audio/human_pain.mp3');
+   sounds ={
+      WALK: new Audio('./audio/Walking1.mp3'),
+      JUMP: new Audio ('./audio/jump.mp3'),
+      HURT: new Audio ('./audio/human_pain.mp3'),
+   };
 
    offset={
       top: 30,
@@ -89,12 +91,45 @@ class Character extends MovableObject{
       './img/human/Hurt/0_Fallen_Angels_Hurt_010.png',
       './img/human/Hurt/0_Fallen_Angels_Hurt_011.png'
    ];
+
+   Images_Slashing = [
+      './img/human/Run Slashing/0_Fallen_Angels_Run Slashing_000.png',
+      './img/human/Run Slashing/0_Fallen_Angels_Run Slashing_001.png',
+      './img/human/Run Slashing/0_Fallen_Angels_Run Slashing_002.png',
+      './img/human/Run Slashing/0_Fallen_Angels_Run Slashing_003.png',
+      './img/human/Run Slashing/0_Fallen_Angels_Run Slashing_004.png',
+      './img/human/Run Slashing/0_Fallen_Angels_Run Slashing_005.png',
+      './img/human/Run Slashing/0_Fallen_Angels_Run Slashing_006.png',
+      './img/human/Run Slashing/0_Fallen_Angels_Run Slashing_007.png',
+      './img/human/Run Slashing/0_Fallen_Angels_Run Slashing_008.png',
+      './img/human/Run Slashing/0_Fallen_Angels_Run Slashing_009.png',
+      './img/human/Run Slashing/0_Fallen_Angels_Run Slashing_010.png',
+      './img/human/Run Slashing/0_Fallen_Angels_Run Slashing_011.png'
+   ];
+
+   Images_Throwing = [
+      './img/human/Throwing/0_Fallen_Angels_Throwing_000.png',
+      './img/human/Throwing/0_Fallen_Angels_Throwing_001.png',
+      './img/human/Throwing/0_Fallen_Angels_Throwing_002.png',
+      './img/human/Throwing/0_Fallen_Angels_Throwing_003.png',
+      './img/human/Throwing/0_Fallen_Angels_Throwing_004.png',
+      './img/human/Throwing/0_Fallen_Angels_Throwing_005.png',
+      './img/human/Throwing/0_Fallen_Angels_Throwing_006.png',
+      './img/human/Throwing/0_Fallen_Angels_Throwing_007.png',
+      './img/human/Throwing/0_Fallen_Angels_Throwing_008.png',
+      './img/human/Throwing/0_Fallen_Angels_Throwing_009.png',
+      './img/human/Throwing/0_Fallen_Angels_Throwing_010.png',
+      './img/human/Throwing/0_Fallen_Angels_Throwing_011.png',
+   ];
+
      constructor(){
         super().loadImage(this.Images_Walking[0]);
         this.loadImages(this.Images_Walking);
         this.loadImages(this.Images_Jumping);
         this.loadImages(this.Images_Dead);
         this.loadImages(this.Images_Hurt);
+        this.loadImages(this.Images_Throwing);
+        this.loadImages(this.Images_Slashing);
         this.applyGravaty();
         this.animate();
 
@@ -104,23 +139,31 @@ class Character extends MovableObject{
      animate(){
 
       setInterval(() => {
-         this.walking_sound.pause();
+         this.sounds.WALK.pause();
          if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){ 
          this.moveRight();
-         this.walking_sound.play();
-          this.otherDirection = false;
+         this.sounds.WALK.play();
+         this.otherDirection = false;
          }
          
          if(this.world.keyboard.LEFT && this.x > -100 ){ 
             this.x -= this.speed;
             this.moveLeft(); 
-            this.walking_sound.play();
+            this.sounds.WALK.play();
             this.otherDirection = true;
          }
    
          if(this.world.keyboard.SPACE  && !this.isAboveGround()){
             this.jump();
-            this.jump_sound.play();
+            this.sounds.JUMP.play();
+         }
+
+         if (this.world.keyboard.S){
+            this.playAnimation(this.Images_Slashing);
+         }
+         
+         if (this.world.keyboard.D){
+            this.playAnimation(this.Images_Throwing);
          }
 
          this.world.camera_x = -this.x + 100;
@@ -132,13 +175,12 @@ class Character extends MovableObject{
          if(!this.isDeadAlready){
             this.isDeadAlready = true;
             this.playAnimation(this.Images_Dead);
-            this.walking_sound.pause();
-            this.hurt_sound.play();
+            this.sounds.WALK.pause();
+            this.sounds.HURT.play();
          }
-            
-   
+
          } else if(this.isHurt()){
-            this.hurt_sound.play();
+           this.sounds.HURT.play();
             this.playAnimation(this.Images_Hurt);
          } else if(this.isAboveGround()){
             this.playAnimation(this.Images_Jumping);
