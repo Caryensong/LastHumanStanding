@@ -177,7 +177,8 @@ class Character extends MovableObject {
                left: 40,
                right: 15,
                bottom: 20
-            }
+            };
+            this.world.checkSlashingCollisions(); 
          }
 
          if (this.world.keyboard.D) {

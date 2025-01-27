@@ -41,7 +41,18 @@ class MovableObject extends DrawableObject {
 
 //Zombies .isColliding from Character on the Top
     isZombieColliding(mo) {
-    return (this.y + this.height - this.offset.bottom < mo.y +mo.height); // Charakter muss nach unten fallen
+        return (this.y + this.height - this.offset.bottom < mo.y +mo.height); // Charakter muss nach unten fallen
+    }
+
+    isSlashingColliding(mo) {
+    // Berechne den Slashing-Bereich mit deinem bestehenden Offset
+    let slashX = this.otherDirection 
+        ? this.x - this.offset.left 
+        : this.x + this.width + this.offset.right; // Rechts schlägt der Charakter nach vorne
+
+    let slashWidth = this.offset.right + this.offset.left;
+
+    return (slashX < mo.x + mo.width && slashX + slashWidth > mo.x);
 }
 
 
