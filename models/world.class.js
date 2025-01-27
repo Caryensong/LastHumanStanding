@@ -33,14 +33,20 @@ check(){
 
 checkThrowObjects() {
   if (this.keyboard.D && this.throwableObjects.length < 5) {
-      if (!this.lastThrowTime || Date.now() - this.lastThrowTime > 500) { // Nur alle 500ms werfen
+      if (!this.lastThrowTime || Date.now() - this.lastThrowTime > 500) {
           let bottle = new ThrowableObject(this.character.x + 90, this.character.y + 50);
           this.throwableObjects.push(bottle);
           this.lastThrowTime = Date.now();
-          console.log('Thrown bottles:', this.throwableObjects.length);
+        
+          const poisonBar = this.level.statusBar.find((bar) => bar.type === 'poison');
+          if (poisonBar) {
+              let poisonPercentage = 100 - (this.throwableObjects.length / 5) * 100;
+              console.log('Thrown bottles:', poisonPercentage);
+              poisonBar.setPoisonPercentage(poisonPercentage);
+          }
       }
   }
-}
+} 
 
 checkCollisions(){
     this.level.enemies.forEach((enemy)=>{

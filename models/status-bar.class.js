@@ -44,7 +44,7 @@ class StatusBar extends DrawableObject {
         if (this.type === 'life') {
             this.setPercentage(100); // Leben starten mit 100%
         } else if (this.type === 'poison') {
-            this.setPoisonPersentage(0); // Gift startet mit 0%
+            this.setPoisonPercentage(100); // Gift startet mit 0%
         } else if (this.type === 'endbossLife'){
             this. setEndbossPercentage(100);
         }
@@ -65,7 +65,7 @@ class StatusBar extends DrawableObject {
         this.img = this.imageCache[path];
     }
 
-    setPoisonPersentage(amount) {
+    setPoisonPercentage(amount) {
         if (this.type !== 'poison') return; // Nur für Gift
         this.poisonPercentage = amount;
         let path = this.Images_Poison[this.resolvePoisonIndex()];
@@ -74,18 +74,18 @@ class StatusBar extends DrawableObject {
 
 
     resolvePoisonIndex(){
-        if(this.amount == 0){
+        if(this.poisonPercentage >= 100){
+            return 5;
+        } else if(this.poisonPercentage >= 80){
+            return 4;
+        } else if(this.poisonPercentage >=60){
+            return 3;
+        }else if(this.poisonPercentage >= 40){
+            return 2;
+        }else if(this.poisonPercentage >= 20){
+            return 1;
+        }else{
             return 0;
-        } else if(this.amount == 1){
-            return 1
-        }else if(this.amount == 2){
-            return 2
-        }else if(this.amount == 3){
-            return 3
-        }else if(this.amount == 4){
-            return 4
-        } else {
-            return 5
         }
     }
 
