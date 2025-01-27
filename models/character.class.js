@@ -6,7 +6,7 @@ class Character extends MovableObject {
    sounds = {
       WALK: new Audio('./audio/Walking1.mp3'),
       JUMP: new Audio('./audio/jump.mp3'),
-      HURT: new Audio('./audio/human_pain.mp3'),
+      HURT: new Audio('./audio/hurt.mp3'),
    };
 
    offset = {

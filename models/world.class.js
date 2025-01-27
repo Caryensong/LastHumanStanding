@@ -58,8 +58,9 @@ checkCollisions(){
 
         if (this.character.isZombieColliding(enemy)){
           console.log("Zombie von oben getroffen!");
-        this.level.enemies.splice(index, 1); // Entferne den Zombie
-       // Charakter springt nach oben
+          enemy.playPoisonDeadAnimation(() => {
+            this.level.enemies.splice(index, 1); // Zombie entfernen
+        });
         }else{
           this.character.hit();
           console.log("Charakter wurde getroffen", this.character.energy)

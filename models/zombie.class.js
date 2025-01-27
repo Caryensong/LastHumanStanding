@@ -4,6 +4,7 @@ class Zombies extends MovableObject{
     height=80;
     y= 345;
     isDead = false;
+    hurt = new Audio('./audio/human_pain.mp3');
    
     walking_sound= new Audio('./audio/zombie_walk.mp3');
 
@@ -26,13 +27,9 @@ class Zombies extends MovableObject{
         './img/zombie3/dead/Dead7.png',
         './img/zombie3/dead/Dead8.png',
     ];
-     
-    Images_Hurt =[
-        './img/zombie3/poison/Hurt1.png',
-        './img/zombie3/poison/Hurt2.png',
-        './img/zombie3/poison/Hurt3.png',
-        './img/zombie3/poison/Hurt4.png',
-        './img/zombie3/poison/Hurt5.png',
+    
+    Images_Posion_Dead =[
+        'img/zombie3/dead/DEAD.png'
     ];
 
     constructor(){
@@ -40,6 +37,7 @@ class Zombies extends MovableObject{
         this.loadImages(this.Images_Walking);
         this.loadImages(this.Images_Dead);
         this.loadImages(this.Images_Hurt);
+        this.loadImages(this.Images_Posion_Dead);
 
         this.x = this.generateRandomPosition(); // Verwende die neue Methode für zufällige Position
         this.speed = 0.08 + Math.random() * 0.25;
@@ -75,11 +73,11 @@ class Zombies extends MovableObject{
     }
 
     playDeadAnimation(onAnimationComplete) {
-        this.isDying = true; // Setze den Zombie-Status auf "stirbt"
+        this.isDead = true; // Setze den Zombie-Status auf "stirbt"
         let currentFrame = 0;
-        this.width=100;
-        this.height=60;
-        this.y = 360; 
+        this.width=90;
+        this.height=50;
+        this.y = 365; 
 
         const deadAnimationInterval = setInterval(() => {
             if (currentFrame < this.Images_Dead.length) {
@@ -91,4 +89,21 @@ class Zombies extends MovableObject{
             }
         }, 100); // 150ms pro Frame
     }
+
+    playPoisonDeadAnimation(onAnimationComplete) {
+        this.isDead = true;
+        this.width = 130;
+        this.height = 20;
+        this.y = 420;
+        this.hurt.play();
+    
+        // Zeige das einzelne Bild für die Animation an
+        this.img = this.imageCache[this.Images_Posion_Dead[0]];
+    
+        // Setze ein Timeout, um nach 2 Sekunden den Zombie zu entfernen
+        setTimeout(() => {
+            if (onAnimationComplete) onAnimationComplete(); // Callback aufrufen
+        }, 1000); // Bild wird 2 Sekunden lang angezeigt
+    }
+    
 }
