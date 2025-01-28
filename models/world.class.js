@@ -92,6 +92,8 @@ checkSlashingCollisions() {
   this.level.enemies.forEach((enemy, index) => {
       if (this.character.isColliding(enemy)) {
           // Überprüfe, ob der Slashing-Treffer den Zombie trifft
+          console.log(this.character.isSlashingColliding(enemy));
+          
           if (this.character.isSlashingColliding(enemy)) {
               console.log("Zombie wurde vom Schwert getroffen!");
              

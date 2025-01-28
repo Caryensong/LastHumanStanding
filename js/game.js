@@ -51,12 +51,15 @@ window.addEventListener("keyup", (e) => {
         keyboard.DOWN = false;
     }
     if(e.keyCode == 32){
-        keyboard.SPACE = false;
+       keyboard.SPACE_SOLVED = false;
+       keyboard.SPACE = false;
     }   
     if(e.keyCode == 68){
+        keyboard.D_SOLVED = false;
         keyboard.D = false;
     }
     if(e.keyCode == 83){
+        keyboard.S_SOLVED = false;
         keyboard.S = false;
     }
 });

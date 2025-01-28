@@ -168,29 +168,39 @@ class Character extends MovableObject {
          }
 
          if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-            this.jump();
-            this.sounds.JUMP.play();
+            if(!this.world.keyboard.SPACE_SOLVED){
+               this.jump();
+               this.sounds.JUMP.play();
+               this.world.keyboard.SPACE_SOLVED = true;
+            } 
          }
 
          if (this.world.keyboard.S) {
-            this.isSlashing = true;
-            this.playAnimation(this.Images_Slashing);
-            this.offset = {
-               top: 30,
-               left: 40,
-               right: 15,
-               bottom: 20
-            };
+            if (!this.world.keyboard.S_SOLVED) {
+               this.isSlashing = true;
+               this.playAnimation(this.Images_Slashing);
+               this.offset = {
+                  top: 30,
+                  left: 40,
+                  right: 15,
+                  bottom: 20
+               };   
+               this.world.checkSlashingCollisions();
+               this.world.keyboard.S_SOLVED = true;   
+            }
 
-            this.world.checkSlashingCollisions(); 
             setTimeout(() => {
                this.isSlashing = false;
-           }, 1800); // Slashing dauert 500ms
+            }, 1800); // Slashing dauert 500ms
          }
 
          if (this.world.keyboard.D) {
-            this.playAnimation(this.Images_Throwing);
-            this.sounds.JUMP.play();
+            if(!this.world.keyboard.D_SOLVED){
+              this.playAnimation(this.Images_Throwing);
+               this.sounds.JUMP.play();  
+               this.world.keyboard.D_SOLVED = true;
+            }
+           
          }
 
          this.world.camera_x = -this.x + 100;
