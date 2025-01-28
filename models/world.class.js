@@ -27,6 +27,7 @@ check(){
   setInterval(() => { 
     this.checkCollisions();
     this.checkThrowObjects();
+    this.checkObjectsColliding();
    
   }, 200);
 }
@@ -34,7 +35,7 @@ check(){
 checkThrowObjects() {
   if (this.keyboard.D && this.throwableObjects.length < 5) {
       if (!this.lastThrowTime || Date.now() - this.lastThrowTime > 500) {
-          let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 50, this.character);
+        let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 50, this.character);
           this.throwableObjects.push(bottle);
           this.lastThrowTime = Date.now();
         
@@ -47,6 +48,37 @@ checkThrowObjects() {
       }
   }
 } 
+
+checkObjectsColliding() {
+  this.level.objects.forEach((object, index) => {
+    if (object && this.character.isColliding(object)) {
+      // Poison-Objekt einsammeln
+      if (object instanceof PoisonObjects) {
+        console.log('Poison Flasche eingesammelt');
+        this.level.objects.splice(index, 1);
+        this.updateStatusBar('poison', 20);
+      }
+
+      // Life-Objekt einsammeln
+      if (object instanceof LifeObjects) {
+        console.log('Leben eingesammelt');
+        this.level.objects.splice(index, 1);
+        this.updateStatusBar('life', 20);
+      }
+    }
+  });
+}
+
+// Vereinheitlichte Methode zur Statusbar-Aktualisierung
+updateStatusBar(type, value) {
+  const bar = this.level.statusBar.find((bar) => bar.type === type);
+  if (bar) {
+    let newPercentage = Math.min(bar.percentage + value, 100);
+    bar.setPercentage(newPercentage);
+    console.log(`${type} Status aktualisiert:`, newPercentage);
+  }
+}
+
 
 checkCollisions(){
     this.level.enemies.forEach((enemy, index) => {
