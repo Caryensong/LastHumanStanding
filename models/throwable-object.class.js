@@ -7,8 +7,16 @@ class ThrowableObject extends MovableObject{
         bottom: 0
       }
 
+    Images_Explosion = [
+        './img/explosion/explosion1.png',
+        './img/explosion/explosion2.png',
+        './img/explosion/explosion3.png',
+    ];
+      
+
     constructor(x, y, character){
         super().loadImage('./img/poison/1.png');
+        this.loadImages(this.Images_Explosion);
         this.x = x;
         this.y = y;
         this.character = character;
@@ -32,4 +40,20 @@ class ThrowableObject extends MovableObject{
         }, 40);
 
     }
+
+    explode() {
+        console.log('Explosion started'); 
+        this.img = this.imageCache[this.Images_Explosion[0]]; //
+        let currentFrame = 0;
+        const explosionInterval = setInterval(() => {
+            if (currentFrame < this.Images_Explosion.length) {
+                this.img = this.imageCache[this.Images_Explosion[currentFrame]];
+                currentFrame++;
+            } else {
+                clearInterval(explosionInterval); // Stoppe die Animation
+                this.world.throwableObjects = this.world.throwableObjects.filter(obj => obj !== this); // Entferne das Objekt
+            }
+        }, 100); // 100ms pro Frame
+    }
+    
 }

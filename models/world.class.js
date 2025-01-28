@@ -77,6 +77,10 @@ checkCollisions(){
     this.level.enemies.forEach((enemy, enemyIndex) => {
       if(bottle.isColliding(enemy)) {
         console.log("Poison trifft Zombie!");
+        bottle.explode();
+
+    this.throwableObjects.splice(bottleIndex, 1); // Entferne die Flasche nach der Explosion
+
 
         enemy.playPoisonDeadAnimation(() => {
           this.level.enemies.splice(enemyIndex, 1); // Zombie entfernen
@@ -92,9 +96,7 @@ checkSlashingCollisions() {
   this.level.enemies.forEach((enemy, index) => {
       if (this.character.isColliding(enemy)) {
           // Überprüfe, ob der Slashing-Treffer den Zombie trifft
-          console.log(this.character.isSlashingColliding(enemy));
-          
-          if (this.character.isSlashingColliding(enemy)) {
+            if (this.character.isSlashingColliding(enemy)) {
               console.log("Zombie wurde vom Schwert getroffen!");
              
               enemy.playDeadAnimation(() => {

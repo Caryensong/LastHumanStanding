@@ -198,7 +198,7 @@ class Character extends MovableObject {
             if(!this.world.keyboard.D_SOLVED){
               this.playAnimation(this.Images_Throwing);
                this.sounds.JUMP.play();  
-               this.world.keyboard.D_SOLVED = true;
+               this.world.keyboard.D_SOLVED = true
             }
            
          }
