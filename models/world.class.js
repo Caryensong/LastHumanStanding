@@ -52,7 +52,7 @@ checkCollisions(){
     this.level.enemies.forEach((enemy, index) => {
       if(this.character.isColliding(enemy)) {
           if (this.character.isSlashing) {
-              console.log("Slashing verhindert verletzung.");
+              console.log("Slashing verhindert Verletzung.");
               return; // Kein Schaden, wenn Slashing aktiv ist
           }
 
@@ -72,6 +72,20 @@ checkCollisions(){
       }
     }
   });
+ // Überprüfe Kollisionen zwischen geworfenen Objekten und Enemys
+  this.throwableObjects.forEach((bottle, bottleIndex) => {
+    this.level.enemies.forEach((enemy, enemyIndex) => {
+      if(bottle.isColliding(enemy)) {
+        console.log("Poison trifft Zombie!");
+
+        enemy.playPoisonDeadAnimation(() => {
+          this.level.enemies.splice(enemyIndex, 1); // Zombie entfernen
+        });
+        this.throwableObjects.splice(bottleIndex, 1);// Entferne die Flasche
+      }
+    });
+  }
+);
 }
 
 checkSlashingCollisions() {

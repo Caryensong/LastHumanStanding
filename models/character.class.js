@@ -181,10 +181,11 @@ class Character extends MovableObject {
                right: 15,
                bottom: 20
             };
+
             this.world.checkSlashingCollisions(); 
             setTimeout(() => {
                this.isSlashing = false;
-           }, 1500); // Slashing dauert 500ms
+           }, 1800); // Slashing dauert 500ms
          }
 
          if (this.world.keyboard.D) {

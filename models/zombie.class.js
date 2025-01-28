@@ -36,7 +36,6 @@ class Zombies extends MovableObject{
         super().loadImage(this.Images_Walking[0]);
         this.loadImages(this.Images_Walking);
         this.loadImages(this.Images_Dead);
-        this.loadImages(this.Images_Hurt);
         this.loadImages(this.Images_Posion_Dead);
 
         this.x = this.generateRandomPosition(); // Verwende die neue Methode für zufällige Position
@@ -83,6 +82,7 @@ class Zombies extends MovableObject{
             if (currentFrame < this.Images_Dead.length) {
                 this.img = this.imageCache[this.Images_Dead[currentFrame]];
                 currentFrame++;
+                this.hurt.play();
             } else {
                 clearInterval(deadAnimationInterval); // Animation beendet
                 if (onAnimationComplete) onAnimationComplete(); // Callback aufrufen
@@ -96,11 +96,9 @@ class Zombies extends MovableObject{
         this.height = 20;
         this.y = 420;
         this.hurt.play();
-    
-        // Zeige das einzelne Bild für die Animation an
+
         this.img = this.imageCache[this.Images_Posion_Dead[0]];
     
-        // Setze ein Timeout, um nach 2 Sekunden den Zombie zu entfernen
         setTimeout(() => {
             if (onAnimationComplete) onAnimationComplete(); // Callback aufrufen
         }, 1000); // Bild wird 2 Sekunden lang angezeigt
