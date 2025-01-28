@@ -52,7 +52,7 @@ class StatusBar extends DrawableObject {
 
     setEndbossPercentage(endBossPercentage){
         if(this.type !== 'endbossLife') return;
-        this.endBossPercentage = endBossPercentage;
+        this.precentage = endBossPercentage;
         let path = this.Images_EndBoss[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }

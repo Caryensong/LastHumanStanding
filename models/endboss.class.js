@@ -24,11 +24,46 @@ class Endboss extends MovableObject {
     'img/endboss/Run Slashing/0_Golem_Run Slashing_011.png',
   ];
 
+  Images_Hurt = [
+    './img/endboss/Hurt/0_Golem_Hurt_000.png',
+    './img/endboss/Hurt/0_Golem_Hurt_001.png',
+    './img/endboss/Hurt/0_Golem_Hurt_002.png',
+    './img/endboss/Hurt/0_Golem_Hurt_003.png',
+    './img/endboss/Hurt/0_Golem_Hurt_004.png',
+    './img/endboss/Hurt/0_Golem_Hurt_005.png',
+    './img/endboss/Hurt/0_Golem_Hurt_006.png',
+    './img/endboss/Hurt/0_Golem_Hurt_007.png',
+    './img/endboss/Hurt/0_Golem_Hurt_008.png',
+    './img/endboss/Hurt/0_Golem_Hurt_009.png',
+    './img/endboss/Hurt/0_Golem_Hurt_010.png',
+    './img/endboss/Hurt/0_Golem_Hurt_011.png'
+  ];
+
+  Images_Dying = [
+    './img/endboss/Dying/0_Golem_Dying_000.png',
+    './img/endboss/Dying/0_Golem_Dying_001.png',
+    './img/endboss/Dying/0_Golem_Dying_002.png',
+    './img/endboss/Dying/0_Golem_Dying_003.png',
+    './img/endboss/Dying/0_Golem_Dying_004.png',
+    './img/endboss/Dying/0_Golem_Dying_005.png',
+    './img/endboss/Dying/0_Golem_Dying_006.png',
+    './img/endboss/Dying/0_Golem_Dying_007.png',
+    './img/endboss/Dying/0_Golem_Dying_008.png',
+    './img/endboss/Dying/0_Golem_Dying_009.png',
+    './img/endboss/Dying/0_Golem_Dying_010.png',
+    './img/endboss/Dying/0_Golem_Dying_011.png',
+    './img/endboss/Dying/0_Golem_Dying_012.png',
+    './img/endboss/Dying/0_Golem_Dying_013.png',
+    './img/endboss/Dying/0_Golem_Dying_014.png'
+  ];
+
   hadFirstContact = false;
 
   constructor() {
     super().loadImage(this.Images_Slashing[0]);
     this.loadImages(this.Images_Slashing);
+    this.loadImages(this.Images_Hurt);
+    this.loadImages(this.Images_Dying);
     this.x = 1800;
     this.y = 175;
     this.height = 300;
