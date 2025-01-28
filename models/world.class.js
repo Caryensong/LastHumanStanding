@@ -8,6 +8,7 @@ class World {
   keyboard;
   throwableObjects = [];
   lastThrowTime;
+  poisonCount = 5; // Maximale Anzahl an Flaschen
 
   constructor(canvas, keyboard){
     this.ctx = canvas.getContext('2d');
@@ -33,21 +34,15 @@ check(){
 }
 
 checkThrowObjects() {
-  if (this.keyboard.D && this.throwableObjects.length < 5) {
-      if (!this.lastThrowTime || Date.now() - this.lastThrowTime > 500) {
-        let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 50, this.character);
+  if (this.keyboard.D && this.poisonCount > 0) {
+      let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 50, this.character);
           this.throwableObjects.push(bottle);
-          this.lastThrowTime = Date.now();
+
+          this.poisonCount--;
         
-          const poisonBar = this.level.statusBar.find((bar) => bar.type === 'poison');
-          if (poisonBar) {
-              let poisonPercentage = (100 - (this.throwableObjects.length / 5) * 100);
-              console.log('Thrown bottles:', poisonPercentage);
-              poisonBar.setPoisonPercentage(poisonPercentage);
-          }
-      }
+          this.updatePoisonBar();
+        }
   }
-} 
 
 checkObjectsColliding() {
   this.level.objects.forEach((object, index) => {
@@ -56,28 +51,43 @@ checkObjectsColliding() {
       if (object instanceof PoisonObjects) {
         console.log('Poison Flasche eingesammelt');
         this.level.objects.splice(index, 1);
-        this.updateStatusBar('poison', 20);
+
+        this.poisonCount = Math.min(this.poisonCount +1, 5);
+ 
+        this.updatePoisonBar();
       }
 
       // Life-Objekt einsammeln
       if (object instanceof LifeObjects) {
         console.log('Leben eingesammelt');
         this.level.objects.splice(index, 1);
-        this.updateStatusBar('life', 20);
+         // Erhöhe die Lebensenergie des Charakters:
+        this.character.energy = Math.min(this.character.energy + 20, 100);
+        this.updateLifeBar();
       }
     }
   });
 }
 
 // Vereinheitlichte Methode zur Statusbar-Aktualisierung
-updateStatusBar(type, value) {
-  const bar = this.level.statusBar.find((bar) => bar.type === type);
-  if (bar) {
-    let newPercentage = Math.min(bar.percentage + value, 100);
-    bar.setPercentage(newPercentage);
-    console.log(`${type} Status aktualisiert:`, newPercentage);
+updatePoisonBar() {
+  const poisonBar = this.level.statusBar.find((bar) => bar.type === 'poison');
+  if (poisonBar) {
+    // Berechne den Prozentsatz basierend auf der Anzahl der verbleibenden Flaschen
+    let poisonPercentage = (this.poisonCount / 5) * 100;
+    poisonBar.setPoisonPercentage(poisonPercentage);
+    console.log('Poison-Bar aktualisiert:', poisonPercentage);
   }
 }
+
+updateLifeBar() {
+  const lifeBar = this.level.statusBar.find((bar) => bar.type === 'life');
+  if (lifeBar) {
+    lifeBar.setPercentage(this.character.energy);
+    console.log('Life-Bar aktualisiert:', this.character.energy);
+  }
+}
+
 
 
 checkCollisions(){
@@ -97,11 +107,8 @@ checkCollisions(){
           this.character.hit();
           console.log("Charakter wurde getroffen", this.character.energy)
         
-          const lifeBar = this.level.statusBar.find((bar) => bar.type === 'life');
-          if (lifeBar) {
-          lifeBar.setPercentage(this.character.energy);
+          this.updateLifeBar();
         }
-      }
     }
   });
  // Überprüfe Kollisionen zwischen geworfenen Objekten und Enemys
@@ -109,19 +116,15 @@ checkCollisions(){
     this.level.enemies.forEach((enemy, enemyIndex) => {
       if(bottle.isColliding(enemy)) {
         console.log("Poison trifft Zombie!");
-        // bottle.explode();
 
-        this.throwableObjects.splice(bottleIndex, 1); // Entferne die Flasche nach der Explosion
-
+        this.throwableObjects.splice(bottleIndex, 1);
 
         enemy.playPoisonDeadAnimation(() => {
           this.level.enemies.splice(enemyIndex, 1); // Zombie entfernen
         });
-        this.throwableObjects.splice(bottleIndex, 1);// Entferne die Flasche
       }
     });
-  }
-);
+  });
 }
 
 checkSlashingCollisions() {

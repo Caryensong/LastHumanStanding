@@ -28,7 +28,7 @@ class StatusBar extends DrawableObject {
     ];
 
     precentage = 100;
-    poisonPercentage = 0;
+    poisonPercentage = 100;
     endBossPercentage = 100;
 
     constructor(x, y, width, height, type = 'life') {
@@ -68,40 +68,39 @@ class StatusBar extends DrawableObject {
     setPoisonPercentage(amount) {
         if (this.type !== 'poison') return; // Nur für Gift
         this.poisonPercentage = amount;
-        let path = this.Images_Poison[this.resolvePoisonIndex()];
+        let path = this.Images_Poison[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
-
-    resolvePoisonIndex(){
-        if(this.poisonPercentage >= 100){
-            return 5;
-        } else if(this.poisonPercentage >= 80){
-            return 4;
-        } else if(this.poisonPercentage >=60){
-            return 3;
-        }else if(this.poisonPercentage >= 40){
-            return 2;
-        }else if(this.poisonPercentage >= 20){
-            return 1;
-        }else{
-            return 0;
-        }
-    }
-
     resolveImageIndex() {
-        if (this.precentage == 100) {
+        if (this.type === 'poison') {
+          if (this.poisonPercentage === 100) {
             return 5;
-        } else if (this.precentage > 80) {
+          } else if (this.poisonPercentage >= 80) {
             return 4;
-        } else if (this.precentage > 60) {
+          } else if (this.poisonPercentage >= 60) {
             return 3;
-        } else if (this.precentage > 40) {
+          } else if (this.poisonPercentage >= 40) {
             return 2;
-        } else if (this.precentage > 20) {
+          } else if (this.poisonPercentage >= 20) {
             return 1;
-        } else {
+          } else {
             return 0;
+          }
         }
+      
+        if (this.precentage == 100) {
+          return 5;
+        } else if (this.precentage >= 80) {
+          return 4;
+        } else if (this.precentage >= 60) {
+          return 3;
+        } else if (this.precentage >= 40) {
+          return 2;
+        } else if (this.precentage >= 20) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
     }
-}
