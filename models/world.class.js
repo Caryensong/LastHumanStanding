@@ -77,9 +77,9 @@ checkCollisions(){
     this.level.enemies.forEach((enemy, enemyIndex) => {
       if(bottle.isColliding(enemy)) {
         console.log("Poison trifft Zombie!");
-        bottle.explode();
+        // bottle.explode();
 
-    this.throwableObjects.splice(bottleIndex, 1); // Entferne die Flasche nach der Explosion
+        this.throwableObjects.splice(bottleIndex, 1); // Entferne die Flasche nach der Explosion
 
 
         enemy.playPoisonDeadAnimation(() => {

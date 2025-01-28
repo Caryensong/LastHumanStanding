@@ -41,19 +41,19 @@ class ThrowableObject extends MovableObject{
 
     }
 
-    explode() {
-        console.log('Explosion started'); 
-        this.img = this.imageCache[this.Images_Explosion[0]]; //
-        let currentFrame = 0;
-        const explosionInterval = setInterval(() => {
-            if (currentFrame < this.Images_Explosion.length) {
-                this.img = this.imageCache[this.Images_Explosion[currentFrame]];
-                currentFrame++;
-            } else {
-                clearInterval(explosionInterval); // Stoppe die Animation
-                this.world.throwableObjects = this.world.throwableObjects.filter(obj => obj !== this); // Entferne das Objekt
-            }
-        }, 100); // 100ms pro Frame
-    }
+    // explode() {
+    //     console.log('Explosion started'); 
+    //     this.img = this.imageCache[this.Images_Explosion[0]]; //
+    //     let currentFrame = 0;
+    //     const explosionInterval = setInterval(() => {
+    //         if (currentFrame < this.Images_Explosion.length) {
+    //             this.img = this.imageCache[this.Images_Explosion[currentFrame]];
+    //             currentFrame++;
+    //         } else {
+    //             clearInterval(explosionInterval); // Stoppe die Animation
+    //             this.world.throwableObjects = this.world.throwableObjects.filter(obj => obj !== this); // Entferne das Objekt
+    //         }
+    //     }, 2000); // 100ms pro Frame
+    // }
     
 }

@@ -15,7 +15,9 @@ const level1 = new Level(
         new PoisonObjects(720, 200),
         new PoisonObjects(720, 200 ),
         new PoisonObjects(1440, 200),
-        new PoisonObjects(1440, 200)
+        new PoisonObjects(1440, 200),
+
+        new LifeObjects(720, 200)
     ],
     [
         new Zombies(), 

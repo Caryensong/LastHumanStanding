@@ -176,15 +176,15 @@ class Character extends MovableObject {
          }
 
          if (this.world.keyboard.S) {
-            if (!this.world.keyboard.S_SOLVED) {
-               this.isSlashing = true;
-               this.playAnimation(this.Images_Slashing);
-               this.offset = {
+            this.isSlashing = true;
+            this.playAnimation(this.Images_Slashing);
+            this.offset = {
                   top: 30,
                   left: 40,
                   right: 15,
                   bottom: 20
                };   
+            if (!this.world.keyboard.S_SOLVED) {
                this.world.checkSlashingCollisions();
                this.world.keyboard.S_SOLVED = true;   
             }
@@ -198,7 +198,7 @@ class Character extends MovableObject {
             if(!this.world.keyboard.D_SOLVED){
               this.playAnimation(this.Images_Throwing);
                this.sounds.JUMP.play();  
-               this.world.keyboard.D_SOLVED = true
+               this.world.keyboard.D_SOLVED = true;
             }
            
          }
