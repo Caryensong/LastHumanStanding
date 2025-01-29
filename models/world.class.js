@@ -120,11 +120,26 @@ checkCollisions(){
         enemy.playPoisonDeadAnimation(() => {
           this.level.enemies.splice(enemyIndex, 1); // Zombie entfernen
         });
-
-
       }
     });
   });
+  // Kollision zwischen geworfenen Objekten und Endboss überprüfen
+  this.throwableObjects.forEach((bottle, bottleIndex)=>{
+    if(bottle.isColliding(this.endboss)){
+      console.log("Posion trifft Endboss");
+
+      this.throwableObjects.splice(bottleIndex, 1);
+      this.endboss.playHurtAnimation();
+      this.endboss.hit();
+      console.log("Endboss Life", this.endboss.energy );
+
+      if(this.endboss.energy <= 0){
+        console.log("endboss besiegt");
+        this.endboss.playDeadAnimation();
+      }
+    }
+  });
+
 }
 
 checkSlashingCollisions() {

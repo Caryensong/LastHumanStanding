@@ -57,8 +57,8 @@ class Endboss extends MovableObject {
     './img/endboss/Dying/0_Golem_Dying_014.png'
   ];
 
-  hadFirstContact = false;
   isDying = false;
+  isHurt = false; 
 
   constructor() {
     super().loadImage(this.Images_Slashing[0]);
@@ -72,23 +72,24 @@ class Endboss extends MovableObject {
     this.speed = 0.3;
     this.otherDirection = true;
     this.energy = 100;
-    this.animate();
+    this.startMovement();
   }
 
-  animate() {
+  startMovement() {
+    if (this.movementInterval) clearInterval(this.movementInterval);
+    if (this.walkingInterval) clearInterval(this.walkingInterval);
+
     this.movementInterval = setInterval(() => {
-      if (this.isDying) {
-        clearInterval(this.movementInterval); // Bewegung stoppen, wenn Endboss stirbt
-        this.Walk.pause(); // Sound stoppen
-        return;
-      }
+      if (this.isDying || this.isHurt) return; // Stoppt Bewegung, wenn verletzt oder tot
+
 
       const distance = Math.abs(world.character.x - this.x);
 
       if (distance <= 500) {
+        if (this.walkingInterval) clearInterval(this.walkingInterval);
+
         this.walkingInterval = setInterval(() => {
-          if (this.isDying) {
-            clearInterval(this.movementInterval);
+          if (this.isDying || this.isHurt) {
             return;
           }
 
@@ -104,7 +105,7 @@ class Endboss extends MovableObject {
             this.moveRight();
           }
 
-        }, 1000 / 25);
+        }, 1000 / 90) ;
 
         this.playAnimation(this.Images_Slashing);
         this.Walk.play();
@@ -114,6 +115,9 @@ class Endboss extends MovableObject {
       }
     }, 100);
   }
+
+  
+
   playHurtAnimation() {
     if (this.isHurt) return;
 
@@ -132,8 +136,9 @@ class Endboss extends MovableObject {
         clearInterval(hurtAnimationInterval);
         setInterval(() => {
           this.isHurt = false; // Nach der Animation wieder freigeben
-          this.animate(); // Nach der Hurt-Animation Bewegung fortsetzen
-        }, 300);
+          this.startMovement();
+          ; // Nur EINMAL Bewegung starten
+        }, 500);
       }
     }, 100);  // Schnellere Hurt-Animation für bessere Sichtbarkeit
   }
