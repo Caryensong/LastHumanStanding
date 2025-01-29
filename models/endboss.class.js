@@ -1,5 +1,6 @@
 class Endboss extends MovableObject {
-  Walk = new Audio("./audio/monster_step.mp3");
+  Walk = new Audio('./audio/monster_step.mp3');
+  HURT = new Audio('./audio/monster-211717.mp3')
 
   offset = {
     top: 65,
@@ -132,6 +133,9 @@ class Endboss extends MovableObject {
       if (currentFrame < this.Images_Hurt.length) {
         this.img = this.imageCache[this.Images_Hurt[currentFrame]];
         currentFrame++;
+        this.HURT.play();
+
+        
       } else {
         clearInterval(hurtAnimationInterval);
         setTimeout(() => {
@@ -156,6 +160,7 @@ class Endboss extends MovableObject {
 
     const deadAnimationInterval = setInterval(() => {
       if (currentFrame < this.Images_Dying.length) {
+        this.HURT.play();
         this.img = this.imageCache[this.Images_Dying[currentFrame]];
         currentFrame++;
       } else {

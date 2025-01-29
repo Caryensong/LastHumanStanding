@@ -7,6 +7,7 @@ class Character extends MovableObject {
       WALK: new Audio('./audio/Walking1.mp3'),
       JUMP: new Audio('./audio/jump.mp3'),
       HURT: new Audio('./audio/hurt.mp3'),
+      SLASH: new Audio('./audio/sword-sound-260274.mp3')
    };
 
    offset = {
@@ -178,6 +179,7 @@ class Character extends MovableObject {
          if (this.world.keyboard.S) {
             this.isSlashing = true;
             this.playAnimation(this.Images_Slashing);
+            this.sounds.SLASH.play();
             this.offset = {
                   top: 30,
                   left: 40,
