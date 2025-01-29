@@ -1,10 +1,10 @@
 class Endboss extends MovableObject {
- Walk = new Audio("./audio/monster_step.mp3");
+  Walk = new Audio("./audio/monster_step.mp3");
 
   offset = {
     top: 65,
     left: 65,
-    right: 20 ,
+    right: 20,
     bottom: 40
 
   }
@@ -65,71 +65,100 @@ class Endboss extends MovableObject {
     this.loadImages(this.Images_Slashing);
     this.loadImages(this.Images_Hurt);
     this.loadImages(this.Images_Dying);
-    this.x = 400;
+    this.x = 1800;
     this.y = 220;
-    this.height =  250;
+    this.height = 250;
     this.width = 255;
     this.speed = 0.3;
     this.otherDirection = true;
-    this.energy = 100; 
+    this.energy = 100;
     this.animate();
   }
 
   animate() {
-    setInterval(() => {
+    this.movementInterval = setInterval(() => {
+      if (this.isDying) {
+        clearInterval(this.movementInterval); // Bewegung stoppen, wenn Endboss stirbt
+        this.Walk.pause(); // Sound stoppen
+        return;
+      }
+
       const distance = Math.abs(world.character.x - this.x);
 
-      if (distance <= 400) {
-        setInterval(() => {
-          if (world.character.x < this.x) {
-          this.moveLeft(); // Richtung Spieler (links)
-        } else if(world.character.x > this.x) {
-          this.moveRight(); // Richtung Spieler (rechts)
-          this.otherDirection = false;
-        
-        }
+      if (distance <= 500) {
+        this.walkingInterval = setInterval(() => {
+          if (this.isDying) {
+            clearInterval(this.movementInterval);
+            return;
+          }
+
+          if (this.x <= 1200) {
+            this.otherDirection = false;
+          } else if (this.x >= 1800) {
+            this.otherDirection = true;
+          }
+
+          if (this.otherDirection) {
+            this.moveLeft();
+          } else {
+            this.moveRight();
+          }
+
         }, 1000 / 25);
 
-  
-      this.playAnimation(this.Images_Slashing);
+        this.playAnimation(this.Images_Slashing);
         this.Walk.play();
         this.Walk.volume = 0.5;
       } else {
-        this.Walk.pause(); // Stoppe Sound, wenn außerhalb der Distanz
+        this.Walk.pause();
       }
+    }, 100);
+  }
+  playHurtAnimation() {
+    if (this.isHurt) return;
 
+    this.isHurt = true;  // Flag setzen, damit Animation nicht mehrfach gestartet wird
+
+    clearInterval(this.movementInterval);  // Bewegung stoppen
+    clearInterval(this.walkingInterval);  // Falls er noch läuft, stoppen
+
+    let currentFrame = 0;
+
+    const hurtAnimationInterval = setInterval(() => {
+      if (currentFrame < this.Images_Hurt.length) {
+        this.img = this.imageCache[this.Images_Hurt[currentFrame]];
+        currentFrame++;
+      } else {
+        clearInterval(hurtAnimationInterval);
+        setInterval(() => {
+          this.isHurt = false; // Nach der Animation wieder freigeben
+          this.animate(); // Nach der Hurt-Animation Bewegung fortsetzen
+        }, 300);
+      }
+    }, 100);  // Schnellere Hurt-Animation für bessere Sichtbarkeit
+  }
+
+
+  playDeadAnimation() {
+    if (this.isDying) return;
+    this.isDying = true;
+    this.energy = 0;
+    clearInterval(this.movementInterval); // Stoppt alle Bewegungen
+    clearInterval(this.walkingInterval); // Falls noch eine Bewegung läuft
+    this.Walk.pause(); // Stoppt den Sound
+
+    let currentFrame = 0;
+
+    const deadAnimationInterval = setInterval(() => {
+      if (currentFrame < this.Images_Dying.length) {
+        this.img = this.imageCache[this.Images_Dying[currentFrame]];
+        currentFrame++;
+      } else {
+        clearInterval(deadAnimationInterval);
+        console.log("Endboss ist besiegt!");
+
+      }
     }, 100);
   }
 
-  playHurtAnimation(){
-    if(this.isDying) return;
-    
-    let currentFrame = 0; 
-
-    const hurtAnimationInterval = setInterval(()=>{
-        if(currentFrame < this.Images_Hurt.length){
-          this.img = this.imageCache[this.Images_Hurt[currentFrame]];
-          currentFrame++;
-        } else {
-          clearInterval(hurtAnimationInterval);
-      }
-    },100);
-  }
-
-  playDeadAnimation(){
-    if(is.isDying) return;
-    this.isDying =true;
-
-    let currentFrame = 0; 
-
-    const deadAnimationInterval = setInterval(()=>{
-        if(currentFrame < this.Images_Dying.length){
-          this.img = this.imageCache[this.Images_Dying[currentFrame]];
-          currentFrame++;
-        } else {
-          clearInterval(deadAnimationInterval);
-          console.log("Endboss ist besiegt!");
-      }
-    },100);
-  }
 }

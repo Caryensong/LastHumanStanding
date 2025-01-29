@@ -128,19 +128,20 @@ checkCollisions(){
 }
 
 checkSlashingCollisions() {
+  if (this.endboss.isDying) return; // Falls Endboss schon stirbt, keine weitere Aktion
   // Kollisionsprüfung für den Endboss
 if(this.character.isColliding(this.endboss)){
   if(this.character.isSlashing){
     console.log("Endboss wurde mit Schwert getroffen");
-    this.endboss.energy -= 20;
+    this.endboss.hit();
+    this.endboss.playHurtAnimation();
+    console.log("Endboss Life", this.endboss.energy );
  
     if(this.endboss.energy <= 0){
       console.log("endboss besiegt");
       this.endboss.playDeadAnimation();
-    } else{
-      this.endboss.playHurtAnimation();
-    }
-  }else {
+    } 
+  } else {
     this.character.hit();
     console.log(" CHarater wurde vom Endboss getroffe", this.character.energy);
     this.updateLifeBar();
@@ -151,7 +152,7 @@ if(this.character.isColliding(this.endboss)){
   this.level.enemies.forEach((enemy, index) => {
       if (this.character.isColliding(enemy)) {
           // Überprüfe, ob der Slashing-Treffer den Zombie trifft
-            if (this.character.isSlashingColliding(enemy) || this.character.isSlashingColliding(this.endboss)) {
+            if (this.character.isSlashingColliding(enemy)) {
               console.log("Zombie wurde vom Schwert getroffen!");
              
               enemy.playDeadAnimation(() => {
