@@ -83,6 +83,7 @@ class Zombies extends MovableObject{
                 this.img = this.imageCache[this.Images_Dead[currentFrame]];
                 currentFrame++;
                 this.hurt.play();
+                this.walking_sound.pause();
             } else {
                 clearInterval(deadAnimationInterval); // Animation beendet
                 if (onAnimationComplete) onAnimationComplete(); // Callback aufrufen
@@ -95,7 +96,10 @@ class Zombies extends MovableObject{
         this.width = 130;
         this.height = 20;
         this.y = 420;
-        this.hurt.play();
+        if(this.hurt.readyState == 4){
+             this.hurt.play();
+        }
+        this.walking_sound.pause();
 
         this.img = this.imageCache[this.Images_Posion_Dead[0]];
     

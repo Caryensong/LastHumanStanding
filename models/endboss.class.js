@@ -3,8 +3,8 @@ class Endboss extends MovableObject {
 
   offset = {
     top: 65,
-    left: 90,
-    right: 60,
+    left: 65,
+    right: 20 ,
     bottom: 40
 
   }
@@ -58,29 +58,24 @@ class Endboss extends MovableObject {
   ];
 
   hadFirstContact = false;
+  isDying = false;
 
   constructor() {
     super().loadImage(this.Images_Slashing[0]);
     this.loadImages(this.Images_Slashing);
     this.loadImages(this.Images_Hurt);
     this.loadImages(this.Images_Dying);
-    this.x = 1800;
-    this.y = 175;
-    this.height = 300;
-    this.width = 305;
+    this.x = 400;
+    this.y = 220;
+    this.height =  250;
+    this.width = 255;
     this.speed = 0.3;
     this.otherDirection = true;
+    this.energy = 100; 
     this.animate();
   }
 
   animate() {
-
-    //   setInterval(()=>{     
-    //     this.moveLeft();
-    // }, 1000/ 60);
-
-
-
     setInterval(() => {
       const distance = Math.abs(world.character.x - this.x);
 
@@ -104,5 +99,37 @@ class Endboss extends MovableObject {
       }
 
     }, 100);
+  }
+
+  playHurtAnimation(){
+    if(this.isDying) return;
+    
+    let currentFrame = 0; 
+
+    const hurtAnimationInterval = setInterval(()=>{
+        if(currentFrame < this.Images_Hurt.length){
+          this.img = this.imageCache[this.Images_Hurt[currentFrame]];
+          currentFrame++;
+        } else {
+          clearInterval(hurtAnimationInterval);
+      }
+    },100);
+  }
+
+  playDeadAnimation(){
+    if(is.isDying) return;
+    this.isDying =true;
+
+    let currentFrame = 0; 
+
+    const deadAnimationInterval = setInterval(()=>{
+        if(currentFrame < this.Images_Dying.length){
+          this.img = this.imageCache[this.Images_Dying[currentFrame]];
+          currentFrame++;
+        } else {
+          clearInterval(deadAnimationInterval);
+          console.log("Endboss ist besiegt!");
+      }
+    },100);
   }
 }

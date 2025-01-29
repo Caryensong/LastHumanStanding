@@ -88,8 +88,6 @@ updateLifeBar() {
   }
 }
 
-
-
 checkCollisions(){
     this.level.enemies.forEach((enemy, index) => {
       if(this.character.isColliding(enemy)) {
@@ -114,7 +112,7 @@ checkCollisions(){
  // Überprüfe Kollisionen zwischen geworfenen Objekten und Enemys
   this.throwableObjects.forEach((bottle, bottleIndex) => {
     this.level.enemies.forEach((enemy, enemyIndex) => {
-      if(bottle.isColliding(enemy)) {
+      if(bottle.isColliding(enemy) ) {
         console.log("Poison trifft Zombie!");
 
         this.throwableObjects.splice(bottleIndex, 1);
@@ -122,16 +120,38 @@ checkCollisions(){
         enemy.playPoisonDeadAnimation(() => {
           this.level.enemies.splice(enemyIndex, 1); // Zombie entfernen
         });
+
+
       }
     });
   });
 }
 
 checkSlashingCollisions() {
+  // Kollisionsprüfung für den Endboss
+if(this.character.isColliding(this.endboss)){
+  if(this.character.isSlashing){
+    console.log("Endboss wurde mit Schwert getroffen");
+    this.endboss.energy -= 20;
+ 
+    if(this.endboss.energy <= 0){
+      console.log("endboss besiegt");
+      this.endboss.playDeadAnimation();
+    } else{
+      this.endboss.playHurtAnimation();
+    }
+  }else {
+    this.character.hit();
+    console.log(" CHarater wurde vom Endboss getroffe", this.character.energy);
+    this.updateLifeBar();
+  }
+
+}
+
   this.level.enemies.forEach((enemy, index) => {
       if (this.character.isColliding(enemy)) {
           // Überprüfe, ob der Slashing-Treffer den Zombie trifft
-            if (this.character.isSlashingColliding(enemy)) {
+            if (this.character.isSlashingColliding(enemy) || this.character.isSlashingColliding(this.endboss)) {
               console.log("Zombie wurde vom Schwert getroffen!");
              
               enemy.playDeadAnimation(() => {
