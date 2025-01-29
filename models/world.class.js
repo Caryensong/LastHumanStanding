@@ -88,6 +88,13 @@ updateLifeBar() {
   }
 }
 
+updateEndbossLifeBar() {
+  const lifeBar = this.level.statusBar.find((bar) => bar.type === 'endbossLife');
+  if (lifeBar) {
+    lifeBar.setEndbossPercentage(this.endboss.energy);
+  }
+}
+
 checkCollisions(){
     this.level.enemies.forEach((enemy, index) => {
       if(this.character.isColliding(enemy)) {
@@ -133,6 +140,8 @@ checkCollisions(){
       this.endboss.hit();
       console.log("Endboss Life", this.endboss.energy );
 
+      this.updateEndbossLifeBar();
+
       if(this.endboss.energy <= 0){
         console.log("endboss besiegt");
         this.endboss.playDeadAnimation();
@@ -151,11 +160,13 @@ if(this.character.isColliding(this.endboss)){
     this.endboss.hit();
     this.endboss.playHurtAnimation();
     console.log("Endboss Life", this.endboss.energy );
- 
+  this.updateEndbossLifeBar();
     if(this.endboss.energy <= 0){
       console.log("endboss besiegt");
       this.endboss.playDeadAnimation();
     } 
+
+  
   } else {
     this.character.hit();
     console.log(" CHarater wurde vom Endboss getroffe", this.character.energy);

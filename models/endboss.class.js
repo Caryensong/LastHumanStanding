@@ -134,7 +134,7 @@ class Endboss extends MovableObject {
         currentFrame++;
       } else {
         clearInterval(hurtAnimationInterval);
-        setInterval(() => {
+        setTimeout(() => {
           this.isHurt = false; // Nach der Animation wieder freigeben
           this.startMovement();
           ; // Nur EINMAL Bewegung starten

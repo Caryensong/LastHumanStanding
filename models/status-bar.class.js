@@ -46,21 +46,21 @@ class StatusBar extends DrawableObject {
         } else if (this.type === 'poison') {
             this.setPoisonPercentage(100); // Gift startet mit 0%
         } else if (this.type === 'endbossLife'){
-            this. setEndbossPercentage(100);
+            this.setEndbossPercentage(100);
         }
     }
 
     setEndbossPercentage(endBossPercentage){
         if(this.type !== 'endbossLife') return;
-        this.precentage = endBossPercentage;
+        this.endBossPercentage = endBossPercentage;
         let path = this.Images_EndBoss[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
 
-    setPercentage(precentage) {
+    setPercentage(percentage) {
         if (this.type !== 'life') return; // Nur für Leben
-        this.precentage = precentage;
+        this.percentage = percentage;
         let path = this.Images_Life[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
@@ -88,19 +88,37 @@ class StatusBar extends DrawableObject {
             return 0;
           }
         }
-      
-        if (this.precentage == 100) {
+
+        if (this.type === 'life') {
+        if (this.percentage === 100) {
           return 5;
-        } else if (this.precentage >= 80) {
+        } else if (this.percentage >= 80) {
           return 4;
-        } else if (this.precentage >= 60) {
+        } else if (this.percentage >= 60) {
           return 3;
-        } else if (this.precentage >= 40) {
+        } else if (this.percentage >= 40) {
           return 2;
-        } else if (this.precentage >= 20) {
+        } else if (this.percentage >= 20) {
           return 1;
         } else {
           return 0;
         }
       }
+
+      if (this.type === 'endbossLife') {
+      if (this.endBossPercentage === 100) {
+        return 5;
+      } else if (this.endBossPercentage >= 80) {
+        return 4;
+      } else if (this.endBossPercentage >= 60) {
+        return 3;
+      } else if (this.endBossPercentage >= 40) {
+        return 2;
+      } else if (this.endBossPercentage >= 20) {
+        return 1;
+      } else {
+        return 0;
+      }
     }
+    }
+  }
