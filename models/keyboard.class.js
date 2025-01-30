@@ -9,5 +9,6 @@ class Keyboard {
     D_SOLVED= false;
     S = false;
     S_SOLVED= false;
+    DOWN = false;
 
 }

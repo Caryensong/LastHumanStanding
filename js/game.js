@@ -8,7 +8,7 @@ function init(){
 }
 
 window.addEventListener("keydown", (e) => {
-    if(e.keyCode == 39){
+     if(e.keyCode == 39){
         keyboard.RIGHT = true;
     }
 
@@ -32,6 +32,10 @@ window.addEventListener("keydown", (e) => {
     if(e.keyCode == 83){
         keyboard.S = true;
     }
+    if(e.keyCode == 40){
+        keyboard.DOWN = true;
+    }
+
 });
 
 window.addEventListener("keyup", (e) => {
@@ -46,7 +50,6 @@ window.addEventListener("keyup", (e) => {
     if(e.keyCode == 38){
         keyboard.UP = false;
     }
-
     if(e.keyCode == 40){
         keyboard.DOWN = false;
     }
@@ -61,5 +64,8 @@ window.addEventListener("keyup", (e) => {
     if(e.keyCode == 83){
         keyboard.S_SOLVED = false;
         keyboard.S = false;
+    }
+    if(e.keyCode == 40){
+        keyboard.DOWN = false;
     }
 });

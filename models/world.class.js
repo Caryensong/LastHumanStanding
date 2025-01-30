@@ -26,11 +26,10 @@ setWorld(){
 
 check(){
   setInterval(() => { 
-    this.checkCollisions();
+    this.checkCollisions(); 
     this.checkThrowObjects();
     this.checkObjectsColliding();
     this.checkSlashingCollisions();
-   
   }, 200);
 }
 
@@ -93,30 +92,40 @@ updateEndbossLifeBar() {
 checkCollisions() {
   this.level.enemies.forEach((enemy, index) => {    
     if (this.character.isColliding(enemy)) {
-      this.handleCharacterEnemyCollision(enemy, index);
-    }
+      
+      if (this.character.isTopZombieColliding(enemy)) {
+        console.log("Zombie von oben getroffen!");
+        this.character.speedY = 10; // Charakter springt hoch
+        this.removeEnemy(enemy, index);
+        return;
+      }
+
+      if (this.character.isSlashing) {
+        console.log("Slashing verhindert Verletzung.");
+        return; // Kein Schaden, wenn Slashing aktiv ist
+      }
+
+      this.character.hit(); 
+      console.log("Charakter wurde getroffen", this.character.energy);
+      this.updateLifeBar();
+    } 
   });
+
   // Überprüfe Kollisionen zwischen geworfenen Objekten und Feinden sowie Endboss
   this.throwableObjects.forEach((bottle, bottleIndex) => {
     this.handleThrowableObjectCollision(bottle, bottleIndex);
   });
 }
 
-handleCharacterEnemyCollision(enemy, index) {
-  if (this.character.isSlashing) {
-    console.log("Slashing verhindert Verletzung.");
-    return; // Kein Schaden, wenn Slashing aktiv ist
-  }
+// checkEnemyTopCollision() {
+//   this.level.enemies.forEach((enemy, index) => {
+//     if (this.character.isTopZombieColliding(enemy)) {
+//       console.log("Zombie von oben getroffen!");
+//       this.removeEnemy(enemy, index);
+//     }
+//   });
+// }
 
-  if (this.character.isTopZombieColliding(enemy)) {
-    console.log("Zombie von oben getroffen!");
-    this.removeEnemy(enemy, index);
-  } else {
-    this.character.hit(); 
-    console.log("Charakter wurde getroffen", this.character.energy);
-    this.updateLifeBar();
-  }
-}
 
 handleThrowableObjectCollision(bottle, bottleIndex) {
   this.level.enemies.forEach((enemy, enemyIndex) => {

@@ -20,6 +20,9 @@ const level1 = new Level(
         new LifeObjects(720, 200),
         new LifeObjects(720, 200),
         new LifeObjects(1440, 200),
+        //unterwasser 
+        new LifeObjects(60, 500),
+        new LifeObjects(30, 600),
     ],
     [
         new Zombies(), 

@@ -172,6 +172,7 @@ class Character extends MovableObject {
             if(!this.world.keyboard.SPACE_SOLVED){
                this.jump();
                this.sounds.JUMP.play();
+               // this.world.checkEnemyTopCollision();
                this.world.keyboard.SPACE_SOLVED = true;
             } 
          }
