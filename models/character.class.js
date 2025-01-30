@@ -190,7 +190,6 @@ class Character extends MovableObject {
                this.world.checkSlashingCollisions();
                this.world.keyboard.S_SOLVED = true;   
             }
-
             setTimeout(() => {
                this.isSlashing = false;
             }, 1800); // Slashing dauert 500ms
