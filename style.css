@@ -27,6 +27,31 @@ h1{
     text-align: center;
 } 
 
+/*---panel */
+
+.panel2{    
+    width: 720px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.panel-wrapper1{
+display: flex;
+}
+
+button{
+    background-color: rgb(35, 35, 39);
+    border-radius: 20%;
+    cursor: pointer;
+}
+button img{
+    width: 30px;
+    filter: brightness(1); /* Standard-Helligkeit */
+    transition: filter 225ms ease-in-out; /* Sanfter Übergang */
+}
+button img:hover{
+    filter: brightness(0) sepia(4) hue-rotate(30deg) saturate(15);
+}
 
 /* Smartphone------- */
 

@@ -2,7 +2,7 @@ const level1 = new Level(
     [
         new StatusBar(10, 0, 200, 40, 'life'),  
         new StatusBar(10, 29, 200, 40, 'poison'),
-        new StatusBar(480, 5, 200, 70, 'endbossLife')
+        new StatusBar(490, 15, 200, 70, 'endbossLife')
 
     ],
     [
