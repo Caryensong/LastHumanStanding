@@ -180,6 +180,7 @@ draw(){
     this.addObjectToMap(this.level.backgroundObjects);   
     this.addObjectToMap( this.level.moon);
     this.addObjectToMap(this.level.clouds);
+    this.addObjectToMap(this.level.hand);
     this.addObjectToMap(this.level.start);
     this.addObjectToMap(this.level.objects);
     this.addObjectToMap(this.throwableObjects);

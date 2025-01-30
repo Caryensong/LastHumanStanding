@@ -27,6 +27,10 @@ const level1 = new Level(
         new Zombies(),
     ],
     [
+        new ZombieHand(740, 405, 20, 45),
+        new ZombieHand(750, 400, 30, 35),
+    ],
+    [
         new Moon()
     ],
     [
