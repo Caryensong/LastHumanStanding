@@ -29,6 +29,7 @@ check(){
     this.checkCollisions();
     this.checkThrowObjects();
     this.checkObjectsColliding();
+    this.checkSlashingCollisions();
    
   }, 200);
 }
@@ -69,11 +70,9 @@ checkObjectsColliding() {
   });
 }
 
-// Vereinheitlichte Methode zur Statusbar-Aktualisierung
 updatePoisonBar() {
   const poisonBar = this.level.statusBar.find((bar) => bar.type === 'poison');
   if (poisonBar) {
-    // Berechne den Prozentsatz basierend auf der Anzahl der verbleibenden Flaschen
     let poisonPercentage = (this.poisonCount / 5) * 100;
     poisonBar.setPoisonPercentage(poisonPercentage);
     console.log('Poison-Bar aktualisiert:', poisonPercentage);
@@ -116,6 +115,9 @@ checkCollisions(){
         }
     }
   });
+
+
+
  // Überprüfe Kollisionen zwischen geworfenen Objekten und Enemys
   this.throwableObjects.forEach((bottle, bottleIndex) => {
     this.level.enemies.forEach((enemy, enemyIndex) => {
@@ -164,9 +166,8 @@ if(this.character.isColliding(this.endboss)){
     if(this.endboss.energy <= 0){
       console.log("endboss besiegt");
       this.endboss.playDeadAnimation();
-    } 
+    }
 
-  
   } else {
     this.character.hit();
     console.log(" CHarater wurde vom Endboss getroffe", this.character.energy);
