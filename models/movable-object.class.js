@@ -37,9 +37,9 @@ class MovableObject extends DrawableObject {
     //Zombies .isColliding from Character on the Top
     isTopZombieColliding(mo) {
         const bottomOfCharacter = this.y + this.height - this.offset.bottom;
-        const topOfEnemy = mo.y + mo.width
-        return (bottomOfCharacter < topOfEnemy);
-    }
+        const topOfEnemy = mo.y + mo.offset.top;
+        return bottomOfCharacter > topOfEnemy;
+}
 
 
     isSlashingColliding(mo) {

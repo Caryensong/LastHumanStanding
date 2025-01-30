@@ -91,7 +91,7 @@ updateEndbossLifeBar() {
 }
 
 checkCollisions() {
-  this.level.enemies.forEach((enemy, index) => {
+  this.level.enemies.forEach((enemy, index) => {    
     if (this.character.isColliding(enemy)) {
       this.handleCharacterEnemyCollision(enemy, index);
     }
@@ -112,7 +112,7 @@ handleCharacterEnemyCollision(enemy, index) {
     console.log("Zombie von oben getroffen!");
     this.removeEnemy(enemy, index);
   } else {
-    this.character.hit();
+    this.character.hit(); 
     console.log("Charakter wurde getroffen", this.character.energy);
     this.updateLifeBar();
   }
@@ -158,17 +158,9 @@ handleEndbossCollision() {
 
 checkSlashingCollisions() {
   if (this.endboss.isDying) return; // Falls Endboss schon stirbt, keine weitere Aktion
-  
-  // Kollision und Schaden durch Endboss (falls der Charakter nicht schlägt)
-  if (this.character.isColliding(this.endboss)) {
-    if (this.character.isSlashing) {
-      console.log("Endboss wurde mit Schwert getroffen");
-      this.handleEndbossCollision();
-    } else {
-      console.log("Charakter wurde vom Endboss getroffen");
-      this.character.hit(); // Der Charakter nimmt Schaden
-      this.updateLifeBar(); // Aktualisiere die Lebensanzeige des Charakters
-    }
+  if (this.character.isColliding(this.endboss) && this.character.isSlashing) {
+    console.log("Endboss wurde mit Schwert getroffen");
+    this.handleEndbossCollision();
   }
 
   this.level.enemies.forEach((enemy, index) => {
@@ -249,4 +241,4 @@ draw(){
     this.ctx.restore();  //macht die Spiegelung wieder
     mo.x =mo.x *  -1;
   }
-}  
+}
