@@ -92,7 +92,7 @@ updateEndbossLifeBar() {
 
 checkCollisions() {
   this.level.enemies.forEach((enemy, index) => {    
-    if (this.character.isColliding(enemy)) {
+    if (this.character.isColliding(enemy) || this.character.isColliding(this.endboss) ) {
       if (this.character.isSlashing) {
         console.log("Slashing verhindert Verletzung.");
         return; // Kein Schaden, wenn Slashing aktiv ist
