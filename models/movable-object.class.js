@@ -13,6 +13,9 @@ class MovableObject extends DrawableObject {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration
+            }else {
+                this.y = 307; 
+                this.speedY = 0;
             }
         }, 1000 / 25);
     }
@@ -38,9 +41,12 @@ class MovableObject extends DrawableObject {
     isTopZombieColliding(mo) {
         const bottomOfCharacter = this.y + this.height - this.offset.bottom;
         const topOfEnemy = mo.y + mo.offset.top;
-        return bottomOfCharacter > topOfEnemy;
-}
-
+        //Charakter auch horizontal über dem Gegner befindet
+        const horizontalOverlap = this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+                                  this.x + this.offset.left < mo.x + mo.width - mo.offset.right;
+    
+        return bottomOfCharacter >= topOfEnemy && bottomOfCharacter <= topOfEnemy + mo.height && horizontalOverlap;
+    }
 
     isSlashingColliding(mo) {
         // Berechne den Slashing-Bereich mit deinem bestehenden Offset
@@ -92,4 +98,9 @@ class MovableObject extends DrawableObject {
     isDead() {
         return this.energy == 0;
     }
+
+    moveDown() {
+        this.y += this.speed;
+    }
+    
 }

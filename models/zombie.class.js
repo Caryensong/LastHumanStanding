@@ -105,7 +105,7 @@ class Zombies extends MovableObject{
     
         setTimeout(() => {
             if (onAnimationComplete) onAnimationComplete(); // Callback aufrufen
-        }, 1000); // Bild wird 2 Sekunden lang angezeigt
+        }, 900); // Bild wird 2 Sekunden lang angezeigt
     }
     
 }

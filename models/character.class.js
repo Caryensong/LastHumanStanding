@@ -2,6 +2,7 @@ class Character extends MovableObject {
    speed = 4;
    world;
    isSlashing = false;
+   isInvulnerable = false;
 
    sounds = {
       WALK: new Audio('./audio/Walking1.mp3'),
@@ -167,6 +168,39 @@ class Character extends MovableObject {
                bottom: 20
             }
          }
+         
+      //    if (this.world.keyboard.DOWN && !this.isAboveGround()) {
+      //       // Alle relevanten Objekte im Level verschieben
+         
+      //       this.world.level.start.forEach(obj => {
+      //           obj.y -= this.speed;  // Verschiebt Startobjekte nach oben
+      //       });
+      //       this.world.level.objects.forEach(obj => {
+      //           obj.y -= this.speed;  // Verschiebt Objekte nach oben
+      //       });
+      //       this.world.level.enemies.forEach(obj => {
+      //           obj.y -= this.speed;  // Verschiebt Gegner nach oben
+      //       });
+      //       this.world.level.hand.forEach(obj => {
+      //           obj.y -= this.speed;  // Verschiebt Handobjekte nach oben
+      //       });
+      //       this.world.level.moon.forEach(obj => {
+      //           obj.y -= this.speed;  // Verschiebt Mond nach oben
+      //       });
+      //       this.world.level.clouds.forEach(obj => {
+      //           obj.y -= this.speed;  // Verschiebt Wolken nach oben
+      //       });
+      //       this.world.level.backgroundObjects.forEach(obj => {
+      //           obj.y -= this.speed;  // Verschiebt Hintergrundobjekte nach oben
+      //       });
+        
+      //       // Kamera nach unten verschieben
+      //       this.world.camera_y += this.speed;
+            
+      //       // Optional: Charakteranimation umstellen, wenn erforderlich
+      //       // this.playSwimmingAnimation();
+      //   }
+        
 
          if (this.world.keyboard.SPACE && !this.isAboveGround()) {
             if(!this.world.keyboard.SPACE_SOLVED){
@@ -232,3 +266,11 @@ class Character extends MovableObject {
    }
 
 }
+
+// playSwimmingAnimation() {
+//    // Du könntest ein Array von Schwimm-Frames verwenden, ähnlich wie bei der Walking-Animation.
+//    if (!this.isSwimming) {
+//        this.loadImages(this.Images_Swimming);  // Angenommen, du hast ein `Images_Swimming` Array
+//        this.isSwimming = true;  // Verhindert, dass die Animation ständig neu geladen wird
+//    }
+// }

@@ -5,6 +5,7 @@ class World {
   canvas;
   ctx;
   camera_x = 0;
+  //  camera_y = 0; // Neue Variable für vertikale Bewegung
   keyboard;
   throwableObjects = [];
   lastThrowTime;
@@ -92,40 +93,33 @@ updateEndbossLifeBar() {
 checkCollisions() {
   this.level.enemies.forEach((enemy, index) => {    
     if (this.character.isColliding(enemy)) {
-      
-      if (this.character.isTopZombieColliding(enemy)) {
-        console.log("Zombie von oben getroffen!");
-        this.character.speedY = 10; // Charakter springt hoch
-        this.removeEnemy(enemy, index);
-        return;
-      }
-
       if (this.character.isSlashing) {
         console.log("Slashing verhindert Verletzung.");
         return; // Kein Schaden, wenn Slashing aktiv ist
       }
-
-      this.character.hit(); 
-      console.log("Charakter wurde getroffen", this.character.energy);
-      this.updateLifeBar();
-    } 
-  });
-
+    if (this.character.isTopZombieColliding(enemy) && this.character.isAboveGround()) {
+        this.character.isInvulnerable = true; 
+        this.removeEnemy(enemy, index); 
+        console.log("Zombie von oben getroffen!");
+  
+        setTimeout(() => {
+        this.character.isInvulnerable = false; // Nach kurzer Zeit wieder verwundbar
+        }, 900 );
+      }
+  
+      if (!this.character.isInvulnerable) {
+        this.character.hit(); // Charakter wird getroffen
+        console.log("Charakter wurde getroffen", this.character.energy);
+        this.updateLifeBar();
+      }
+}
+});
   // Überprüfe Kollisionen zwischen geworfenen Objekten und Feinden sowie Endboss
   this.throwableObjects.forEach((bottle, bottleIndex) => {
     this.handleThrowableObjectCollision(bottle, bottleIndex);
   });
+
 }
-
-// checkEnemyTopCollision() {
-//   this.level.enemies.forEach((enemy, index) => {
-//     if (this.character.isTopZombieColliding(enemy)) {
-//       console.log("Zombie von oben getroffen!");
-//       this.removeEnemy(enemy, index);
-//     }
-//   });
-// }
-
 
 handleThrowableObjectCollision(bottle, bottleIndex) {
   this.level.enemies.forEach((enemy, enemyIndex) => {
@@ -179,6 +173,13 @@ checkSlashingCollisions() {
     }
   });
 }
+
+// checkCharacterMovement() {
+//   if (this.keyboard.DOWN) {
+//       this.character.moveDown();
+//       this.camera_y += this.character.speed; // Kamera nach unten bewegen
+//   }
+// }
 
 
 draw(){
