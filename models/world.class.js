@@ -152,11 +152,6 @@ handleEndbossCollision() {
   this.endboss.hit();
   console.log("Endboss Life", this.endboss.energy);
   this.updateEndbossLifeBar();
-
-  if (this.endboss.energy <= 0) {
-    console.log("Endboss besiegt");
-    this.endboss.playDeadAnimation();
-  }
 }
 
 checkSlashingCollisions() {

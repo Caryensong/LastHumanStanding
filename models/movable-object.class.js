@@ -82,9 +82,17 @@ class MovableObject extends DrawableObject {
 
     hit() {
         this.energy -= 10;
+    
         if (this.energy <= 0) {
             this.energy = 0;
-            this.playDeathAnimation(); 
+    
+            // Prüfen, ob das aktuelle Objekt ein Character ist
+            if (this instanceof Character) {
+                this.playDeathAnimation();
+            } else if (this instanceof Endboss) {
+                console.log("Endboss besiegt!");
+                this.playDeadAnimation();
+            }
         } else {
             this.lastHit = new Date().getTime();
         }
