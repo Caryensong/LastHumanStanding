@@ -3,6 +3,7 @@ class Character extends MovableObject {
    world;
    isSlashing = false;
    isInvulnerable = false;
+   isDeadAlready = false; 
 
    sounds = {
       WALK: new Audio('./audio/Walking1.mp3'),
@@ -136,11 +137,36 @@ class Character extends MovableObject {
       this.loadImages(this.Images_Slashing);
       this.applyGravaty();
       this.animate();
-
-      this.isDeadAlready = false;
    }
 
+   playDeathAnimation() {
+      if (this.isDeadAlready) return;
+  
+      console.log("Starte Todesanimation!");
+      this.isDeadAlready = true;
+      this.speed = 0;  
+      this.world.keyboard = {}; 
+  
+      let index = 0;
+      let deathAnimation = setInterval(() => {
+          this.img = this.imageCache[this.Images_Dead[index]];
+          index++;
+  
+          if (index >= this.Images_Dead.length) {
+              clearInterval(deathAnimation);
+              console.log("Todesanimation beendet!");
+          }
+      }, 100); // Wechsle Bild alle 100ms
+  
+      setTimeout(() => {
+          console.log("Spieler ist tot! Game Over!");
+      }, this.Images_Dead.length * 100);
+  }
+  
+
    animate() {
+
+
 
       setInterval(() => {
          this.sounds.WALK.pause();
@@ -169,38 +195,6 @@ class Character extends MovableObject {
             }
          }
          
-      //    if (this.world.keyboard.DOWN && !this.isAboveGround()) {
-      //       // Alle relevanten Objekte im Level verschieben
-         
-      //       this.world.level.start.forEach(obj => {
-      //           obj.y -= this.speed;  // Verschiebt Startobjekte nach oben
-      //       });
-      //       this.world.level.objects.forEach(obj => {
-      //           obj.y -= this.speed;  // Verschiebt Objekte nach oben
-      //       });
-      //       this.world.level.enemies.forEach(obj => {
-      //           obj.y -= this.speed;  // Verschiebt Gegner nach oben
-      //       });
-      //       this.world.level.hand.forEach(obj => {
-      //           obj.y -= this.speed;  // Verschiebt Handobjekte nach oben
-      //       });
-      //       this.world.level.moon.forEach(obj => {
-      //           obj.y -= this.speed;  // Verschiebt Mond nach oben
-      //       });
-      //       this.world.level.clouds.forEach(obj => {
-      //           obj.y -= this.speed;  // Verschiebt Wolken nach oben
-      //       });
-      //       this.world.level.backgroundObjects.forEach(obj => {
-      //           obj.y -= this.speed;  // Verschiebt Hintergrundobjekte nach oben
-      //       });
-        
-      //       // Kamera nach unten verschieben
-      //       this.world.camera_y += this.speed;
-            
-      //       // Optional: Charakteranimation umstellen, wenn erforderlich
-      //       // this.playSwimmingAnimation();
-      //   }
-        
 
          if (this.world.keyboard.SPACE && !this.isAboveGround()) {
             if(!this.world.keyboard.SPACE_SOLVED){
@@ -242,17 +236,11 @@ class Character extends MovableObject {
          this.world.camera_x = -this.x + 100;
       }, 1000 / 60);
 
-
+   
       setInterval(() => {
-         if (this.isDead()) {
-            if (!this.isDeadAlready) {
-               this.isDeadAlready = true;
-               this.playAnimation(this.Images_Dead);
-               this.sounds.WALK.pause();
-               this.sounds.HURT.play();
-            }
-
-         } else if (this.isHurt()) {
+         if (this.isDeadAlready) return;// Falls Charakter tot ist, keine weiteren Animationen starten
+        
+         if (this.isHurt()) {
             this.sounds.HURT.play();
             this.playAnimation(this.Images_Hurt);
          } else if (this.isAboveGround()) {
@@ -267,10 +255,3 @@ class Character extends MovableObject {
 
 }
 
-// playSwimmingAnimation() {
-//    // Du könntest ein Array von Schwimm-Frames verwenden, ähnlich wie bei der Walking-Animation.
-//    if (!this.isSwimming) {
-//        this.loadImages(this.Images_Swimming);  // Angenommen, du hast ein `Images_Swimming` Array
-//        this.isSwimming = true;  // Verhindert, dass die Animation ständig neu geladen wird
-//    }
-// }
