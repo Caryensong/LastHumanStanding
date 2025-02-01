@@ -86,7 +86,6 @@ class MovableObject extends DrawableObject {
         if (this.energy <= 0) {
             this.energy = 0;
     
-            // Prüfen, ob das aktuelle Objekt ein Character ist
             if (this instanceof Character) {
                 this.playDeathAnimation();
             } else if (this instanceof Endboss) {

@@ -163,11 +163,7 @@ class Character extends MovableObject {
       }, this.Images_Dead.length * 100);
   }
   
-
    animate() {
-
-
-
       setInterval(() => {
          this.sounds.WALK.pause();
          if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
