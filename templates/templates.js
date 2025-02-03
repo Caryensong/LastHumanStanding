@@ -37,11 +37,11 @@ function howToPlayTemplate(){
 `
 }
 
-function WonGameTemplate(){
+function wonGameTemplate(){
     return `
-    <div id="howToPlayBox"> 
+    <div id="endScreenBox"> 
           <img src="./img/Startscreen/youWin.png" alt="You Win">
-      <div class="descriptionBtn_container">
+      <div class="restart_btn_container">
         <button class="startbtn" onclick="init()">Play Again</button>
       </div>
       </div>
@@ -50,9 +50,9 @@ function WonGameTemplate(){
 
 function lostGameTemplate(){
     return `
-    <div id="howToPlayBox"> 
+    <div id="endScreenBox"> 
           <img src="./img/Startscreen/GameOver.png" alt="Game Over">
-      <div class="gameOverBtn_container">
+      <div class="restart_btn_container">
           <button class="startbtn" onclick="init()">Play Again</button>
       </div>
       </div>

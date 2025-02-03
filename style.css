@@ -93,6 +93,11 @@ button.startbtn:hover{
     height: 480px;  
 }
 
+#endScreen img{
+    width: 740px;
+    height: 480px;  
+}
+
 /* Smartphone------- */
 
 @media only screen and (max-width: 720px){

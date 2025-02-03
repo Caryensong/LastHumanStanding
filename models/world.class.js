@@ -20,7 +20,7 @@ class World {
     this.setWorld();
     this.checkCollisions(); 
     this.check();
-    this.checkGameOver();
+   
 }
 
 setWorld(){
@@ -32,7 +32,8 @@ check(){
     this.checkCollisions(); 
     this.checkThrowObjects();
     this.checkObjectsColliding();
-    this.checkSlashingCollisions();
+    this.checkSlashingCollisions(); 
+    this.checkGameOver();
   }, 200);
 }
 
@@ -180,25 +181,26 @@ checkGameOver(){
   if(this.character.isDead()){
     let winner = "endboss";
     setTimeout(()=> {
-      this.gameover = true; 
+      this.gameOver = true; 
       this.renderGameOver(winner);
-    },1000);
+    },2500);
   } else if(this.endboss.isDead()){
     let winner = "character";
     setTimeout(()=> {
-      this.gameover = true; 
+      this.gameOver = true; 
       this.renderGameOver(winner);
-    },1000);
+    },2500);
   }
 }
 
 renderGameOver(winner){
+  console.log("Game Over Screen wird gerendert für:", winner);
   canvas = document.getElementById("canvas");
   canvas.classList.add("d-none");
-  endScreen = document.getElementById("startScreen");
+  endScreen = document.getElementById("endScreen");
   endScreen.classList.remove("d-none");
   if(winner == "character"){
-    endScreen.innerHTML = WonGameTemplate();
+    endScreen.innerHTML = wonGameTemplate();
   } else {
     endScreen.innerHTML = lostGameTemplate();
   }
