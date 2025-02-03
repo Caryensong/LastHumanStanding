@@ -3,19 +3,26 @@ let world;
 let keyboard = new Keyboard();
 
 function startGame(){
-    startScreen =document.getElementById("startScreen");
-    startScreen = "";
-    canvas =document.getElementById("canvas");
-    canvas.classList.remove("d-none");
+     startScreen =document.getElementById("startScreen");
+     startScreen = "";
+     canvas =document.getElementById("canvas");
+     canvas.classList.remove("d-none");
 
-    world = new World(canvas, keyboard);
+     world = new World(canvas, keyboard);
+}
+
+function startDescription(){
+    descriptionScreen = document.getElementById("startContent");
+    descriptionScreen.classList.add("d-none");
+    startScreen = document.getElementById("startScreen");
+    startScreen.innerHTML = descriptionTemplate();
 }
 
 function init(){
     canvas = document.getElementById('canvas');
-    startScreen = document.getElementById("startScreen");
-    startScreen.innerHTML = startTemplate();
-   
+     startScreen = document.getElementById("startScreen");
+     startScreen.innerHTML = startTemplate();
+    // world = new World(canvas, keyboard);
 }
 
 window.addEventListener("keydown", (e) => {
