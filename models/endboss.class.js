@@ -106,7 +106,7 @@ class Endboss extends MovableObject {
             this.moveRight();
           }
 
-        }, 1000 / 90) ;
+        }, 5) ;
 
         this.playAnimation(this.Images_Slashing);
         this.Walk.play();
@@ -114,7 +114,7 @@ class Endboss extends MovableObject {
       } else {
         this.Walk.pause();
       }
-    }, 100);
+    }, 80);
   }
 
   

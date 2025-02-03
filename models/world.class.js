@@ -5,7 +5,7 @@ class World {
   canvas;
   ctx;
   camera_x = 0;
-  //  camera_y = 0; // Neue Variable für vertikale Bewegung
+  //  camera_y = 0; // vertikale Bewegung
   keyboard;
   throwableObjects = [];
   lastThrowTime;
@@ -114,7 +114,6 @@ checkCollisions() {
       }
 }
 });
-  // Überprüfe Kollisionen zwischen geworfenen Objekten und Feinden sowie Endboss
   this.throwableObjects.forEach((bottle, bottleIndex) => {
     this.handleThrowableObjectCollision(bottle, bottleIndex);
   });
@@ -136,7 +135,7 @@ handleThrowableObjectCollision(bottle, bottleIndex) {
     this.handleEndbossCollision();
   }
 }
-// Hilfsmethoden für das Entfernen von Objekten
+
 removeThrowableObject(bottleIndex) {
   this.throwableObjects.splice(bottleIndex, 1);
 }
@@ -153,7 +152,7 @@ handleEndbossCollision() {
   console.log("Endboss Life", this.endboss.energy);
   this.updateEndbossLifeBar();
 }
-
+ 
 checkSlashingCollisions() {
   if (this.endboss.isDying) return; // Falls Endboss schon stirbt, keine weitere Aktion
   if (this.character.isColliding(this.endboss) && this.character.isSlashing) {
