@@ -207,7 +207,7 @@ class Character extends MovableObject {
             this.sounds.SLASH.play();
             this.offset = {
                   top: 30,
-                  left: 40,
+                  left: 35,
                   right: 15,
                   bottom: 20
                };   

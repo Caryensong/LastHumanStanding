@@ -95,6 +95,12 @@ checkCollisions() {
     if (this.character.isColliding(enemy) || this.character.isColliding(this.endboss) ) {
       if (this.character.isSlashing) {
         console.log("Slashing verhindert Verletzung.");
+        if (!this.character.slashTimeout) {
+          this.character.slashTimeout = setTimeout(() => {
+            this.character.isSlashing = false;
+            this.character.slashTimeout = null;
+          }, 1800);
+        }
         return; // Kein Schaden, wenn Slashing aktiv ist
       }
     if (this.character.isTopZombieColliding(enemy) && this.character.isAboveGround()) {

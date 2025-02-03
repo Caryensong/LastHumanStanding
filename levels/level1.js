@@ -1,3 +1,5 @@
+// let level
+
 const level1 = new Level(
     [
         new StatusBar(10, 0, 200, 40, 'life'),  

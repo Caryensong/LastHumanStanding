@@ -48,7 +48,7 @@ class Zombies extends MovableObject{
         let x;
 
         do {
-            x = 200 + Math.random() * 500; // Generiere zufällige Position
+            x = 280 + Math.random() * 500; // Generiere zufällige Position
         } while (Zombies.zombiePositions.some(pos => Math.abs(pos - x) < minDistance));
 
         Zombies.zombiePositions.push(x); // Speichere die Position in der Liste
