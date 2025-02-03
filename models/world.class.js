@@ -10,6 +10,7 @@ class World {
   throwableObjects = [];
   lastThrowTime;
   poisonCount = 5; // Maximale Anzahl an Flaschen
+  gameOver = false;
 
   constructor(canvas, keyboard){
     this.ctx = canvas.getContext('2d');
@@ -19,6 +20,7 @@ class World {
     this.setWorld();
     this.checkCollisions(); 
     this.check();
+    this.checkGameOver();
 }
 
 setWorld(){
@@ -172,6 +174,34 @@ checkSlashingCollisions() {
       this.removeEnemy(enemy, index);
     }
   });
+}
+
+checkGameOver(){
+  if(this.character.isDead()){
+    let winner = "endboss";
+    setTimeout(()=> {
+      this.gameover = true; 
+      this.renderGameOver(winner);
+    },1000);
+  } else if(this.endboss.isDead()){
+    let winner = "character";
+    setTimeout(()=> {
+      this.gameover = true; 
+      this.renderGameOver(winner);
+    },1000);
+  }
+}
+
+renderGameOver(winner){
+  canvas = document.getElementById("canvas");
+  canvas.classList.add("d-none");
+  endScreen = document.getElementById("startScreen");
+  endScreen.classList.remove("d-none");
+  if(winner == "character"){
+    endScreen.innerHTML = WonGameTemplate();
+  } else {
+    endScreen.innerHTML = lostGameTemplate();
+  }
 }
 
 // checkCharacterMovement() {

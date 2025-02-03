@@ -36,3 +36,25 @@ function howToPlayTemplate(){
       </div>
 `
 }
+
+function WonGameTemplate(){
+    return `
+    <div id="howToPlayBox"> 
+          <img src="./img/Startscreen/youWin.png" alt="You Win">
+      <div class="descriptionBtn_container">
+        <button class="startbtn" onclick="init()">Play Again</button>
+      </div>
+      </div>
+`
+}
+
+function lostGameTemplate(){
+    return `
+    <div id="howToPlayBox"> 
+          <img src="./img/Startscreen/GameOver.png" alt="Game Over">
+      <div class="gameOverBtn_container">
+          <button class="startbtn" onclick="init()">Play Again</button>
+      </div>
+      </div>
+`
+}
