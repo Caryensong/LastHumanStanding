@@ -15,13 +15,24 @@ function startTemplate(){
 
 function descriptionTemplate(){
     return `
-    <div id="descriptionBox" width="720px" height="480px"> 
+        <div id="descriptionBox"> 
               <img src="./img/Startscreen/description.png" alt="description">
           <div class="descriptionBtn_container">
               <button class="startbtn" onclick="init()">Back</button>
-              <button class="startbtn" id="img-button" onclick="options()">READY</button>
+              <button class="startbtn" id="img-button" onclick="howToPlayScreen()">READY</button>
           </div>
-          </div>
-  
+        </div>
    `
+}
+
+function howToPlayTemplate(){
+    return `
+    <div id="howToPlayBox"> 
+          <img src="./img/Startscreen/Keyboard.png" alt="description">
+      <div class="descriptionBtn_container">
+          <button class="startbtn" onclick="init()">Back</button>
+          <button class="startbtn" id="img-button" onclick="startGame()">PLAY</button>
+      </div>
+      </div>
+`
 }

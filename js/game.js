@@ -3,7 +3,8 @@ let world;
 let keyboard = new Keyboard();
 
 function startGame(){
-     startScreen =document.getElementById("startScreen");
+   startScreen = document.getElementById("startScreen");
+    startScreen.classList.add("d-none");
      startScreen = "";
      canvas =document.getElementById("canvas");
      canvas.classList.remove("d-none");
@@ -11,9 +12,17 @@ function startGame(){
      world = new World(canvas, keyboard);
 }
 
-function startDescription(){
-    descriptionScreen = document.getElementById("startContent");
+function howToPlayScreen(){
+    descriptionScreen = document.getElementById("descriptionBox");
     descriptionScreen.classList.add("d-none");
+    startScreen = document.getElementById("startScreen");
+    startScreen.innerHTML = howToPlayTemplate();
+
+}
+
+function startDescription(){
+    firstScreen = document.getElementById("startContent");
+    firstScreen.classList.add("d-none");
     startScreen = document.getElementById("startScreen");
     startScreen.innerHTML = descriptionTemplate();
 }

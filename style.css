@@ -80,10 +80,18 @@ button.startbtn:hover{
 
 .descriptionBtn_container{
     position: fixed;
-    top:640px;
-    right: 550px;
+    top:620px;
+    right: 560px;
+}
+#descriptionBox img{
+    width: 740px;
+    height: 480px;
 }
 
+#howToPlayBox img{
+    width: 740px;
+    height: 480px;  
+}
 
 /* Smartphone------- */
 
