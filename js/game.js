@@ -11,13 +11,17 @@ function startGame(){
      initLevel();
      world = new World(canvas, keyboard);
 }
+function stopGame(world) {
+    clearInterval(world.intervalID);
+    world.throwableObjects = []; // Alle geworfenen Objekte entfernen
+}
+
 
 function howToPlayScreen(){
     descriptionScreen = document.getElementById("descriptionBox");
     descriptionScreen.classList.add("d-none");
     startScreen = document.getElementById("startScreen");
     startScreen.innerHTML = howToPlayTemplate();
-
 }
 
 function startDescription(){
@@ -32,15 +36,14 @@ function init(){
     startScreen.innerHTML= "";
     endScreen = document.getElementById("endScreenBox"); 
     canvas = document.getElementById('canvas');
+   
     if( endScreen){
          endScreen.classList.add("d-none");  
-          canvas.classList.remove("d-none");
+         canvas.classList.remove("d-none");
     }
-   
-  
     startScreen.innerHTML = startTemplate();
-    // world = new World(canvas, keyboard);
 }
+
 
 window.addEventListener("keydown", (e) => {
      if(e.keyCode == 39){

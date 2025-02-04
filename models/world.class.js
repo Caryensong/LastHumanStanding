@@ -28,12 +28,15 @@ setWorld(){
 }
 
 check(){
-  setInterval(() => { 
+  this.intervalID = setInterval(() => { 
+    if (this.gameOver) {
+      clearInterval(this.intervalID);
+      return;
+    }
     this.checkCollisions(); 
     this.checkThrowObjects();
     this.checkObjectsColliding();
     this.checkSlashingCollisions(); 
-    this.checkGameOver();
   }, 200);
 }
 
@@ -95,7 +98,7 @@ updateEndbossLifeBar() {
 
 checkCollisions() {
   this.level.enemies.forEach((enemy, index) => {    
-    if (this.character.isColliding(enemy) || this.character.isColliding(this.endboss) ) {
+    if (this.character.isColliding(enemy) || this.endboss.isColliding(this.character) ) {
       if (this.character.isSlashing) {
         console.log("Slashing verhindert Verletzung.");
         if (!this.character.slashTimeout) {
@@ -181,13 +184,16 @@ checkGameOver(){
   if(this.character.isDead()){
     let winner = "endboss";
     setTimeout(()=> {
-      this.gameOver = true; 
+      this.gameOver = true;
+      stopGame(this);
       this.renderGameOver(winner);
+
     },2500);
   } else if(this.endboss.isDead()){
     let winner = "character";
     setTimeout(()=> {
       this.gameOver = true; 
+      stopGame(this);
       this.renderGameOver(winner);
     },2500);
   }
@@ -214,8 +220,10 @@ renderGameOver(winner){
 
 
 draw(){
+  if(this.gameOver){
+    return;
+  }
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
     this.ctx.translate(this.camera_x, 0);
 
     this.addObjectToMap(this.level.backgroundObjects);   
@@ -239,11 +247,14 @@ draw(){
     this.addToMap(this.endboss);
 
     this.ctx.translate(-this.camera_x, 0);
-    
-    let self = this;
-    requestAnimationFrame(function(){
-      self.draw();
-    });
+
+    this.checkGameOver();
+    if (!this.gameOver) { // Hier prüfen, ob das Spiel weiterläuft
+      let self = this;
+      requestAnimationFrame(function(){
+        self.draw();
+      });
+    }
   }
 
   addObjectToMap(objects){

@@ -82,8 +82,7 @@ class Endboss extends MovableObject {
 
     this.movementInterval = setInterval(() => {
       if (this.isDying || this.isHurt) return; // Stoppt Bewegung, wenn verletzt oder tot
-
-
+      
       const distance = Math.abs(world.character.x - this.x);
 
       if (distance <= 500) {

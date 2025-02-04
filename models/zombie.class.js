@@ -44,7 +44,7 @@ class Zombies extends MovableObject{
     }
 
     generateRandomPosition() {
-        let minDistance = 100; // Mindestabstand zwischen Zombies
+        let minDistance = 150; // Mindestabstand zwischen Zombies
         let x;
 
         do {
