@@ -1,8 +1,11 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+musicBackground = 
 
 function startGame() {
+    world = null;
+    
     startScreen = document.getElementById("howToPlayBox");
     startScreen.classList.add("d-none");
     startScreen = "";
@@ -33,7 +36,7 @@ function init() {
     startScreen.innerHTML = "";
     endScreen = document.getElementById("endScreenBox");
     canvas = document.getElementById('canvas');
-
+    AudioHub.startBackgroundMusic();
     if (endScreen) {
         endScreen.classList.add("d-none");
         canvas.classList.remove("d-none");

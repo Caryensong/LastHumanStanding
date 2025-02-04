@@ -39,10 +39,15 @@ h1{
     width: 720px;
     display: flex;
     justify-content: space-around;
+    position: relative;
+    top: -100px;
 }
+.panel-wrapper2{
+    }
 
 .panel-wrapper1{
-display: flex;
+position: relative;
+top:50px
 }
 
 button{

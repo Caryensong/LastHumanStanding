@@ -5,7 +5,6 @@ class World {
   canvas;
   ctx;
   camera_x = 0;
-  //  camera_y = 0; // vertikale Bewegung
   keyboard;
   throwableObjects = [];
   lastThrowTime;
@@ -213,14 +212,6 @@ class World {
     }
   }
 
-  // checkCharacterMovement() {
-  //   if (this.keyboard.DOWN) {
-  //       this.character.moveDown();
-  //       this.camera_y += this.character.speed; // Kamera nach unten bewegen
-  //   }
-  // }
-
-
   draw() {
     if (this.gameOver) {
       return;
@@ -251,12 +242,11 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
 
     this.checkGameOver();
-    if (!this.gameOver) { // Hier prüfen, ob das Spiel weiterläuft
-      let self = this;
-      requestAnimationFrame(function () {
+    let self = this;
+    requestAnimationFrame(function() {
         self.draw();
-      });
-    }
+    });
+    
   }
 
   addObjectToMap(objects) {
