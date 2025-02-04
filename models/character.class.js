@@ -218,7 +218,7 @@ class Character extends MovableObject {
             setTimeout(() => {
                this.isSlashing = false;
                this.world.keyboard.S_SOLVED = false;
-            }, 1800); // Slashing schutz dauer
+            }, 1000); // Slashing schutz dauer
          }
 
          if (this.world.keyboard.D) {

@@ -88,14 +88,14 @@ class Zombies extends MovableObject{
                 clearInterval(deadAnimationInterval); // Animation beendet
                 if (onAnimationComplete) onAnimationComplete(); // Callback aufrufen
             }
-        }, 100); // 150ms pro Frame
+        }, 80); // 150ms pro Frame
     }
 
     playPoisonDeadAnimation(onAnimationComplete) {
         this.isDead = true;
         this.width = 130;
         this.height = 20;
-        this.y = 420;
+        this.y = 430;
         if(this.hurt.readyState == 4){
              this.hurt.play();
         }

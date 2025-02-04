@@ -2,6 +2,11 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
+function stopGame(world) {
+    clearInterval(world.intervalID);
+    world.throwableObjects = []; // Alle geworfenen Objekte entfernen
+}
+
 function startGame(){
    startScreen = document.getElementById("howToPlayBox");
     startScreen.classList.add("d-none");
@@ -11,11 +16,6 @@ function startGame(){
      initLevel();
      world = new World(canvas, keyboard);
 }
-function stopGame(world) {
-    clearInterval(world.intervalID);
-    world.throwableObjects = []; // Alle geworfenen Objekte entfernen
-}
-
 
 function howToPlayScreen(){
     descriptionScreen = document.getElementById("descriptionBox");

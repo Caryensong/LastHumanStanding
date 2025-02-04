@@ -105,7 +105,7 @@ checkCollisions() {
           this.character.slashTimeout = setTimeout(() => {
             this.character.isSlashing = false;
             this.character.slashTimeout = null;
-          }, 1800);
+          }, 1000);
         }
         return; // Kein Schaden, wenn Slashing aktiv ist
       }
