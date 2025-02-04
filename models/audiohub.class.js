@@ -12,7 +12,7 @@ class AudioHub {
     }
 
     // Alle Sounds stoppen
-    static stopAll() {
+    static stopAllSound() {
         AudioHub.allSounds.forEach(sound => {
             sound.pause();
             sound.currentTime = 0; // Optional: Setze die Wiedergabezeit zurück

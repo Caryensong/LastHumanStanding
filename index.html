@@ -6,6 +6,7 @@
    <link rel="shortcut icon" href="./img/icon/icon.png" type="image/x-icon">
    <title>LAST HUMAN STANDING GAME</title>
    <link rel="stylesheet" href="style.css">
+   <script src="./models/audiohub.class.js"></script> 
    <script src="./models/drawable-object.class.js"></script>
    <script src="./models/movable-object.class.js"></script>
    <script src="./models/character.class.js"></script>
@@ -23,7 +24,7 @@
    <script src="./models/level.class.js"></script>
    <script src="./models/endboss.class.js"></script>
    <script src="./models/throwable-object.class.js"></script> 
-   <script src="./models/audiohub.class.js"></script> 
+   
    <script src="./js/game.js"></script>
    <script src="./levels/level1.js"></script>
    <script src="./templates/templates.js"></script>
@@ -34,7 +35,7 @@
    <h1>LAST HUMAN STANDING GAME</h1>
    <section class="panel1">
       <div class="panel-wrapper1">
-      <button id="sound" onclick="stopSound()"><img src="./img/icon/sound_on.png" alt="Sound"></button>
+      <button id="sound" onclick="toggleSound()"><img id="soundIcon" src="./img/icon/sound_on.png" alt="Sound"></button>
       <button id="fullscreen"><img src="./img/icon/fullscreen.png" alt="Screen"></button>
    </div>
    </section>

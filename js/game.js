@@ -1,7 +1,6 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-musicBackground = 
 
 function startGame() {
     world = null;
@@ -43,6 +42,19 @@ function init() {
     }
     startScreen.innerHTML = startTemplate();
 }
+
+function toggleSound(){
+    let soundIcon = document.getElementById("soundIcon");
+
+    if(AudioHub.backgroundmusic.paused){
+        AudioHub.startBackgroundMusic();
+        soundIcon.src = "./img/icon/sound_on.png";  
+    } else{
+        AudioHub.stopAllSound(); 
+        soundIcon.src ="./img/icon/sound_off.png";
+    }
+}
+
 
 
 window.addEventListener("keydown", (e) => {
