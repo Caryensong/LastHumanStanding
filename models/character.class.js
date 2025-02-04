@@ -196,7 +196,6 @@ class Character extends MovableObject {
             if(!this.world.keyboard.SPACE_SOLVED){
                this.jump();
                this.sounds.JUMP.play();
-               // this.world.checkEnemyTopCollision();
                this.world.keyboard.SPACE_SOLVED = true;
             } 
          }
@@ -218,7 +217,7 @@ class Character extends MovableObject {
             setTimeout(() => {
                this.isSlashing = false;
                this.world.keyboard.S_SOLVED = false;
-            }, 1000); // Slashing schutz dauer
+            }, 200); // Slashing schutz dauer
          }
 
          if (this.world.keyboard.D) {

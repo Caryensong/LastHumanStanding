@@ -4,6 +4,7 @@ class Zombies extends MovableObject{
     height=80;
     y= 345;
     isDead = false;
+    isInvulnerable = false;
     hurt = new Audio('./audio/human_pain.mp3');
    
     walking_sound= new Audio('./audio/zombie_walk.mp3');

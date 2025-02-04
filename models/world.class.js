@@ -98,20 +98,24 @@ updateEndbossLifeBar() {
 
 checkCollisions() {
   this.level.enemies.forEach((enemy, index) => {    
-    if (this.character.isColliding(enemy) || this.endboss.isColliding(this.character) ) {
+    if (this.character.isColliding(enemy) || this.character.isColliding(this.endboss) ) {
+      console.log(this.character.isColliding(this.endboss));
       if (this.character.isSlashing) {
         console.log("Slashing verhindert Verletzung.");
+        this.character.isInvulnerable = true; 
         if (!this.character.slashTimeout) {
           this.character.slashTimeout = setTimeout(() => {
+            this.character.isInvulnerable = true; 
             this.character.isSlashing = false;
+            this.character.isInvulnerable = false;
             this.character.slashTimeout = null;
-          }, 1000);
+          }, 300);
         }
         return; // Kein Schaden, wenn Slashing aktiv ist
       }
     if (this.character.isTopZombieColliding(enemy) && this.character.isAboveGround()) {
         this.character.isInvulnerable = true; 
-        this.removeEnemy(enemy, index); 
+        this.removeEnemy(enemy, index);
         console.log("Zombie von oben getroffen!");
   
         setTimeout(() => {
@@ -170,6 +174,10 @@ checkSlashingCollisions() {
   if (this.character.isColliding(this.endboss) && this.character.isSlashing) {
     console.log("Endboss wurde mit Schwert getroffen");
     this.handleEndbossCollision();
+  } else if(this.character.isColliding(this.endboss)){
+    this.character.hit(); // Charakter wird getroffen
+    console.log("Charakter wurde getroffen", this.character.energy);
+    this.updateLifeBar();
   }
 
   this.level.enemies.forEach((enemy, index) => {
