@@ -1,10 +1,8 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-
+  
 function startGame() {
-    world = null;
-    
     startScreen = document.getElementById("howToPlayBox");
     startScreen.classList.add("d-none");
     startScreen = "";
@@ -14,6 +12,7 @@ function startGame() {
     initLevel();
     world = new World(canvas, keyboard);
     AudioHub.startBackgroundMusic();
+    world.zombies.resetZombiePositions();
     world.gameOver = false;
 }
 
@@ -43,6 +42,7 @@ function init() {
     }
     startScreen.innerHTML = startTemplate();
 }
+
 
 function toggleSound(){
     let soundIcon = document.getElementById("soundIcon");

@@ -5,7 +5,7 @@ class Zombies extends MovableObject{
     y= 345;
     isDead = false;
     isInvulnerable = false;
-    
+
     Images_Walking =[
         './img/zombie3/walk/Walk1.png',
         './img/zombie3/walk/Walk2.png',
@@ -42,15 +42,25 @@ class Zombies extends MovableObject{
     }
 
     generateRandomPosition() {
-        let minDistance = 150; // Mindestabstand zwischen Zombies
-        let x;
+        const minDistance = 150; // Mindestabstand zwischen Zombies
+        let x = 280 + Math.random() * 500; // Generiere zufällige Position
 
-        do {
-            x = 280 + Math.random() * 500; // Generiere zufällige Position
-        } while (Zombies.zombiePositions.some(pos => Math.abs(pos - x) < minDistance));
+        // Überprüfe, ob der Zombie zu nahe an anderen Zombies ist
+        for (let pos of Zombies.zombiePositions) {
+            if (Math.abs(pos - x) < minDistance) {
+                // Wenn der Abstand zu einem anderen Zombie zu gering ist, eine neue Position generieren
+                x = 280 + Math.random() * 500;
+                pos = null; // Beende die Schleife, wenn ein neuer Wert generiert wurde
+                break;
+            }
+        }
 
         Zombies.zombiePositions.push(x); // Speichere die Position in der Liste
         return x;
+    }
+
+    resetZombiePositions() {
+        this.zombiePositions = []; // Reset der Positionsliste bei Spielneustart
     }
 
     animation(){
@@ -87,7 +97,7 @@ class Zombies extends MovableObject{
                 clearInterval(deadAnimationInterval); // Animation beendet
                 if (onAnimationComplete) onAnimationComplete(); // Callback aufrufen
             }
-        }, 80); // 150ms pro Frame
+        }, 80);
     }
 
     playPoisonDeadAnimation(onAnimationComplete) {
