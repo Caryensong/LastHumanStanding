@@ -8,7 +8,7 @@ function startGame(){
      startScreen = "";
      canvas =document.getElementById("canvas");
      canvas.classList.remove("d-none");
-
+     initLevel();
      world = new World(canvas, keyboard);
 }
 
