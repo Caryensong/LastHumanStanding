@@ -197,8 +197,7 @@ renderGameOver(winner){
   console.log("Game Over Screen wird gerendert für:", winner);
   canvas = document.getElementById("canvas");
   canvas.classList.add("d-none");
-  endScreen = document.getElementById("endScreen");
-  endScreen.classList.remove("d-none");
+  let endScreen = document.getElementById("startScreen");
   if(winner == "character"){
     endScreen.innerHTML = wonGameTemplate();
   } else {
@@ -240,7 +239,7 @@ draw(){
     this.addToMap(this.endboss);
 
     this.ctx.translate(-this.camera_x, 0);
-
+    
     let self = this;
     requestAnimationFrame(function(){
       self.draw();
