@@ -1,7 +1,5 @@
 class Endboss extends MovableObject {
-  Walk = new Audio('./audio/monster_step.mp3');
-  HURT = new Audio('./audio/monster-211717.mp3')
-
+ 
   offset = {
     top: 65,
     left: 65,
@@ -108,10 +106,9 @@ class Endboss extends MovableObject {
         }, 5) ;
 
         this.playAnimation(this.Images_Slashing);
-        this.Walk.play();
-        this.Walk.volume = 0.5;
+        AudioHub.playSound(AudioHub.EndbossWalk);
       } else {
-        this.Walk.pause();
+        AudioHub.EndbossWalk.pause();
       }
     }, 80);
   }
@@ -132,7 +129,7 @@ class Endboss extends MovableObject {
       if (currentFrame < this.Images_Hurt.length) {
         this.img = this.imageCache[this.Images_Hurt[currentFrame]];
         currentFrame++;
-        this.HURT.play();
+        AudioHub.playSound(AudioHub.EndbossHurt);
 
         
       } else {
@@ -153,13 +150,13 @@ class Endboss extends MovableObject {
     this.energy = 0;
     clearInterval(this.movementInterval); // Stoppt alle Bewegungen
     clearInterval(this.walkingInterval); // Falls noch eine Bewegung läuft
-    this.Walk.pause(); // Stoppt den Sound
+    AudioHub.EndbossWalk.pause();
 
     let currentFrame = 0;
 
     const deadAnimationInterval = setInterval(() => {
       if (currentFrame < this.Images_Dying.length) {
-        this.HURT.play();
+        AudioHub.playSound(AudioHub.EndbossHurt);
         this.img = this.imageCache[this.Images_Dying[currentFrame]];
         currentFrame++;
       } else {

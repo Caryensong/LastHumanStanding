@@ -5,10 +5,7 @@ class Zombies extends MovableObject{
     y= 345;
     isDead = false;
     isInvulnerable = false;
-    hurt = new Audio('./audio/human_pain.mp3');
-   
-    walking_sound= new Audio('./audio/zombie_walk.mp3');
-
+    
     Images_Walking =[
         './img/zombie3/walk/Walk1.png',
         './img/zombie3/walk/Walk2.png',
@@ -67,7 +64,7 @@ class Zombies extends MovableObject{
         setInterval(() => {
             if(!this.isDead){
                 this.playAnimation(this.Images_Walking);
-                this.walking_sound.play();
+                AudioHub.playSound(AudioHub.enemyWalking_sound);
             }
         }, 250);
     }
@@ -83,8 +80,9 @@ class Zombies extends MovableObject{
             if (currentFrame < this.Images_Dead.length) {
                 this.img = this.imageCache[this.Images_Dead[currentFrame]];
                 currentFrame++;
-                this.hurt.play();
-                this.walking_sound.pause();
+                AudioHub.playSound(AudioHub.enemyHurt);
+                    AudioHub.enemyWalking_sound.pause();
+         
             } else {
                 clearInterval(deadAnimationInterval); // Animation beendet
                 if (onAnimationComplete) onAnimationComplete(); // Callback aufrufen
@@ -97,10 +95,10 @@ class Zombies extends MovableObject{
         this.width = 130;
         this.height = 20;
         this.y = 430;
-        if(this.hurt.readyState == 4){
-             this.hurt.play();
+        if(AudioHub.enemyHurt.readyState >= 2){
+            AudioHub.playSound(AudioHub.enemyHurt);
         }
-        this.walking_sound.pause();
+        AudioHub.enemyWalking_sound.pause();
 
         this.img = this.imageCache[this.Images_Posion_Dead[0]];
     

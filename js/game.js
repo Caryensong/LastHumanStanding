@@ -13,6 +13,7 @@ function startGame() {
     canvas.classList.remove("d-none");
     initLevel();
     world = new World(canvas, keyboard);
+    AudioHub.startBackgroundMusic();
     world.gameOver = false;
 }
 
@@ -35,7 +36,7 @@ function init() {
     startScreen.innerHTML = "";
     endScreen = document.getElementById("endScreenBox");
     canvas = document.getElementById('canvas');
-    AudioHub.startBackgroundMusic();
+    
     if (endScreen) {
         endScreen.classList.add("d-none");
         canvas.classList.remove("d-none");
@@ -46,12 +47,12 @@ function init() {
 function toggleSound(){
     let soundIcon = document.getElementById("soundIcon");
 
-    if(AudioHub.backgroundmusic.paused){
-        AudioHub.startBackgroundMusic();
+    AudioHub.toggleSound(); 
+
+    if(AudioHub.soundEnabled){
         soundIcon.src = "./img/icon/sound_on.png";  
     } else{
-        AudioHub.stopAllSound(); 
-        soundIcon.src ="./img/icon/sound_off.png";
+        soundIcon.src = "./img/icon/sound_off.png"; 
     }
 }
 

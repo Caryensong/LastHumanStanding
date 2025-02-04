@@ -5,13 +5,6 @@ class Character extends MovableObject {
    isInvulnerable = false;
    isDeadAlready = false; 
 
-   sounds = {
-      WALK: new Audio('./audio/Walking1.mp3'),
-      JUMP: new Audio('./audio/jump.mp3'),
-      HURT: new Audio('./audio/hurt.mp3'),
-      SLASH: new Audio('./audio/sword-sound-260274.mp3')
-   };
-
    offset = {
       top: 30,
       left: 40,
@@ -165,10 +158,10 @@ class Character extends MovableObject {
   
    animate() {
       setInterval(() => {
-         this.sounds.WALK.pause();
+         AudioHub.CharWalk.pause();
          if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.moveRight();
-            this.sounds.WALK.play();
+            AudioHub.playSound(AudioHub.CharWalk);
             this.otherDirection = false;
             this.offset = {
                top: 30,
@@ -181,7 +174,7 @@ class Character extends MovableObject {
          if (this.world.keyboard.LEFT && this.x > -100) {
             this.x -= this.speed;
             this.moveLeft();
-            this.sounds.WALK.play();
+            AudioHub.playSound(AudioHub.CharWalk);
             this.otherDirection = true;
             this.offset = {
                top: 30,
@@ -195,7 +188,7 @@ class Character extends MovableObject {
          if (this.world.keyboard.SPACE && !this.isAboveGround()) {
             if(!this.world.keyboard.SPACE_SOLVED){
                this.jump();
-               this.sounds.JUMP.play();
+               AudioHub.playSound(AudioHub.CharJump);
                this.world.keyboard.SPACE_SOLVED = true;
             } 
          }
@@ -203,7 +196,7 @@ class Character extends MovableObject {
          if (this.world.keyboard.S) {
             this.isSlashing = true;
             this.playAnimation(this.Images_Slashing);
-            this.sounds.SLASH.play();
+            AudioHub.playSound(AudioHub.CharSlash);
             this.offset = {
                   top: 30,
                   left: 35,
@@ -223,7 +216,7 @@ class Character extends MovableObject {
          if (this.world.keyboard.D) {
             if(!this.world.keyboard.D_SOLVED){
               this.playAnimation(this.Images_Throwing);
-               this.sounds.JUMP.play();  
+              AudioHub.playSound(AudioHub.CharJump);  
                this.world.keyboard.D_SOLVED = true;
             }
            
@@ -237,7 +230,7 @@ class Character extends MovableObject {
          if (this.isDeadAlready) return;// Falls Charakter tot ist, keine weiteren Animationen starten
         
          if (this.isHurt()) {
-            this.sounds.HURT.play();
+            AudioHub.playSound(AudioHub.CharHurt);
             this.playAnimation(this.Images_Hurt);
          } else if (this.isAboveGround()) {
             this.playAnimation(this.Images_Jumping);
