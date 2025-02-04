@@ -12,12 +12,14 @@ body{
     height: 100vh;
     background-image: url('./img/background/dark_forest_background1.png');
     object-fit:contain;
-    background-position: center;     
+    background-position: center;    
+    overflow: hidden; 
 }
 
 canvas{
     background: linear-gradient(to bottom, rgb(0, 5, 27) 50%, rgb(112, 112, 112) 90%, rgb(35, 75, 102) 100%);
     display: block;
+    border:5px solid #222121;
 }
 
 .d-none{
@@ -62,9 +64,9 @@ button img:hover{
 width: 480px;
 display: flex;
 justify-content: space-around;
-position: fixed;
-top:640px;
-right: 550px;
+position:relative;
+top:-55px;
+right: -120px;
 }
 
 button.startbtn{
@@ -78,26 +80,47 @@ button.startbtn:hover{
     filter: brightness(2) sepia(4) hue-rotate(30deg) saturate(15);
 }
 
+#startContent img{
+    width: 740px;
+}
+
 .descriptionBtn_container{
-    position: fixed;
-    top:620px;
-    right: 560px;
-}
-#descriptionBox img{
-    width: 740px;
-    height: 480px;
+    position: relative;
+    top:-70px;
+    right: -460px;
 }
 
-#howToPlayBox img{
-    width: 740px;
-    height: 480px;  
+.play_again_btn{
+    position: relative;
+    top: -205px;
+    right: -280px;
+    width: 180px;
+    height: 40px;
+    background: #22212100;
+     border: none;
+     color: #FFF;
 }
 
-#endScreen img{
-    width: 740px;
-    height: 480px;  
+.play_again_btn:hover{
+     color: #19fd24;
+     font-size:20px ;
 }
 
+.Winplay_again_btn{
+    position: relative;
+    top: -240px;
+    right: -300px;
+    width: 180px;
+    height: 40px;
+    background: #22212100;
+     border: none;
+     color: #FFF;
+}
+
+.Winplay_again_btn:hover{
+     color: #19fd24;
+     font-size:20px ;
+}
 /* Smartphone------- */
 
 @media only screen and (max-width: 720px){

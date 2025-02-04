@@ -42,7 +42,7 @@ function wonGameTemplate(){
     <div id="endScreenBox"> 
           <img src="./img/Startscreen/youWin.png" alt="You Win">
       <div class="restart_btn_container">
-        <button class="startbtn" onclick="init()">Play Again</button>
+        <button class="Winplay_again_btn" onclick="init()">Play Again</button>
       </div>
       </div>
 `
@@ -53,7 +53,7 @@ function lostGameTemplate(){
     <div id="endScreenBox"> 
           <img src="./img/Startscreen/GameOver.png" alt="Game Over">
       <div class="restart_btn_container">
-          <button class="startbtn" onclick="init()">Play Again</button>
+          <button class="play_again_btn" onclick="init()">PLAY AGAIN</button>
       </div>
       </div>
 `

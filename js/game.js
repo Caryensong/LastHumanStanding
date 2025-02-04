@@ -30,7 +30,14 @@ function startDescription(){
 function init(){
     startScreen = document.getElementById("startScreen");
     startScreen.innerHTML= "";
+    endScreen = document.getElementById("endScreenBox"); 
     canvas = document.getElementById('canvas');
+    if( endScreen){
+         endScreen.classList.add("d-none");  
+          canvas.classList.remove("d-none");
+    }
+   
+  
     startScreen.innerHTML = startTemplate();
     // world = new World(canvas, keyboard);
 }
