@@ -50,9 +50,10 @@ function startGame() {
     startScreen = document.getElementById("howToPlayBox");
     startScreen.classList.add("d-none");
     startScreen = "";
-
     canvas = document.getElementById("canvas");
     canvas.classList.remove("d-none");
+    let panel2 = document.querySelector(".panel2");
+    panel2.style.display = "flex";
     initLevel();
     world = new World(canvas, keyboard);
     AudioHub.startBackgroundMusic();

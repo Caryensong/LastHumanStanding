@@ -192,14 +192,23 @@ class World {
       this.gameOver = true;
       this.stopAllIntervals();
       this.renderGameOver(winner);
+      this.hidePanel2(); // Panel2 ausblenden
 
     } else if (this.endboss.isDead() && !this.gameOver) {
       let winner = "character";
       this.gameOver = true;
       this.stopAllIntervals();
       this.renderGameOver(winner);
+      this.hidePanel2(); // Panel2 ausblenden
     }
   }
+
+  hidePanel2() {
+    let panel2 = document.querySelector(".panel2");
+    if (panel2) {
+        panel2.style.display = "none";
+    }
+}
 
   stopAllIntervals() {
     if (this.intervalID) clearInterval(this.intervalID);
