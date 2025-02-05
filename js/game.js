@@ -1,6 +1,50 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+
+function toggleFullscreen(){
+    let fullscreenBtn = document.getElementById("fullscreen");
+    let img = fullscreenBtn.querySelector("img");
+
+    if(!document.fullscreenElement){
+      openFullscreen(document.documentElement);  
+      img.src = "./img/icon/closescreen.png";
+    } else {
+        closeFullscreen();
+        img.src = "./img/icon/fullscreen.png";
+    }
+}
+
+function openFullscreen(elem) {
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+      elem.msRequestFullscreen();
+    }
+  }
+
+  function closeFullscreen(){
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    }
+}
+
+document.addEventListener("fullscreenchange", () => {
+    let fullscreenBtn = document.getElementById("fullscreen");
+    let img = fullscreenBtn.querySelector("img");
+
+    if (!document.fullscreenElement) {
+        img.src = "./img/icon/fullscreen.png"; // Icon für "Fullscreen starten"
+    } else {
+        img.src = "./img/icon/closescreen.png"; // Icon für "Fullscreen beenden"
+    }
+});
   
 function startGame() {
     startScreen = document.getElementById("howToPlayBox");
@@ -57,8 +101,6 @@ function toggleSound(){
         soundIcon.src = "./img/icon/sound_off.png"; 
     }
 }
-
-
 
 window.addEventListener("keydown", (e) => {
     if (e.keyCode == 39) {
