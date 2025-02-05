@@ -36,13 +36,6 @@ h1 {
 
 /*---panel */
 
-.panel2 {
-    width: 720px;
-    display: flex;
-    justify-content: space-around;
-    position: relative;
-    top: -100px;
-}
 
 .panel-wrapper1 {
     position: relative;
@@ -132,10 +125,40 @@ button.startbtn:hover {
     font-size: 18px;
 }
 
+/* respnsive button */
 
-/* Smartphone------- */
+.panel2 {
+    width: 720px;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    top: -100px;
+}
+.panel-wrapperL{
+    display: none;
+}
+
+.panel-wrapperR{
+    display: none;
+}
+
 
 /* Smartphone ------- */
+@media (hover: none) and (orientation:landscape){
+    .desktopBtn{
+        display: none;
+    }
+
+    .panel-wrapperL{
+        display: block;
+    }
+    
+    .panel-wrapperR{
+        display: block;
+    }
+
+}
+
 
 @media only screen and (max-width: 720px) {
     canvas {
@@ -150,27 +173,22 @@ button.startbtn:hover {
 
     #startScreen {
         width: 100%;
-        height: auto;
     }
 
     #startContent img {
         width: 100%;
-        height: auto;
     }
 
     #descriptionBox img {
         width: 100%;
-        height: auto;
     }
 
     #howToPlayBox img {
         width: 100%;
-        height: auto;
-    }
+ }
 
     #endScreenBox img {
         width: 100%;
-        height: auto;
     }
 
 
@@ -184,35 +202,27 @@ button.startbtn:hover {
     }
 
     .panel1 {
-        width: 100%;
-        height: auto;
-        /* Höhe auf auto setzen, damit es sich anpasst */
+        height: 100vh;
     }
 
     #startScreen {
-        width: 100%;
-        height: auto;
+        height: 100vh;
     }
 
     #startContent img {
-        width: 100%;
-        /* Bild anpassen */
-        height: auto;
+        height: 100vh;
     }
 
     #descriptionBox img {
-        width: 100%;
-        height: auto;
+        height: 100vh;
     }
 
     #howToPlayBox img {
-        width: 100%;
-        height: auto;
+        height: 100vh;
     }
 
     #endScreenBoximg {
-        width: 100%;
-        height: auto;
+        height: 100vh;
     }
 
 }
