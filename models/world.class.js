@@ -193,7 +193,7 @@ class World {
       this.stopAllIntervals();
       this.renderGameOver(winner);
       this.hidePanel2(); // Panel2 ausblenden
-      this.hideSoundBtn();
+      // this.hideSoundBtn();
       AudioHub.stopAllSound();
 
     } else if (this.endboss.isDead() && !this.gameOver) {
@@ -202,7 +202,7 @@ class World {
       this.stopAllIntervals();
       this.renderGameOver(winner);
       this.hidePanel2();
-      this.hideSoundBtn();
+      // this.hideSoundBtn();
       AudioHub.stopAllSound();
     }
   }
@@ -213,10 +213,10 @@ class World {
         panel2.style.display = "none";
     }
 }
-hideSoundBtn(){
-  let soundsBtn = document.querySelector(".sound_btn");
-  soundsBtn.style.display = "none";
-}
+// hideSoundBtn(){
+//   let soundsBtn = document.querySelector(".sound_btn");
+//   soundsBtn.style.display = "none";
+// }
 
 
   stopAllIntervals() {

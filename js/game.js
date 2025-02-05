@@ -54,11 +54,11 @@ function startGame() {
     canvas.classList.remove("d-none");
     let panel2 = document.querySelector(".panel2");
     panel2.style.display = "flex";
-    let soundsBtn = document.querySelector(".sound_btn");
-    soundsBtn.style.display = "block";
+    // let soundsBtn = document.querySelector(".sound_btn");
+    // soundsBtn.style.display = "block";
     initLevel();
     world = new World(canvas, keyboard);
-    AudioHub.startBackgroundMusic();
+    // AudioHub.startBackgroundMusic();
     if (world.zombies) {
         world.zombies.resetZombiePositions();
     }
@@ -89,6 +89,7 @@ function init() {
         endScreen.classList.add("d-none");
         canvas.classList.remove("d-none");
     }
+    AudioHub.startBackgroundMusic();
     startScreen.innerHTML = startTemplate();
 }
 
