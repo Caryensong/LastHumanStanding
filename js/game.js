@@ -93,6 +93,11 @@ function init() {
     startScreen.innerHTML = startTemplate();
 }
 
+function options(){
+    startScreen = document.getElementById("startScreen");
+    startScreen.innerHTML = "";
+    startScreen.innerHTML = impressum();
+}
 
 function toggleSound(){
     let soundIcon = document.getElementById("soundIcon");

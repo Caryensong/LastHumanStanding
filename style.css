@@ -34,6 +34,18 @@ h1 {
     text-align: center;
 }
 
+/* .start_screen{
+    position:absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+
 button {
     background-color: rgb(35, 35, 39);
     border-radius: 20%;
@@ -113,6 +125,29 @@ button.startbtn:hover {
     color: #19fd24;
     font-size: 18px;
 }
+/* options */
+.option_content{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.navbar{
+display: flex;
+flex-direction: column;
+width: 150px; 
+color: #FFF;
+gap: 10px;
+}
+
+.content_text{
+    width: 400px;
+    height: 200px;
+    overflow-y: scroll;
+    color: #FFF;
+    background-color: rgba(0, 0, 0, 0.555);
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px;
+}
 
 /* respnsive button */
 
@@ -122,15 +157,16 @@ button.startbtn:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    top:-10px
+    top:-10px;
+    z-index: 100;
 }
 .panel2 {
     width: 720px;
     display: none;
     justify-content: space-around;
-    gap: 180px;
-    position:fixed;
-    top: 333px;
+    gap: 150px;
+    position:absolute;
+    bottom: 10px;
 }
 
 .panel-wrapperL{
@@ -182,12 +218,13 @@ span{
         display: none;
     }
     .panel-wrapper1 {
-         position: fixed;
-        bottom: 320px;
+         /* position: fixed;
+        bottom: 120px; */
         /* position: relative;
-        top: 80px; */
-        /* position: absolute;
-        top:-500px */
+        top: -150px;  */
+        position: absolute;
+        top:20px;
+        z-index: 200;
 
     }
 }
