@@ -93,10 +93,13 @@ function init() {
     startScreen.innerHTML = startTemplate();
 }
 
-function options(){
-    startScreen = document.getElementById("startScreen");
-    startScreen.innerHTML = "";
-    startScreen.innerHTML = impressum();
+function options(page ='impressum'){
+    const content = {
+        impressum: impressum(),
+        datenschutz: datenschutz(),
+        credits: credits()
+    };
+    document.getElementById("startScreen").innerHTML = content[page];
 }
 
 function toggleSound(){

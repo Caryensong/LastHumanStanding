@@ -110,6 +110,17 @@ button.startbtn:hover {
     color: #FFF;
 }
 
+.option_btn {
+    background: #222121;
+    padding: 10px;
+    color: #FFF;
+}
+.option_btn.active {
+    background-color:  #19fd24de;
+    font-size: 17px;
+}
+
+
 .play_again_btn:hover {
     color: #19fd24;
     font-size: 18px;
@@ -147,6 +158,9 @@ gap: 10px;
     background-color: rgba(0, 0, 0, 0.555);
     font-family: Arial, Helvetica, sans-serif;
     padding: 10px;
+    
+    scrollbar-width: thin;
+    scrollbar-color: green rgba(0, 0, 0, 0.555);
 }
 
 /* respnsive button */
