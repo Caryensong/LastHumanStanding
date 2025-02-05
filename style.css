@@ -1,41 +1,42 @@
 @font-face {
     font-family: 'defused';
-    src:url('./fonts/defused.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-}  
+    src: url('./fonts/defused.ttf') format('truetype');
+    /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
 
-body{
+body {
     display: flex;
     flex-direction: column;
-    align-items: center;  
+    align-items: center;
     justify-content: center;
     margin: 0;
     height: 100vh;
     background-image: url('./img/background/dark_forest_background1.png');
-    object-fit:contain;
-    background-position: center;    
-    overflow: hidden; 
+    object-fit: contain;
+    background-position: center;
+    overflow: hidden;
 }
 
-canvas{
+canvas {
     background: linear-gradient(to bottom, rgb(0, 5, 27) 50%, rgb(112, 112, 112) 90%, rgb(35, 75, 102) 100%);
     display: block;
-    border:5px solid #222121;
+    border: 5px solid #222121;
 }
 
-.d-none{
-    display:none;
+.d-none {
+    display: none;
 }
 
-h1{
+h1 {
     color: rgb(0, 0, 0);
     font-family: 'defused', Arial, Helvetica, sans-serif;
     text-shadow: 2px 2px 8px rgb(255, 196, 0);
     text-align: center;
-} 
+}
 
 /*---panel */
 
-.panel2{    
+.panel2 {
     width: 720px;
     display: flex;
     justify-content: space-around;
@@ -43,100 +44,175 @@ h1{
     top: -100px;
 }
 
-.panel-wrapper1{
-position: relative;
-top:50px
+.panel-wrapper1 {
+    position: relative;
+    top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-button{
+button {
     background-color: rgb(35, 35, 39);
     border-radius: 20%;
     cursor: pointer;
 }
 
-button img{
+button img {
     width: 30px;
-    filter: brightness(1); /* Standard-Helligkeit */
-    transition: filter 225ms ease-in-out; /* Sanfter Übergang */
+    filter: brightness(1);
+    /* Standard-Helligkeit */
+    transition: filter 225ms ease-in-out;
+    /* Sanfter Übergang */
 }
-button img:hover{
+
+button img:hover {
     filter: brightness(0) sepia(4) hue-rotate(30deg) saturate(15);
 }
 
-.startBtn_container{
-width: 480px;
-display: flex;
-justify-content: space-around;
-position:relative;
-top:-55px;
-right: -120px;
+.startBtn_container {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    top: -55px;
 }
 
-button.startbtn{
+button.startbtn {
     background-color: rgb(35, 35, 39);
     border-radius: 20%;
     cursor: pointer;
     padding: 10px;
     color: #FFF;
 }
-button.startbtn:hover{
+
+button.startbtn:hover {
     filter: brightness(2) sepia(4) hue-rotate(30deg) saturate(15);
 }
 
-#startContent img{
+#startContent img {
     width: 740px;
 }
 
-.descriptionBtn_container{
+.descriptionBtn_container {
     position: relative;
-    top:-70px;
-    right: -460px;
+    top: -70px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 50px;
 }
 
-.play_again_btn{
+.restart_btn_container {
     position: relative;
-    top: -205px;
-    right: -280px;
-    width: 180px;
+    top: -50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 40px;
-    background: #22212100;
-     border: none;
-     color: #FFF;
 }
 
-.play_again_btn:hover{
-     color: #19fd24;
-     font-size:20px ;
+.play_again_btn {
+    background: #222121;
+    padding: 10px;
+    color: #FFF;
 }
 
-.Winplay_again_btn{
-    position: relative;
-    top: -240px;
-    right: -300px;
-    width: 180px;
-    height: 40px;
-    background: #22212100;
-     border: none;
-     color: #FFF;
+.play_again_btn:hover {
+    color: #19fd24;
+    font-size: 18px;
 }
 
-.Winplay_again_btn:hover{
-     color: #19fd24;
-     font-size:20px ;
+.Winplay_again_btn {
+    background: #222121;
+    color: #FFF;
+    padding: 10px;
 }
+
+.Winplay_again_btn:hover {
+    color: #19fd24;
+    font-size: 18px;
+}
+
+
 /* Smartphone------- */
 
-@media only screen and (max-width: 720px){
-    canvas{
+/* Smartphone ------- */
+
+@media only screen and (max-width: 720px) {
+    canvas {
         width: 100%;
     }
+
+    .panel1 {
+        width: 100%;
+        padding: 0 10px;
+        /* Etwas Platz an den Rändern */
+    }
+
+    #startScreen {
+        width: 100%;
+        height: auto;
+    }
+
+    #startContent img {
+        width: 100%;
+        height: auto;
+    }
+
+    #descriptionBox img {
+        width: 100%;
+        height: auto;
+    }
+
+    #howToPlayBox img {
+        width: 100%;
+        height: auto;
+    }
+
+    #endScreenBox img {
+        width: 100%;
+        height: auto;
+    }
+
+
 }
-    
+
 /* Smartphone -------- */
 
-@media only screen and (max-width: 480px){
-    canvas{
+@media only screen and (max-width: 480px) {
+    canvas {
         height: 100vh;
     }
+
+    .panel1 {
+        width: 100%;
+        height: auto;
+        /* Höhe auf auto setzen, damit es sich anpasst */
+    }
+
+    #startScreen {
+        width: 100%;
+        height: auto;
+    }
+
+    #startContent img {
+        width: 100%;
+        /* Bild anpassen */
+        height: auto;
+    }
+
+    #descriptionBox img {
+        width: 100%;
+        height: auto;
+    }
+
+    #howToPlayBox img {
+        width: 100%;
+        height: auto;
+    }
+
+    #endScreenBoximg {
+        width: 100%;
+        height: auto;
+    }
+
 }
-    

@@ -24,7 +24,6 @@
    <script src="./models/level.class.js"></script>
    <script src="./models/endboss.class.js"></script>
    <script src="./models/throwable-object.class.js"></script> 
-   
    <script src="./js/game.js"></script>
    <script src="./levels/level1.js"></script>
    <script src="./templates/templates.js"></script>
@@ -33,14 +32,15 @@
 <body onload="init()">
 
    <h1>LAST HUMAN STANDING GAME</h1>
+
    <section class="panel1">
       <div class="panel-wrapper1">
       <button id="sound" onclick="toggleSound()"><img id="soundIcon" src="./img/icon/sound_on.png" alt="Sound"></button>
       <button id="fullscreen" onclick="toggleFullscreen()"><img src="./img/icon/fullscreen.png" alt="Screen"></button>
    </div>
+   <div id="startScreen"></div>
    </section>
 
-   <div id="startScreen" width="720" height="480"></div>
    <canvas id="canvas" class="d-none" width="720" height="480"></canvas>
 
    <section class="panel2">

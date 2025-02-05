@@ -1,6 +1,5 @@
 function startTemplate(){
  return `
-  <div id="startBox" width="720px" height="480px"> 
        <div id="startContent">
             <img src="./img/Startscreen/Startscreen.png" alt="StartGame">
         <div class="startBtn_container">
@@ -8,8 +7,6 @@ function startTemplate(){
             <button class="startbtn" id="img-button" onclick="options()">OPTIONS</button>
         </div>
         </div>
-    </div>
-
  `
 }
 
