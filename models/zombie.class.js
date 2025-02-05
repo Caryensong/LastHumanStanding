@@ -59,7 +59,7 @@ class Zombies extends MovableObject{
         return x;
     }
 
-    resetZombiePositions() {
+    static resetZombiePositions() {
         this.zombiePositions = []; // Reset der Positionsliste bei Spielneustart
     }
 

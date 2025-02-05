@@ -12,7 +12,9 @@ function startGame() {
     initLevel();
     world = new World(canvas, keyboard);
     AudioHub.startBackgroundMusic();
-    world.zombies.resetZombiePositions();
+    if (world.zombies) {
+        world.zombies.resetZombiePositions();
+    }
     world.gameOver = false;
 }
 

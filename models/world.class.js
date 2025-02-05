@@ -190,15 +190,22 @@ class World {
     if (this.character.isDead() && !this.gameOver) {
       let winner = "endboss";
       this.gameOver = true;
+      this.stopAllIntervals();
       this.renderGameOver(winner);
 
     } else if (this.endboss.isDead() && !this.gameOver) {
       let winner = "character";
       this.gameOver = true;
-
+      this.stopAllIntervals();
       this.renderGameOver(winner);
     }
   }
+
+  stopAllIntervals() {
+    if (this.intervalID) clearInterval(this.intervalID);
+    if (this.endboss.movementInterval) clearInterval(this.endboss.movementInterval);
+    if (this.endboss.walkingInterval) clearInterval(this.endboss.walkingInterval);
+}
 
   renderGameOver(winner) {
     console.log("Game Over Screen wird gerendert für:", winner);
@@ -246,7 +253,6 @@ class World {
     requestAnimationFrame(function() {
         self.draw();
     });
-    
   }
 
   addObjectToMap(objects) {
