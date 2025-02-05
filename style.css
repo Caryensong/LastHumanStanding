@@ -158,9 +158,14 @@ gap: 10px;
     background-color: rgba(0, 0, 0, 0.555);
     font-family: Arial, Helvetica, sans-serif;
     padding: 10px;
-    
+
     scrollbar-width: thin;
     scrollbar-color: green rgba(0, 0, 0, 0.555);
+}
+
+a{
+    color: #19fd24;
+    text-decoration: none;
 }
 
 /* respnsive button */

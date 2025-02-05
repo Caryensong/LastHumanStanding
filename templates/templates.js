@@ -78,8 +78,23 @@ function generateOptionsPage(content, activePage) {
 
 function credits() {
     return generateOptionsPage(`
-        <h3>Credits</h3>
-        <p>Vielen Dank an alle Mitwirkenden dieses Projekts.</p>
+        <section>
+    <h4>Credits</h4>
+    <p><strong>Verwendete Assets:</strong></p>
+    <ul>
+        <li><strong>Icons:</strong> <a href="https://icons8.de/icons/set/free-icons" target="_blank">Icons8</a></li>
+        <li><strong>Charaktere, Zombies & Endboss:</strong> 
+            <a href="https://craftpix.net/" target="_blank">CraftPix</a> 
+            (<a href="https://craftpix.net/file-licenses/" target="_blank">Lizenz</a>)
+        </li>
+        <li><strong>Sounds:</strong>
+            <ul>
+                <li><a href="https://freesound.org/" target="_blank">Freesound</a></li>
+                <li><a href="https://pixabay.com/sound-effects/" target="_blank">Pixabay Sound Effects</a></li>
+            </ul>
+        </li>
+    </ul>
+</section>
     `, 'credits');
 }
 
