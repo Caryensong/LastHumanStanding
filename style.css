@@ -20,9 +20,6 @@ body {
 canvas {
     background: linear-gradient(to bottom, rgb(0, 5, 27) 50%, rgb(112, 112, 112) 90%, rgb(35, 75, 102) 100%);
     display: block;
-    border: 5px solid #222121;
-    width: 720px;
-    height: 480px;
 }
 
 .d-none {
@@ -37,14 +34,11 @@ h1 {
 }
 
 /*---panel */
-
-
 .panel-wrapper1 {
-    position: relative;
-    top: 50px;
+    position: fixed;
     display: flex;
-    justify-content: center;
     align-items: center;
+    bottom: 320px;
 }
 
 button {
@@ -134,8 +128,8 @@ button.startbtn:hover {
     display: none;
     justify-content: space-around;
     gap: 180px;
-    position: relative;
-    top: -50px;
+    position:fixed;
+    top: 333px;
 }
 
 .panel-wrapperL{
@@ -147,7 +141,8 @@ button.startbtn:hover {
 }
 /* rotatescreen */
 .rotateScreen{
-    background-color: rgba(0, 0, 0, 0.753);
+    background: linear-gradient(to top, black 0%, #111111ef 40%,  rgba(24, 199, 24, 0.356) 100%);
+    background: li;
     width: 100%;
     height: 100vh;
     display: none;
@@ -172,6 +167,9 @@ span{
     .desktopBtn{
         display: none;
     }
+    #canvas{
+        height: 100vh;
+    }
 
     .panel-wrapperL{
         display: block;
@@ -179,6 +177,9 @@ span{
     
     .panel-wrapperR{
         display: block;
+    }
+    h1{
+        display: none;
     }
 }
 
@@ -201,20 +202,26 @@ span{
     }
     .rotateScreen{
         display: flex;
+
     }
     h1{
         display: none;
     }
+    #sound{
+        display: none;
+    }
+    .panel-wrapperL{display: none;}
+    .panel-wrapperR{display: none;}
 }
 
 
 @media only screen and (max-width: 720px) {
-    canvas {
+    #canvas {
         width: 100%;
         height: 100vh;
     }
 
-    .panel1,
+   
     #startScreen {
         width: 100%;
         height: 100vh;
@@ -228,18 +235,21 @@ span{
         height: 100vh;
     
     }
+    h1{
+        display: none;
+    }
 
 }
 
 /* Smartphone -------- */
 
 @media only screen and (max-width: 480px) {
-    canvas {
+    #canvas {
         width: 100%;
-        height: 100vh; /* Dynamische Höhe */
+        height: 100vh;
     }
 
-    .panel1,
+   
     #startScreen {
         width: 100%;
         height: 100vh;
@@ -251,6 +261,9 @@ span{
     #endScreenBox img {
         width: 100%;
         height: 100vh;
+    }
+    h1{
+        display: none;
     }
 
 }
