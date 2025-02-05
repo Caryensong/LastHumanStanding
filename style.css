@@ -38,7 +38,7 @@ h1 {
     position: fixed;
     display: flex;
     align-items: center;
-    bottom: 320px;
+    bottom: 560px;
 }
 
 button {
@@ -139,6 +139,10 @@ button.startbtn:hover {
 .panel-wrapperR{
     display: none;
 }
+
+.sound_btn{
+display: none;
+}
 /* rotatescreen */
 .rotateScreen{
     background: linear-gradient(to top, black 0%, #111111ef 40%,  rgba(24, 199, 24, 0.356) 100%);
@@ -180,6 +184,9 @@ span{
     }
     h1{
         display: none;
+    }
+    .panel-wrapper1 {
+        bottom: 320px;
     }
 }
 

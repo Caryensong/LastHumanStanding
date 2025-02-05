@@ -54,6 +54,8 @@ function startGame() {
     canvas.classList.remove("d-none");
     let panel2 = document.querySelector(".panel2");
     panel2.style.display = "flex";
+    let soundsBtn = document.querySelector(".sound_btn");
+    soundsBtn.style.display = "block";
     initLevel();
     world = new World(canvas, keyboard);
     AudioHub.startBackgroundMusic();
@@ -163,5 +165,11 @@ window.addEventListener("keyup", (e) => {
     }
     if (e.keyCode == 40) {
         keyboard.DOWN = false;
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "m") { // Nur "M" soll den Sound togglen
+        AudioHub.toggleSound();
     }
 });

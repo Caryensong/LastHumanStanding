@@ -193,13 +193,17 @@ class World {
       this.stopAllIntervals();
       this.renderGameOver(winner);
       this.hidePanel2(); // Panel2 ausblenden
+      this.hideSoundBtn();
+      AudioHub.stopAllSound();
 
     } else if (this.endboss.isDead() && !this.gameOver) {
       let winner = "character";
       this.gameOver = true;
       this.stopAllIntervals();
       this.renderGameOver(winner);
-      this.hidePanel2(); // Panel2 ausblenden
+      this.hidePanel2();
+      this.hideSoundBtn();
+      AudioHub.stopAllSound();
     }
   }
 
@@ -209,6 +213,11 @@ class World {
         panel2.style.display = "none";
     }
 }
+hideSoundBtn(){
+  let soundsBtn = document.querySelector(".sound_btn");
+  soundsBtn.style.display = "none";
+}
+
 
   stopAllIntervals() {
     if (this.intervalID) clearInterval(this.intervalID);

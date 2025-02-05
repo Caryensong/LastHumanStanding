@@ -43,6 +43,12 @@ class AudioHub {
 
         if (this.soundEnabled) {
             this.startBackgroundMusic();
+            this.allSounds.forEach(sound => {
+                if (sound !== this.backgroundmusic) {
+                    sound.volume = 1; // Setze Lautstärke wieder hoch
+                    sound.play();
+                }
+            });
         } else {
             this.stopAllSound();
         }
