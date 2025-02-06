@@ -1,0 +1,26 @@
+{
+    "source": {
+        "include": ["./models/audiohub.class.js",
+                    "./models/background-object.class.js",
+                    "./models/character.class.js",
+                    "./models/clouds.class.js",
+                    "./models/drawable-object.class.js",
+                    "./models/endboss.class.js",
+                    "./models/keyboard.class.js",
+                    "models/level.class.js",
+                    "./models/lifeObjects.class.js",
+                    "./models/moon.class.js",
+                    "./models/movable-object.class.js",
+                    "./models/poisonObjects.class.js",
+                    "./models/start.class.js",
+                    "./models/status-bar.class.js",
+                    "./models/throwable-object.class.js",
+                    "./models/world.class.js",
+                    "./models/zombie.class.js",
+                    "./models/zombiehand.class.js"
+                ]
+    },
+    "opts": {
+        "destination": "./out"
+    }
+}

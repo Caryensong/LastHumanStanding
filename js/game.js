@@ -211,6 +211,7 @@ window.addEventListener("keydown", (e) => {
         keyboard.DOWN = true;
     }
     if (e.keyCode == 32) {
+        e.preventDefault(); // Verhindert ungewolltes Verhalten
         keyboard.SPACE = true;
     }
     if (e.keyCode == 68) {
@@ -258,7 +259,10 @@ window.addEventListener("keyup", (e) => {
 });
 
 document.addEventListener("keydown", (event) => {
-    if (event.key === "m") { // Nur "M" soll den Sound togglen
-        AudioHub.toggleSound();
+    // Prüfen, ob die M-Taste gedrückt wurde
+    if (event.key.toLowerCase() === "m") { 
+        event.preventDefault(); // Verhindert Standardaktionen
+        AudioHub.toggleSound(); // Sound an/aus
+        return; // Verhindert weitere Verarbeitung
     }
 });

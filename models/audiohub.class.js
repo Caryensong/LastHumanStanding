@@ -1,3 +1,7 @@
+/**
+ *  Manages audio playback for the game, including background music and sound effects.
+ * @class
+ */
 class AudioHub {
     static backgroundmusic = new Audio('./audio/hope-cinematic-loop-273335.mp3');
     static enemyHurt = new Audio('./audio/human_pain.mp3');
@@ -9,6 +13,7 @@ class AudioHub {
     static EndbossWalk = new Audio('./audio/monster_step.mp3');
     static EndbossHurt = new Audio('./audio/monster-211717.mp3');
 
+    /** @type {HTMLAudioElement[]} List of all sound effects and background music.*/
     static allSounds = [
         AudioHub.backgroundmusic,
         AudioHub.enemyHurt,
@@ -20,15 +25,21 @@ class AudioHub {
         AudioHub.EndbossHurt,
         AudioHub.EndbossWalk,
     ];
+    /** @type {boolean} Indicates whether sound is enabled or disabled. */
+    static soundEnabled = false;
 
-    static soundEnabled = false;  // Standardmäßig auf 'false' setzen
-
+    /**
+    * Starts playing the background music in a loop.
+    */
     static startBackgroundMusic() {
-        AudioHub.backgroundmusic.loop = true; // Musik in Schleife abspielen
+        AudioHub.backgroundmusic.loop = true;
         AudioHub.backgroundmusic.volume = 0.4;
         AudioHub.backgroundmusic.play();
     }
 
+    /**
+    * Stops all sounds and mutes them.
+    */
     static stopAllSound() {
         this.soundEnabled = false;
         localStorage.setItem('soundEnabled', 'false');
@@ -40,16 +51,18 @@ class AudioHub {
         });
     }
 
+    /**
+    * Toggles sound on or off and updates localStorage.
+    */
     static toggleSound() {
         this.soundEnabled = !this.soundEnabled;
-        // Speichern des Sound-Status im localStorage
         localStorage.setItem('soundEnabled', this.soundEnabled ? 'true' : 'false');
 
         if (this.soundEnabled) {
             this.startBackgroundMusic();
             this.allSounds.forEach(sound => {
                 if (sound !== this.backgroundmusic) {
-                    sound.volume = 1; // Setze Lautstärke wieder hoch
+                    sound.volume = 1;
                 }
             });
         } else {
@@ -59,16 +72,18 @@ class AudioHub {
                     sound.pause();
                 }
             });
-            this.backgroundmusic.pause(); // Hintergrundmusik extra stoppen
+            this.backgroundmusic.pause();
         }
     }
 
+    /**
+   * Loads the saved sound state from localStorage and applies it.
+   */
     static loadSoundState() {
         const savedSoundState = localStorage.getItem('soundEnabled');
-        console.log('Gespeicherter Sound-Status:', savedSoundState);  
-         // Wenn kein Wert gespeichert ist (erste Besuch), setzen wir den Sound auf true.
-         if (savedSoundState === null) {
-            this.soundEnabled = false;  // Setzt Standardwert
+        console.log('Gespeicherter Sound-Status:', savedSoundState);
+        if (savedSoundState === null) {
+            this.soundEnabled = false;
             localStorage.setItem('soundEnabled', 'false');  // Speichert Standardwert im localStorage
         } else if (savedSoundState === 'true') {
             this.soundEnabled = true;
@@ -76,13 +91,11 @@ class AudioHub {
             this.soundEnabled = false;
         }
 
-        // console.log("Sound aktiviert:", this.soundEnabled); 
-
         if (this.soundEnabled) {
             this.startBackgroundMusic();
             this.allSounds.forEach(sound => {
                 if (sound !== this.backgroundmusic) {
-                    sound.volume = 1; // Setze Lautstärke wieder hoch
+                    sound.volume = 1;
                 }
             });
         } else {
@@ -96,6 +109,10 @@ class AudioHub {
         }
     }
 
+    /**
+    * Plays a given sound if sound is enabled.
+    * @param {HTMLAudioElement} sound - The sound effect to play.
+    */
     static playSound(sound) {
         if (this.soundEnabled) {
             sound.play();
