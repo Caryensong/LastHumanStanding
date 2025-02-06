@@ -102,6 +102,7 @@ button.startbtn:hover {
     justify-content: center;
     align-items: center;
     height: 40px;
+    gap: 10px;
 }
 
 .play_again_btn {

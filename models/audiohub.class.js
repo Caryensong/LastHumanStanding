@@ -46,11 +46,17 @@ class AudioHub {
             this.allSounds.forEach(sound => {
                 if (sound !== this.backgroundmusic) {
                     sound.volume = 1; // Setze Lautstärke wieder hoch
-                    sound.play();
+                    // sound.play();
                 }
             });
         } else {
-            this.stopAllSound();
+            this.allSounds.forEach(sound => {
+                if (sound !== this.backgroundmusic) {
+                    sound.volume = 0;
+                    sound.pause();
+                }
+            });
+            this.backgroundmusic.pause(); // Hintergrundmusik extra stoppen
         }
     }
 
