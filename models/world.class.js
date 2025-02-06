@@ -15,6 +15,12 @@ class World {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.keyboard = keyboard;
+
+     
+    // // Canvas Größe an die Fenstergröße anpassen
+    // this.canvas.width = window.innerWidth;  
+    // this.canvas.height = window.innerHeight;
+
     this.draw();
     this.setWorld();
     this.checkCollisions();

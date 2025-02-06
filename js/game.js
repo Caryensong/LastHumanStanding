@@ -104,6 +104,9 @@ function startDescription() {
 }
 
 function init() {
+    // canvas = document.getElementById("canvas");
+    // canvas.width = window.innerWidth;  // Die Breite des Canvas an die Fenstergröße anpassen
+    // canvas.height = window.innerHeight; // Die Höhe des Canvas an die Fenstergröße anpassen
     AudioHub.loadSoundState();  // Überprüfen und Laden des gespeicherten Sound-Status
     // Sound-Icon nach dem Status aktualisieren
     updateSoundIcon();
@@ -150,6 +153,49 @@ function updateSoundIcon() {
         soundIcon.src = "./img/icon/sound_off.png";
     }
 }
+
+
+function bindBtsPressEvents() {
+    const rightKey = document.getElementById("rightKey");
+    const leftKey = document.getElementById("leftKey");
+    const jumpKey = document.getElementById("jumpKey");
+    const posionKey = document.getElementById("posionKey");
+    const slashKey = document.getElementById("slashKey");
+
+    // Touchstart und Touchend für Buttons
+    const touchHandler = (key, action) => {
+        return (e) => {
+            e.preventDefault();
+            world.keyboard[key] = action;
+    
+            // Wenn der Key losgelassen wird, SOLVED auf false setzen
+            if (!action) {
+                const solvedKey = key + "_SOLVED";
+                if (world.keyboard[solvedKey]) {
+                    world.keyboard[solvedKey] = false;
+                }
+            }
+        };
+    };
+    rightKey.addEventListener('touchstart', touchHandler('RIGHT', true));
+    rightKey.addEventListener('touchend', touchHandler('RIGHT', false));
+
+    leftKey.addEventListener('touchstart', touchHandler('LEFT', true));
+    leftKey.addEventListener('touchend', touchHandler('LEFT', false));
+
+    jumpKey.addEventListener('touchstart', touchHandler('SPACE', true));
+    jumpKey.addEventListener('touchend', touchHandler('SPACE', false));
+
+    posionKey.addEventListener('touchstart', touchHandler('D', true));
+    posionKey.addEventListener('touchend', touchHandler('D', false));
+
+    slashKey.addEventListener('touchstart', touchHandler('S', true));
+    slashKey.addEventListener('touchend', touchHandler('S', false));
+}
+document.addEventListener('DOMContentLoaded', () => {
+    bindBtsPressEvents();
+});
+
 
 window.addEventListener("keydown", (e) => {
     if (e.keyCode == 39) {
