@@ -2,13 +2,13 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
-function toggleFullscreen(){
+function toggleFullscreen() {
     let fullscreenBtn = document.getElementById("fullscreen");
     let img = fullscreenBtn.querySelector("img");
 
-    if(!document.fullscreenElement){
-      openFullscreen(document.documentElement);  
-      img.src = "./img/icon/closescreen.png";
+    if (!document.fullscreenElement) {
+        openFullscreen(document.documentElement);
+        img.src = "./img/icon/closescreen.png";
     } else {
         closeFullscreen();
         img.src = "./img/icon/fullscreen.png";
@@ -17,15 +17,15 @@ function toggleFullscreen(){
 
 function openFullscreen(elem) {
     if (elem.requestFullscreen) {
-      elem.requestFullscreen();
+        elem.requestFullscreen();
     } else if (elem.webkitRequestFullscreen) { /* Safari */
-      elem.webkitRequestFullscreen();
+        elem.webkitRequestFullscreen();
     } else if (elem.msRequestFullscreen) { /* IE11 */
-      elem.msRequestFullscreen();
+        elem.msRequestFullscreen();
     }
-  }
+}
 
-  function closeFullscreen(){
+function closeFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
     } else if (document.webkitExitFullscreen) { /* Safari */
@@ -45,9 +45,9 @@ document.addEventListener("fullscreenchange", () => {
         img.src = "./img/icon/closescreen.png"; // Icon für "Fullscreen beenden"
     }
 });
-  
+
 function restartGame() {
-    AudioHub.stopAllSound(); 
+    AudioHub.stopAllSound();
     let endScreen = document.getElementById("endScreenBox");
     if (endScreen) {
         endScreen.remove(); // Game Over Screen entfernen
@@ -60,7 +60,7 @@ function restartGame() {
     startGame(); // Neues Spiel starten
 }
 
-function startGame() { 
+function startGame() {
     if (world) {
         world = null; // Altes world-Objekt wirklich zurücksetzen
     }
@@ -104,24 +104,27 @@ function startDescription() {
 }
 
 function init() {
+    AudioHub.loadSoundState();  // Überprüfen und Laden des gespeicherten Sound-Status
+
     let startScreen = document.getElementById("startScreen");
     startScreen.innerHTML = "";
     let endScreen = document.getElementById("endScreenBox");
     canvas = document.getElementById('canvas');
-    
+
     if (endScreen) {
         endScreen.classList.remove();;
         canvas.classList.remove("d-none");
     }
-    canvas.classList.add("d-none"); 
+    canvas.classList.add("d-none");
+
     if (AudioHub.soundEnabled) {
-        AudioHub.stopAllSound(); // Stoppe alle anderen Sounds
-        AudioHub.startBackgroundMusic(); // Starte nur die Hintergrundmusik
+        AudioHub.startBackgroundMusic();
     }
+
     startScreen.innerHTML = startTemplate();
 }
 
-function options(page ='impressum'){
+function options(page = 'impressum') {
     const content = {
         impressum: impressum(),
         datenschutz: datenschutz(),
@@ -130,15 +133,15 @@ function options(page ='impressum'){
     document.getElementById("startScreen").innerHTML = content[page];
 }
 
-function toggleSound(){
+function toggleSound() {
     let soundIcon = document.getElementById("soundIcon");
 
-    AudioHub.toggleSound(); 
+    AudioHub.toggleSound();
 
-    if(AudioHub.soundEnabled){
-        soundIcon.src = "./img/icon/sound_on.png";  
-    } else{
-        soundIcon.src = "./img/icon/sound_off.png"; 
+    if (AudioHub.soundEnabled) {
+        soundIcon.src = "./img/icon/sound_on.png";
+    } else {
+        soundIcon.src = "./img/icon/sound_off.png";
     }
 }
 

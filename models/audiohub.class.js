@@ -13,9 +13,9 @@ class AudioHub {
         AudioHub.backgroundmusic,
         AudioHub.enemyHurt,
         AudioHub.enemyWalking_sound,
-        AudioHub.CharWalk, 
-        AudioHub.CharJump, 
-        AudioHub.CharSlash, 
+        AudioHub.CharWalk,
+        AudioHub.CharJump,
+        AudioHub.CharSlash,
         AudioHub.CharHurt,
         AudioHub.EndbossHurt,
         AudioHub.EndbossWalk,
@@ -31,6 +31,8 @@ class AudioHub {
 
     static stopAllSound() {
         this.soundEnabled = false;
+        localStorage.setItem('soundEnabled', 'false');
+
         this.allSounds.forEach(sound => {
             sound.pause();
             sound.volume = 0;
@@ -40,6 +42,8 @@ class AudioHub {
 
     static toggleSound() {
         this.soundEnabled = !this.soundEnabled; // Umschalten
+        // Speichern des Sound-Status im localStorage
+        localStorage.setItem('soundEnabled', this.soundEnabled ? 'true' : 'false');
 
         if (this.soundEnabled) {
             this.startBackgroundMusic();
@@ -50,6 +54,30 @@ class AudioHub {
                 }
             });
         } else {
+            this.allSounds.forEach(sound => {
+                if (sound !== this.backgroundmusic) {
+                    sound.volume = 0;
+                    sound.pause();
+                }
+            });
+            this.backgroundmusic.pause(); // Hintergrundmusik extra stoppen
+        }
+    }
+
+    static loadSoundState() {
+        const savedSoundState = localStorage.getItem('soundEnabled');
+
+        if (savedSoundState === 'true') {
+            this.soundEnabled = true;
+            this.startBackgroundMusic();
+            this.allSounds.forEach(sound => {
+                if (sound !== this.backgroundmusic) {
+                    sound.volume = 1; // Setze Lautstärke wieder hoch
+                    // sound.play();
+                }
+            });
+        } else {
+            this.soundEnabled = false;
             this.allSounds.forEach(sound => {
                 if (sound !== this.backgroundmusic) {
                     sound.volume = 0;
