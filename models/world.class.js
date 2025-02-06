@@ -128,6 +128,18 @@ class World {
         }
       }
     });
+  // Kollisionen mit Zombiehänden prüfen
+  this.level.zombieHands.forEach((zombieHand) => {
+    if (this.character.isColliding(zombieHand)) {
+      console.log("Kollision mit Zombie-Hand erkannt!");
+      if (!this.character.isInvulnerable) {
+        this.character.hit(); // Charakter wird getroffen
+        console.log("Charakter wurde von der Zombie-Hand getroffen", this.character.energy);
+        this.updateLifeBar();
+      }
+    }
+  });
+
     this.throwableObjects.forEach((bottle, bottleIndex) => {
       this.handleThrowableObjectCollision(bottle, bottleIndex);
     });
@@ -251,10 +263,11 @@ handleGameOver() {
     this.addObjectToMap(this.level.backgroundObjects);
     this.addObjectToMap(this.level.moon);
     this.addObjectToMap(this.level.clouds);
-    this.addObjectToMap(this.level.hand);
     this.addObjectToMap(this.level.start);
     this.addObjectToMap(this.level.objects);
     this.addObjectToMap(this.throwableObjects);
+    this.addObjectToMap(this.level.zombieHands);
+    this.addObjectToMap(this.level.groundObject);
 
     this.ctx.translate(-this.camera_x, 0);  //camera Back
 

@@ -19,7 +19,7 @@ class DrawableObject{
     }
 
     drawFrame(ctx){
-        if(this instanceof Character || this instanceof Zombies || this instanceof Endboss || this instanceof ThrowableObject){
+        if(this instanceof Character || this instanceof Zombies || this instanceof Endboss || this instanceof ThrowableObject || this instanceof ZombieHand ){
         ctx.beginPath();
         ctx.lineWidth = "4";
         ctx.strokeStyle = "green";

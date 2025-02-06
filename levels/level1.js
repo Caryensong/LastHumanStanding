@@ -34,10 +34,6 @@ function initLevel(){
             new Zombies(),
         ],
         [
-            new ZombieHand(740, 405, 20, 45),
-            new ZombieHand(750, 400, 30, 35),
-        ],
-        [
             new Moon()
         ],
         [
@@ -53,8 +49,9 @@ function initLevel(){
         [   new BackgroundObject('./img/background/3.1.png', -720, 0, 720, 480, 0.1),
             new BackgroundObject('./img/background/4.1.png', -720, 0, 720, 480, 0.5),
             new BackgroundObject('./img/background/2.1.png', -720, 0, 720, 480, 0.9),
-    
+            
             new BackgroundObject('./img/background/4.png', 0, 0, 720, 480, 0.5),
+            
             new BackgroundObject('./img/background/stars.png', 0, 0, 720, 480, 1), 
             new BackgroundObject('./img/background/3.png', 0, 0, 720, 480, 0.1),        
             new BackgroundObject('./img/trees/jungle_tree_5.png', 50, 190 ,80, 220, 0.5),       
@@ -68,7 +65,6 @@ function initLevel(){
             new BackgroundObject('./img/trees/winter_tree_10.png', -50, 450 ,200, 50, 0.9),
             new BackgroundObject('./img/trees/winter_tree_10.png', 155, 425 ,200, 70, 0.9),
             new BackgroundObject('./img/trees/winter_tree_10.png', 275, 425 ,200, 70, 0.9),
-            new BackgroundObject('./img/trees/winter_tree_10.png', 675, 425 ,200, 70, 0.8),
             new BackgroundObject('./img/trees/jungle_tree_5.png', 250, 195 ,80, 220, 0.7),
     
             
@@ -91,14 +87,23 @@ function initLevel(){
     
             new BackgroundObject('./img/trees/winter_tree_8.png', 1250, 195 ,150, 220, 0.9),
           
-           
             new BackgroundObject('./img/trees/jungle_tree_6.png', 660, 195 ,80, 220, 0.8),
             new BackgroundObject('./img/background/stars.png', 2160, 0, 720, 480, 0.1 ),
             new BackgroundObject('./img/background/3.1.png', 2160, 0, 720, 480, 0.1),
             new BackgroundObject('./img/background/4.1.png', 2160, 0, 720, 480, 0.5), 
             
             new BackgroundObject('./img/background/2.1.png', 2160, 0, 720, 480, 0.9),
-        ]
+        ],
+        [
+            new ZombieHand(695, 405, 20, 45),
+            new ZombieHand(705, 400, 30, 35),
+        ],
+        [
+            new BackgroundObject('./img/background/ground.png', 645, 432, 100, 100, 0.9),
+            new BackgroundObject('./img/trees/winter_tree_10.png', 675, 425 ,200, 70, 0.8),
+            new BackgroundObject('./img/trees/winter_tree_10.png', 625, 425 ,200, 90, 0.9)
+        ],
+    
     );
 }
 
