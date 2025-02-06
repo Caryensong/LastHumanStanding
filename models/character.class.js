@@ -1,5 +1,5 @@
 class Character extends MovableObject {
-   speed = 4;
+   speed = 3;
    world;
    isSlashing = false;
    isInvulnerable = false;
@@ -120,9 +120,31 @@ class Character extends MovableObject {
       './img/human/Throwing/0_Fallen_Angels_Throwing_011.png',
    ];
 
+   Images_Idle =[
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_000.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_001.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_002.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_003.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_004.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_005.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_006.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_007.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_008.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_009.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_010.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_011.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_012.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_013.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_014.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_015.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_016.png',
+      './img/human/Idle Blinking/0_Fallen_Angels_Idle Blinking_017.png'
+   ];
+
    constructor() {
       super().loadImage(this.Images_Walking[0]);
       this.loadImages(this.Images_Walking);
+      this.loadImages(this.Images_Idle);
       this.loadImages(this.Images_Jumping);
       this.loadImages(this.Images_Dead);
       this.loadImages(this.Images_Hurt);
@@ -184,7 +206,6 @@ class Character extends MovableObject {
             }
          }
          
-
          if (this.world.keyboard.SPACE && !this.isAboveGround()) {
             if(!this.world.keyboard.SPACE_SOLVED){
                this.jump();
@@ -234,12 +255,12 @@ class Character extends MovableObject {
             this.playAnimation(this.Images_Hurt);
          } else if (this.isAboveGround()) {
             this.playAnimation(this.Images_Jumping);
-         } else {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+         } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                this.playAnimation(this.Images_Walking);
-            }
+         } else{
+            this.playAnimation(this.Images_Idle);
          }
-      }, 20);
+      }, 50);
    }
 
 }
