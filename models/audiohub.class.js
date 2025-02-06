@@ -12,6 +12,8 @@ class AudioHub {
     static CharSlash = new Audio('./audio/sword-sound-260274.mp3');
     static EndbossWalk = new Audio('./audio/monster_step.mp3');
     static EndbossHurt = new Audio('./audio/monster-211717.mp3');
+    static GameOverSound = new Audio('./audio/gameover.mp3');
+    static YouWinSound = new Audio('./audio/win.mp3');
 
     /** @type {HTMLAudioElement[]} List of all sound effects and background music.*/
     static allSounds = [

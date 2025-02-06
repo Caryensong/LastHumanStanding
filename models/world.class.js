@@ -193,7 +193,9 @@ class World {
       this.stopAllIntervals();
       this.renderGameOver(winner);
       this.hidePanel2(); // Panel2 ausblenden
+      AudioHub.playSound(AudioHub.GameOverSound);
       this.handleGameOver();
+     
 
     } else if (this.endboss.isDead() && !this.gameOver) {
       let winner = "character";
@@ -201,7 +203,8 @@ class World {
       this.stopAllIntervals();
       this.renderGameOver(winner);
       this.hidePanel2();
-      this.handleGameOver();
+      AudioHub.playSound(AudioHub.YouWinSound);
+      this.handleGameOver(); 
     }
   }
 

@@ -57,7 +57,9 @@ function restartGame() {
     }
     canvas = document.getElementById("canvas");
     canvas.classList.remove("d-none"); // Canvas wieder anzeigen
+    AudioHub.loadSoundState();
     startGame(); // Neues Spiel starten
+    updateSoundIcon();
 }
 
 function startGame() {
