@@ -69,7 +69,7 @@ class AudioHub {
          // Wenn kein Wert gespeichert ist (erste Besuch), setzen wir den Sound auf true.
          if (savedSoundState === null) {
             this.soundEnabled = false;  // Setzt Standardwert
-            localStorage.setItem('soundEnabled', 'true');  // Speichert Standardwert im localStorage
+            localStorage.setItem('soundEnabled', 'false');  // Speichert Standardwert im localStorage
         } else if (savedSoundState === 'true') {
             this.soundEnabled = true;
         } else {
