@@ -46,24 +46,43 @@ document.addEventListener("fullscreenchange", () => {
     }
 });
   
-function startGame() {
-    startScreen = document.getElementById("howToPlayBox");
-    startScreen.classList.add("d-none");
-    startScreen = "";
-    canvas = document.getElementById("canvas");
-    canvas.classList.remove("d-none");
-    let panel2 = document.querySelector(".panel2");
-    panel2.style.display = "flex";
-    // let soundsBtn = document.querySelector(".sound_btn");
-    // soundsBtn.style.display = "block";
-    initLevel();
-    world = new World(canvas, keyboard);
-    // AudioHub.startBackgroundMusic();
-    if (world.zombies) {
-        world.zombies.resetZombiePositions();
+function restartGame() {
+    let endScreen = document.getElementById("endScreenBox");
+    if (endScreen) {
+        endScreen.remove(); // Game Over Screen entfernen
     }
-    world.gameOver = false;
+    if (world) {
+        world = null; // Altes world-Objekt löschen, um einen Neustart zu erzwingen
+    }
+    canvas = document.getElementById("canvas");
+    canvas.classList.remove("d-none"); // Canvas wieder anzeigen
+    startGame(); // Neues Spiel starten
 }
+
+function startGame() { 
+    if (world) {
+        world = null; // Altes world-Objekt wirklich zurücksetzen
+    }
+
+    let startScreen = document.getElementById("howToPlayBox");
+    if (startScreen) {
+        startScreen.classList.add("d-none");
+    }
+
+    canvas = document.getElementById("canvas");
+    canvas.classList.remove("d-none"); // Stelle sicher, dass das Spielfeld sichtbar ist
+
+    let panel2 = document.querySelector(".panel2");
+    if (panel2) {
+        panel2.style.display = "flex";
+    }
+
+    initLevel(); // Level initialisieren
+    world = new World(canvas, keyboard); // Neues Spielobjekt erstellen
+
+    world.gameOver = false; // Spielstatus zurücksetzen
+}
+
 
 function howToPlayScreen() {
     descriptionScreen = document.getElementById("descriptionBox");
@@ -80,15 +99,16 @@ function startDescription() {
 }
 
 function init() {
-    startScreen = document.getElementById("startScreen");
+    let startScreen = document.getElementById("startScreen");
     startScreen.innerHTML = "";
-    endScreen = document.getElementById("endScreenBox");
+    let endScreen = document.getElementById("endScreenBox");
     canvas = document.getElementById('canvas');
     
     if (endScreen) {
-        endScreen.classList.add("d-none");
+        endScreen.classList.remove();;
         canvas.classList.remove("d-none");
     }
+    canvas.classList.add("d-none"); 
     AudioHub.startBackgroundMusic();
     startScreen.innerHTML = startTemplate();
 }
