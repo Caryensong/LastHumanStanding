@@ -46,27 +46,21 @@ class DrawableObject {
      * @returns {void}
      */
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Zombies || this instanceof Endboss || this instanceof ThrowableObject || this instanceof ZombieHand) {
-            ctx.beginPath();
-            ctx.lineWidth = "4";
-            ctx.strokeStyle = "green";
-            ctx.rect(
-                this.x + this.offset.left,
-                this.y + this.offset.top,
-                this.width - this.offset.left - this.offset.right,
-                this.height - this.offset.top - this.offset.bottom
-            );
+        // if (this instanceof Character || this instanceof Zombies || this instanceof Endboss || this instanceof ThrowableObject || this instanceof ZombieHand) {
+        //     ctx.beginPath();
+        //     ctx.lineWidth = "4";
+        //     ctx.strokeStyle = "green";
+        //     ctx.rect(
+        //         this.x + this.offset.left,
+        //         this.y + this.offset.top,
+        //         this.width - this.offset.left - this.offset.right,
+        //         this.height - this.offset.top - this.offset.bottom
+        //     );
             ctx.stroke();
-        }
+        
     }
 
-      /**
-     * Loads multiple images from an array of file paths and stores them in the image cache.
-     * This is used for objects that have a series of images for animation or state changes.
-     * 
-     * @param {string[]} arr An array of file paths to the images to be loaded.
-     * @returns {void}
-     */
+    
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();

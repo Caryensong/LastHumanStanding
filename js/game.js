@@ -164,10 +164,13 @@ function bindBtsPressEvents() {
     // Touchstart und Touchend für Buttons
     const touchHandler = (key, action) => {
         return (e) => {
-            e.preventDefault();
+            // Check if the event can be prevented (if cancelable is true)
+            if (e.cancelable) {
+                e.preventDefault();  // Prevent default only if it is allowed
+            }
+            
             world.keyboard[key] = action;
     
-            // Wenn der Key losgelassen wird, SOLVED auf false setzen
             if (!action) {
                 const solvedKey = key + "_SOLVED";
                 if (world.keyboard[solvedKey]) {
@@ -262,7 +265,7 @@ window.addEventListener("keyup", (e) => {
 
 document.addEventListener("keydown", (event) => {
     // Prüfen, ob die M-Taste gedrückt wurde
-    if (event.key.toLowerCase() === "m") { 
+    if (event.key.toLowerCase() === "m") {
         event.preventDefault(); // Verhindert Standardaktionen
         AudioHub.toggleSound(); // Sound an/aus
         return; // Verhindert weitere Verarbeitung
