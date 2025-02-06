@@ -145,12 +145,21 @@ class World {
       this.level.objects.splice(index, 1);
       this.poisonCount = Math.min(this.poisonCount + 1, 5);
       this.updatePoisonBar();
+
+      if (this.soundEnabled) {
+        AudioHub.playSound(AudioHub.clickSound); // Play the click sound if sound is enabled
+      }
+
     }      // Life-Objekt einsammeln
     if (object instanceof LifeObjects) {
       console.log('Leben eingesammelt');
       this.level.objects.splice(index, 1);
       this.character.energy = Math.min(this.character.energy + 20, 100);
       this.updateLifeBar();
+
+      if (this.soundEnabled) {
+        AudioHub.playSound(AudioHub.clickSound); // Play the click sound if sound is enabled
+      }
     }
   }
 

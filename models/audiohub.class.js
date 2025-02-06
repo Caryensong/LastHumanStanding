@@ -14,6 +14,7 @@ class AudioHub {
     static EndbossHurt = new Audio('./audio/monster-211717.mp3');
     static GameOverSound = new Audio('./audio/gameover.mp3');
     static YouWinSound = new Audio('./audio/win.mp3');
+    static clickSound = new Audio('./audio/click.mp3');
 
     /** @type {HTMLAudioElement[]} List of all sound effects and background music.*/
     static allSounds = [
@@ -26,6 +27,7 @@ class AudioHub {
         AudioHub.CharHurt,
         AudioHub.EndbossHurt,
         AudioHub.EndbossWalk,
+        AudioHub.clickSound,
     ];
     /** @type {boolean} Indicates whether sound is enabled or disabled. */
     static soundEnabled = false;
