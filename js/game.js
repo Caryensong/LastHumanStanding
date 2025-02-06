@@ -104,9 +104,6 @@ function startDescription() {
 }
 
 function init() {
-    // canvas = document.getElementById("canvas");
-    // canvas.width = window.innerWidth;  // Die Breite des Canvas an die Fenstergröße anpassen
-    // canvas.height = window.innerHeight; // Die Höhe des Canvas an die Fenstergröße anpassen
     AudioHub.loadSoundState();  // Überprüfen und Laden des gespeicherten Sound-Status
     // Sound-Icon nach dem Status aktualisieren
     updateSoundIcon();

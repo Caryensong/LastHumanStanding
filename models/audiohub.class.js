@@ -21,7 +21,7 @@ class AudioHub {
         AudioHub.EndbossWalk,
     ];
 
-    static soundEnabled = true;  // Standardmäßig auf 'true' setzen
+    static soundEnabled = false;  // Standardmäßig auf 'false' setzen
 
     static startBackgroundMusic() {
         AudioHub.backgroundmusic.loop = true; // Musik in Schleife abspielen
@@ -68,7 +68,7 @@ class AudioHub {
         console.log('Gespeicherter Sound-Status:', savedSoundState);  
          // Wenn kein Wert gespeichert ist (erste Besuch), setzen wir den Sound auf true.
          if (savedSoundState === null) {
-            this.soundEnabled = true;  // Setzt Standardwert
+            this.soundEnabled = false;  // Setzt Standardwert
             localStorage.setItem('soundEnabled', 'true');  // Speichert Standardwert im localStorage
         } else if (savedSoundState === 'true') {
             this.soundEnabled = true;
