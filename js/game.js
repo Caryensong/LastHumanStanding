@@ -105,6 +105,8 @@ function startDescription() {
 
 function init() {
     AudioHub.loadSoundState();  // Überprüfen und Laden des gespeicherten Sound-Status
+    // Sound-Icon nach dem Status aktualisieren
+    updateSoundIcon();
 
     let startScreen = document.getElementById("startScreen");
     startScreen.innerHTML = "";
@@ -118,7 +120,8 @@ function init() {
     canvas.classList.add("d-none");
 
     if (AudioHub.soundEnabled) {
-        AudioHub.startBackgroundMusic();
+        AudioHub.stopAllSound(); // Stoppe alle anderen Sounds
+        AudioHub.startBackgroundMusic(); // Starte nur die Hintergrundmusik
     }
 
     startScreen.innerHTML = startTemplate();
@@ -134,9 +137,12 @@ function options(page = 'impressum') {
 }
 
 function toggleSound() {
-    let soundIcon = document.getElementById("soundIcon");
-
     AudioHub.toggleSound();
+    updateSoundIcon();
+}
+
+function updateSoundIcon() {
+    let soundIcon = document.getElementById("soundIcon");
 
     if (AudioHub.soundEnabled) {
         soundIcon.src = "./img/icon/sound_on.png";

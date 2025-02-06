@@ -21,7 +21,7 @@ class AudioHub {
         AudioHub.EndbossWalk,
     ];
 
-    static soundEnabled = true;
+    static soundEnabled = true;  // Standardmäßig auf 'true' setzen
 
     static startBackgroundMusic() {
         AudioHub.backgroundmusic.loop = true; // Musik in Schleife abspielen
@@ -41,7 +41,7 @@ class AudioHub {
     }
 
     static toggleSound() {
-        this.soundEnabled = !this.soundEnabled; // Umschalten
+        this.soundEnabled = !this.soundEnabled;
         // Speichern des Sound-Status im localStorage
         localStorage.setItem('soundEnabled', this.soundEnabled ? 'true' : 'false');
 
@@ -50,7 +50,6 @@ class AudioHub {
             this.allSounds.forEach(sound => {
                 if (sound !== this.backgroundmusic) {
                     sound.volume = 1; // Setze Lautstärke wieder hoch
-                    // sound.play();
                 }
             });
         } else {
@@ -66,18 +65,27 @@ class AudioHub {
 
     static loadSoundState() {
         const savedSoundState = localStorage.getItem('soundEnabled');
-
-        if (savedSoundState === 'true') {
+        console.log('Gespeicherter Sound-Status:', savedSoundState);  
+         // Wenn kein Wert gespeichert ist (erste Besuch), setzen wir den Sound auf true.
+         if (savedSoundState === null) {
+            this.soundEnabled = true;  // Setzt Standardwert
+            localStorage.setItem('soundEnabled', 'true');  // Speichert Standardwert im localStorage
+        } else if (savedSoundState === 'true') {
             this.soundEnabled = true;
+        } else {
+            this.soundEnabled = false;
+        }
+
+        // console.log("Sound aktiviert:", this.soundEnabled); 
+
+        if (this.soundEnabled) {
             this.startBackgroundMusic();
             this.allSounds.forEach(sound => {
                 if (sound !== this.backgroundmusic) {
                     sound.volume = 1; // Setze Lautstärke wieder hoch
-                    // sound.play();
                 }
             });
         } else {
-            this.soundEnabled = false;
             this.allSounds.forEach(sound => {
                 if (sound !== this.backgroundmusic) {
                     sound.volume = 0;
