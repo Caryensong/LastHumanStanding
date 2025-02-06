@@ -1,11 +1,26 @@
+/**
+ * Class representing a zombie character in the game.
+ * It extends the `MovableObject` class and has functionality for walking, dying, and poison-death animations.
+ * Each zombie has random starting positions and speeds, and can be marked as dead or invulnerable.
+ */
 class Zombies extends MovableObject{
-    static zombiePositions = []; // Array, um Positionen aller Zombies zu speichern
+
+       /**
+     * Array to store the positions of all zombies in the game.
+     * This helps ensure zombies are not spawned too close to each other.
+     * @type {number[]}
+     */
+    static zombiePositions = [];
     width=55;
     height=80;
     y= 345;
     isDead = false;
     isInvulnerable = false;
 
+       /**
+     * List of images for the animation.
+     * @type {string[]}
+     */
     Images_Walking =[
         './img/zombie3/walk/Walk1.png',
         './img/zombie3/walk/Walk2.png',
@@ -30,6 +45,10 @@ class Zombies extends MovableObject{
         'img/zombie3/dead/DEAD.png'
     ];
 
+    /**
+     * Creates an instance of a zombie with random positioning and speed.
+     * Also starts the animation and movement of the zombie.
+     */
     constructor(){
         super().loadImage(this.Images_Walking[0]);
         this.loadImages(this.Images_Walking);
@@ -41,6 +60,10 @@ class Zombies extends MovableObject{
         this.animation();
     }
 
+    /**
+     * Generates a random X position for the zombie, ensuring it is not too close to other zombies.
+     * @returns {number} The random X position for the zombie.
+     */
     generateRandomPosition() {
         const minDistance = 150; // Mindestabstand zwischen Zombies
         let x = 280 + Math.random() * 500; // Generiere zufällige Position
@@ -59,10 +82,18 @@ class Zombies extends MovableObject{
         return x;
     }
 
+     /**
+     * Resets the zombie positions, clearing the stored positions.
+     * This is useful when restarting the game.
+     */
     static resetZombiePositions() {
         this.zombiePositions = []; // Reset der Positionsliste bei Spielneustart
     }
 
+      /**
+     * Starts the zombie's walking animation and movement.
+     * @returns {void}
+     */
     animation(){
         setInterval(()=>{     
             if(!this.isDead){
@@ -79,6 +110,12 @@ class Zombies extends MovableObject{
         }, 250);
     }
 
+       /**
+     * Plays the zombie's death animation.
+     * Once the animation completes, the `onAnimationComplete` callback is triggered.
+     * @param {Function} onAnimationComplete - A callback function to be executed when the animation completes.
+     * @returns {void}
+     */
     playDeadAnimation(onAnimationComplete) {
         this.isDead = true; // Setze den Zombie-Status auf "stirbt"
         let currentFrame = 0;
@@ -100,6 +137,12 @@ class Zombies extends MovableObject{
         }, 80);
     }
 
+      /**
+     * Plays the poisoned-dead animation.
+     * Once the animation completes, the `onAnimationComplete` callback is triggered.
+     * @param {Function} onAnimationComplete - A callback function to be executed when the animation completes.
+     * @returns {void}
+     */
     playPoisonDeadAnimation(onAnimationComplete) {
         this.isDead = true;
         this.width = 130;

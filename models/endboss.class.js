@@ -1,5 +1,11 @@
+/**
+ * Represents the Endboss character in the game. 
+ * This object manages the Endboss's state (e.g., hurt, dying), animations, movement, and interactions with the player.
+ * 
+ * @class Endboss
+ * @extends MovableObject
+ */
 class Endboss extends MovableObject {
- 
   offset = {
     top: 65,
     left: 65,
@@ -7,7 +13,11 @@ class Endboss extends MovableObject {
     bottom: 40
 
   }
-
+  /**
+    * Array of image paths for the Endboss's animation.
+    * 
+    * @type {string[]}
+    */
   Images_Slashing = [
     'img/endboss/Run Slashing/0_Golem_Run Slashing_000.png',
     'img/endboss/Run Slashing/0_Golem_Run Slashing_001.png',
@@ -56,9 +66,26 @@ class Endboss extends MovableObject {
     './img/endboss/Dying/0_Golem_Dying_014.png'
   ];
 
+  /**
+  * Flag to determine if the Endboss is currently dying.
+  * 
+  * @type {boolean}
+  */
   isDying = false;
-  isHurt = false; 
 
+  /**
+   * Flag to determine if the Endboss is currently hurt.
+   * 
+   * @type {boolean}
+   */
+  isHurt = false;
+
+  /**
+  * Creates an instance of the Endboss.
+  * Initializes the Endboss's image, position, size, movement, and animations.
+  * 
+  * @constructor
+  */
   constructor() {
     super().loadImage(this.Images_Slashing[0]);
     this.loadImages(this.Images_Slashing);
@@ -74,13 +101,20 @@ class Endboss extends MovableObject {
     this.startMovement();
   }
 
+
+  /**
+  * Starts the movement of the Endboss. The Endboss will walk toward the player and perform a slashing animation.
+  * The movement stops if the Endboss is hurt or dying.
+  * 
+  * @returns {void}
+  */
   startMovement() {
     if (this.movementInterval) clearInterval(this.movementInterval);
     if (this.walkingInterval) clearInterval(this.walkingInterval);
 
     this.movementInterval = setInterval(() => {
       if (this.isDying || this.isHurt) return; // Stoppt Bewegung, wenn verletzt oder tot
-      
+
       const distance = Math.abs(world.character.x - this.x);
 
       if (distance <= 500) {
@@ -103,7 +137,7 @@ class Endboss extends MovableObject {
             this.moveRight();
           }
 
-        }, 5) ;
+        }, 5);
 
         this.playAnimation(this.Images_Slashing);
         AudioHub.playSound(AudioHub.EndbossWalk);
@@ -113,15 +147,19 @@ class Endboss extends MovableObject {
     }, 80);
   }
 
-  
-
+  /**
+    * Plays the hurt animation for the Endboss.
+    * The hurt animation stops after playing through all frames, then resumes the Endboss's movement.
+    * 
+    * @returns {void}
+    */
   playHurtAnimation() {
     if (this.isHurt) return;
 
     this.isHurt = true;  // Flag setzen, damit Animation nicht mehrfach gestartet wird
 
-    clearInterval(this.movementInterval);  // Bewegung stoppen
-    clearInterval(this.walkingInterval);  // Falls er noch läuft, stoppen
+    clearInterval(this.movementInterval);
+    clearInterval(this.walkingInterval);  
 
     let currentFrame = 0;
 
@@ -131,25 +169,29 @@ class Endboss extends MovableObject {
         currentFrame++;
         AudioHub.playSound(AudioHub.EndbossHurt);
 
-        
+
       } else {
         clearInterval(hurtAnimationInterval);
         setTimeout(() => {
-          this.isHurt = false; // Nach der Animation wieder freigeben
+          this.isHurt = false; 
           this.startMovement();
-          ; // Nur EINMAL Bewegung starten
         }, 500);
       }
-    }, 100);  // Schnellere Hurt-Animation für bessere Sichtbarkeit
+    }, 100); 
   }
 
-
+  /**
+    * Plays the dying animation for the Endboss.
+    * The animation plays through all frames and then the Endboss is considered defeated.
+    * 
+    * @returns {void}
+    */
   playDeadAnimation() {
     if (this.isDying) return;
     this.isDying = true;
     this.energy = 0;
-    clearInterval(this.movementInterval); // Stoppt alle Bewegungen
-    clearInterval(this.walkingInterval); // Falls noch eine Bewegung läuft
+    clearInterval(this.movementInterval); 
+    clearInterval(this.walkingInterval); 
     AudioHub.EndbossWalk.pause();
 
     let currentFrame = 0;
