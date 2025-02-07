@@ -227,7 +227,7 @@ class Character extends MovableObject {
              AudioHub.playSound(AudioHub.CharDead);
          } else {
              clearInterval(deathAnimation);
-             this.img = this.imageCache[this.Images_Dead[this.Images_Dead.length - 1]]; // Bleibt auf letztem Bild
+             this.img = this.imageCache[this.Images_Dead[this.Images_Dead.length - 1]];
          }
      }, 100);
   
@@ -289,7 +289,7 @@ class Character extends MovableObject {
             setTimeout(() => {
                this.isSlashing = false;
                this.world.keyboard.S_SOLVED = false;
-            }, 1000); // Slashing - character isInvulnerable
+            }, 1000);
          }
 
          if (this.world.keyboard.D) {
@@ -300,7 +300,6 @@ class Character extends MovableObject {
             }
            
          }
-
          this.world.camera_x = -this.x + 100;
       }, 1000 / 60);
 

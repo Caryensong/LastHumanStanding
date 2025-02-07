@@ -107,7 +107,7 @@ class Endboss extends MovableObject {
     if (this.walkingInterval) clearInterval(this.walkingInterval);
 
     this.movementInterval = setInterval(() => {
-      if (this.isDying || this.isHurt()) return; // Stoppt Bewegung, wenn verletzt oder tot
+      if (this.isDying || this.isHurt()) return;
 
       const distance = Math.abs(world.character.x - this.x);
 
@@ -192,7 +192,7 @@ class Endboss extends MovableObject {
         currentFrame++;
       } else {
         clearInterval(deadAnimationInterval);
-        this.img = this.imageCache[this.Images_Dying[this.Images_Dying.length - 1]]; // Bleibt auf letztem Bild
+        this.img = this.imageCache[this.Images_Dying[this.Images_Dying.length - 1]]; 
       }
     }, 100);
   }

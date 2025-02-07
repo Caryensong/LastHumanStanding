@@ -273,15 +273,15 @@ a {
     } 
 
     .panel-wrapper1 {
-        position: relative;
-        top: -150px;
+        position: absolute;
+        top: 20px;
         z-index: 200;
     }
 
     #startContent img,
     #descriptionBox img,
     #howToPlayBox img{
-        height: 105vh;
+        height: 112vh;
         /* position: fixed; */
     } 
 
@@ -293,7 +293,7 @@ a {
     
     #endWinScreenBox img, #endOverScreenBox img {
         max-width: 720px;
-        height: 102vh;
+        height: 112vh;
     }
 
     .descriptionBtn_container {

@@ -57,7 +57,7 @@ class Zombies extends MovableObject{
         this.loadImages(this.Images_Dead);
         this.loadImages(this.Images_Posion_Dead);
 
-        this.x = this.generateRandomPosition(); // Verwende die neue Methode für zufällige Position
+        this.x = this.generateRandomPosition();
         this.speed = 0.08 + Math.random() * 0.25;
         this.animation();
     }
@@ -67,20 +67,18 @@ class Zombies extends MovableObject{
      * @returns {number} The random X position for the zombie.
      */
     generateRandomPosition() {
-        const minDistance = 150; // Mindestabstand zwischen Zombies
-        let x = 280 + Math.random() * 500; // Generiere zufällige Position
+        const minDistance = 150; 
+        let x = 280 + Math.random() * 500; 
 
-        // Überprüfe, ob der Zombie zu nahe an anderen Zombies ist
         for (let pos of Zombies.zombiePositions) {
             if (Math.abs(pos - x) < minDistance) {
-                // Wenn der Abstand zu einem anderen Zombie zu gering ist, eine neue Position generieren
                 x = 280 + Math.random() * 500;
-                pos = null; // Beende die Schleife, wenn ein neuer Wert generiert wurde
+                pos = null;
                 break;
             }
         }
 
-        Zombies.zombiePositions.push(x); // Speichere die Position in der Liste
+        Zombies.zombiePositions.push(x); 
         return x;
     }
 
@@ -89,7 +87,7 @@ class Zombies extends MovableObject{
      * This is useful when restarting the game.
      */
     static resetZombiePositions() {
-        this.zombiePositions = []; // Reset der Positionsliste bei Spielneustart
+        this.zombiePositions = []; 
     }
 
       /**
@@ -139,8 +137,8 @@ class Zombies extends MovableObject{
                     AudioHub.enemyWalking_sound.pause();
          
             } else {
-                clearInterval(deadAnimationInterval); // Animation beendet
-                if (onAnimationComplete) onAnimationComplete(); // Callback aufrufen
+                clearInterval(deadAnimationInterval); 
+                if (onAnimationComplete) onAnimationComplete(); 
             }
         }, 80);
     }
@@ -164,8 +162,8 @@ class Zombies extends MovableObject{
         this.img = this.imageCache[this.Images_Posion_Dead[0]];
     
         setTimeout(() => {
-            if (onAnimationComplete) onAnimationComplete(); // Callback aufrufen
-        }, 900); // Bild wird 2 Sekunden lang angezeigt
+            if (onAnimationComplete) onAnimationComplete(); 
+        }, 900); 
     }
     
 }

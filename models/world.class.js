@@ -146,7 +146,7 @@ class World {
       this.updatePoisonBar();
 
       if (this.soundEnabled) {
-        AudioHub.playSound(AudioHub.clickSound); // Play the click sound if sound is enabled
+        AudioHub.playSound(AudioHub.clickSound);
       }
 
     }      // Life-Objekt einsammeln
@@ -156,7 +156,7 @@ class World {
       this.updateLifeBar();
 
       if (this.soundEnabled) {
-        AudioHub.playSound(AudioHub.clickSound); // Play the click sound if sound is enabled
+        AudioHub.playSound(AudioHub.clickSound); 
       }
     }
   }
@@ -211,18 +211,16 @@ class World {
   checkEnemyAndEndbossCollisions() {
     this.level.enemies.forEach((enemy, index) => {
       if (this.character.isColliding(enemy) || this.character.isColliding(this.endboss)) {
-        // Slashing-Überprüfung
         if (this.character.isSlashing) {
           this.handleSlashing();
-          return; // Kein Schaden, wenn Slashing aktiv ist
+          return; 
         }
 
-        // Zombie von oben treffen
+       
         if (this.character.isTopZombieColliding(enemy) && this.character.isAboveGround()) {
           this.handleZombieCollision(enemy, index);
         }
 
-        // Normaler Treffer
         if (!this.character.isInvulnerable && !this.character.isHurt()) {
           this.character.hit();
           this.updateLifeBar();
@@ -273,7 +271,7 @@ class World {
     this.level.zombieHands.forEach((zombieHand) => {
       if (this.character.isColliding(zombieHand)) {
         if (!this.character.isInvulnerable) {
-          this.character.hit(); // Charakter wird getroffen
+          this.character.hit();
           this.updateLifeBar();
         }
       }
@@ -325,7 +323,7 @@ class World {
    */
   removeEnemy(enemy, index) {
     enemy.playPoisonDeadAnimation(() => {
-      this.level.enemies.splice(index, 1); // Zombie entfernen
+      this.level.enemies.splice(index, 1);
     });
   }
 
@@ -343,11 +341,11 @@ class World {
   * Checks for collisions during the slashing action of the character.
   */
   checkSlashingCollisions() {
-    if (this.endboss.isDying) return; // Falls Endboss schon stirbt, keine weitere Aktion
+    if (this.endboss.isDying) return; 
     if (this.character.isColliding(this.endboss) && this.character.isSlashing) {
       this.handleEndbossCollision();
     } else if (this.character.isColliding(this.endboss)) {
-      this.character.hit(); // Charakter wird getroffen
+      this.character.hit();
       this.updateLifeBar();
     }
 
@@ -388,7 +386,7 @@ handleGameOverSequence(winner, playDeathAnimation) {
     }, 1000);
 
     setTimeout(playDeathAnimation, 100);
-    setTimeout(() => { this.stopAllIntervals(); }, 4000); // Stoppe erst nach der Animation
+    setTimeout(() => { this.stopAllIntervals(); }, 4000);
 }
 
   /**
@@ -397,7 +395,6 @@ handleGameOverSequence(winner, playDeathAnimation) {
  * @returns {void}
  */
   handleGameOver() {
-    // Überprüfe, ob der Sound aus ist und stoppe ihn nur dann
     if (AudioHub.soundEnabled) {
       AudioHub.stopGameSound();
     }
@@ -426,9 +423,8 @@ handleGameOverSequence(winner, playDeathAnimation) {
     if (this.endboss.walkingInterval) clearInterval(this.endboss.walkingInterval);
     if (this.level.enemies) {
       this.level.enemies.forEach(enemy => {
-          // Stop enemy's movement intervals
           if (enemy instanceof Zombies) {
-              enemy.stopZombieIntervals();  // Stop zombie intervals
+              enemy.stopZombieIntervals(); 
           }
       });
   }
@@ -472,13 +468,13 @@ handleGameOverSequence(winner, playDeathAnimation) {
     this.addObjectToMap(this.level.zombieHands);
     this.addObjectToMap(this.level.groundObject);
 
-    this.ctx.translate(-this.camera_x, 0);  //camera Back
+    this.ctx.translate(-this.camera_x, 0); 
 
     this.level.statusBar.forEach((statusBar) => {
-      this.addToMap(statusBar); // Jede StatusBar einzeln hinzufügen
+      this.addToMap(statusBar); 
     });
 
-    this.ctx.translate(this.camera_x, 0);   //camera forwards
+    this.ctx.translate(this.camera_x, 0); 
 
     this.addToMap(this.character);
     this.addObjectToMap(this.level.enemies);
@@ -516,7 +512,7 @@ handleGameOverSequence(winner, playDeathAnimation) {
     if (mo instanceof BackgroundObject || mo instanceof Cloud) {
       this.ctx.globalAlpha = mo.opacity;
     } else {
-      this.ctx.globalAlpha = 1; // Full opacity for other objects
+      this.ctx.globalAlpha = 1;
     }
 
     if (mo.otherDirection) {
@@ -551,7 +547,7 @@ handleGameOverSequence(winner, playDeathAnimation) {
  * @returns {void}
  */
   flipImageBack(mo) {
-    this.ctx.restore();  //macht die Spiegelung wieder
+    this.ctx.restore();
     mo.x = mo.x * -1;
   }
 }

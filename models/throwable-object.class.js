@@ -48,6 +48,7 @@ class ThrowableObject extends MovableObject {
       this.character = character; 
       this.height = 50;
       this.width = 50;
+      this.throwDirection = character.otherDirection ? -1 : 1;
       this.throw();
     }
   
@@ -57,15 +58,9 @@ class ThrowableObject extends MovableObject {
      */
     throw() {
       this.speedY = 30;
-      this.applyGravaty(); // Applies gravity to the object
+      this.applyGravaty();
       setInterval(() => {
-        // Moves the object in the direction the character is facing (left or right)
-        if (this.character.otherDirection === true) {
-          this.x -= 10; 
-        } else {
-          this.x += 10;
-        }
-      }, 40); // Updates the position of the object every 40 milliseconds
-    }
+          this.x += this.throwDirection * 10;
+      }, 40);
   }
-  
+}

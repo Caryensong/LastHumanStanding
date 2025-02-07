@@ -40,9 +40,9 @@ class ZombieHand extends MovableObject{
      * @returns {void}
      */
     animation() {
-        let currentImageIndex = 0; // Start mit dem ersten Bild
+        let currentImageIndex = 0;
         setInterval(() => {
-            this.loadImage(this.IMAGES[currentImageIndex]); // Bild wechseln
+            this.loadImage(this.IMAGES[currentImageIndex]);
             currentImageIndex++;
             if (currentImageIndex >= this.IMAGES.length) {
                 currentImageIndex = 0;
@@ -57,12 +57,11 @@ class ZombieHand extends MovableObject{
      */
     movement() {
         let amplitude = 15;
-        let frequency = 0.05;  // Geschwindigkeit der Bewegung
-        let startY = this.y;  // Anfangsposition der Y-Koordinate
+        let frequency = 0.05; 
+        let startY = this.y;  
 
-        // Setzt ein Intervall, um die Y-Position zu verändern
         setInterval(() => {
-            this.y = startY + amplitude * Math.sin(frequency * Date.now()); // Berechnet die neue Y-Position
-        }, 400); // Alle 20ms wird die Position aktualisiert
+            this.y = startY + amplitude * Math.sin(frequency * Date.now());
+        }, 400);
     }
 }

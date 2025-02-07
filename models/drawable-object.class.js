@@ -21,7 +21,7 @@ class DrawableObject {
         * @returns {void}
         */
     loadImage(path) {
-        this.img = new Image();  //existiert bereits <img id = "image" scr>  this.img = document.getElementByID ('image') 
+        this.img = new Image();
         this.img.src = path;
     }
 
@@ -41,7 +41,7 @@ class DrawableObject {
      * The bounding box is drawn if the object is an instance of certain classes like `Character`, `Zombies`, etc.
      * The box is drawn with a green stroke color and a width of 4.
      * 
-     * @param {CanvasRenderingContext2D} ctx The canvas context to draw the bounding box on.
+     * @param {CanvasRenderingContext2D} ctx 
      * @returns {void}
      */
     drawFrame(ctx) {

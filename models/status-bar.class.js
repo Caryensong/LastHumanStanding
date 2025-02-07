@@ -123,7 +123,7 @@ class StatusBar extends DrawableObject {
    * @param {number} amount - The poison level percentage affecting the player.
    */
   setPoisonPercentage(amount) {
-    if (this.type !== 'poison') return; // Only for poison type
+    if (this.type !== 'poison') return;
     this.poisonPercentage = amount;
     let path = this.Images_Poison[this.resolveImageIndex()];
     this.img = this.imageCache[path];

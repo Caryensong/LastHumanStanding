@@ -187,7 +187,7 @@ class MovableObject extends DrawableObject {
   hit() {
     const now = new Date().getTime();
     if (this.isHurt() || (now - this.lastHit) < 1000) {
-      return; // Skip the hit if the character was hurt recently (within 1 second)
+      return;
     }
 
     this.energy -= 10;
@@ -203,7 +203,7 @@ class MovableObject extends DrawableObject {
     } else {
       this.lastHit = new Date().getTime();
     }
-    this.lastHit = now; // Update the last hit time
+    this.lastHit = now;
   }
 
   /**
@@ -214,8 +214,7 @@ class MovableObject extends DrawableObject {
    */
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
-    // timepassed = timepassed / 1000; // in seconds
-    return timepassed < 1000; // within 0.5s
+    return timepassed < 1000; 
   }
 
   /**
