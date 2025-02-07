@@ -47,7 +47,7 @@ document.addEventListener("fullscreenchange", () => {
 });
 
 function restartGame() {
-    let endScreen = document.getElementById("endScreenBox");
+    let endScreen = document.getElementById("startScreen");
     if (endScreen) {
         endScreen.classList.add("d-none");
     }

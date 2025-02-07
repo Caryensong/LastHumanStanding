@@ -441,8 +441,11 @@ handleGameOverSequence(winner, playDeathAnimation) {
     canvas.classList.add("d-none");
     let endScreen = document.getElementById("startScreen");
     if (winner == "character") {
+      endScreen.classList.remove("d-none");
       endScreen.innerHTML = wonGameTemplate();
+      
     } else {
+      endScreen.classList.remove("d-none");
       endScreen.innerHTML = lostGameTemplate();
     }
   }
