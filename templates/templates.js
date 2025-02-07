@@ -112,7 +112,7 @@ Johannes-Wirtz-Str 19,<br>
 47877 Willich,<br>
 Deutschland<br>
 
-Tel.: 01789731129<br>
+Tel.: *********<br>
 E-Mail: caryensong@googlemail.com<br><br>
 
 EU-Streitschlichtung<br>

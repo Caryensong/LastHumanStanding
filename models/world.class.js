@@ -237,7 +237,6 @@ class World {
  * @returns {void}
  */
   handleSlashing() {
-    console.log("Slashing verhindert Verletzung.");
     this.character.isInvulnerable = true;
     if (!this.character.slashTimeout) {
       this.character.slashTimeout = setTimeout(() => {
@@ -377,17 +376,18 @@ class World {
  * @param {Function} playDeathAnimation - Die Todesanimation, die abgespielt werden soll.
  */
 handleGameOverSequence(winner, playDeathAnimation) {
-    setTimeout(() => { this.gameOver = true; }, 3000);
+  AudioHub.playSound(winner === "character" ? AudioHub.YouWinSound : AudioHub.GameOverSound);
+
+    setTimeout(() => { this.gameOver = true; }, 1000);
 
     setTimeout(() => {
         this.renderGameOver(winner);
         this.hidePanel2();
-        AudioHub.playSound(winner === "character" ? AudioHub.YouWinSound : AudioHub.GameOverSound);
         this.handleGameOver();
-    }, 2000);
+    }, 1000);
 
-    setTimeout(playDeathAnimation, 100); // Animation starten
-    setTimeout(() => { this.stopAllIntervals(); }, 5000); // Stoppe erst nach der Animation
+    setTimeout(playDeathAnimation, 100);
+    setTimeout(() => { this.stopAllIntervals(); }, 4000); // Stoppe erst nach der Animation
 }
 
   /**
@@ -398,8 +398,7 @@ handleGameOverSequence(winner, playDeathAnimation) {
   handleGameOver() {
     // Überprüfe, ob der Sound aus ist und stoppe ihn nur dann
     if (AudioHub.soundEnabled) {
-      AudioHub.stopAllSound();
-      AudioHub.startBackgroundMusic(); // Hintergrundmusik wieder starten
+      AudioHub.stopGameSound();
     }
   }
 
@@ -424,7 +423,15 @@ handleGameOverSequence(winner, playDeathAnimation) {
     if (this.intervalID) clearInterval(this.intervalID);
     if (this.endboss.movementInterval) clearInterval(this.endboss.movementInterval);
     if (this.endboss.walkingInterval) clearInterval(this.endboss.walkingInterval);
+    if (this.level.enemies) {
+      this.level.enemies.forEach(enemy => {
+          // Stop enemy's movement intervals
+          if (enemy instanceof Zombies) {
+              enemy.stopZombieIntervals();  // Stop zombie intervals
+          }
+      });
   }
+}
 
   /**
    * Renders the game over screen, displaying either a victory or defeat message based on the winner.
@@ -433,7 +440,6 @@ handleGameOverSequence(winner, playDeathAnimation) {
    * @returns {void}
    */
   renderGameOver(winner) {
-    console.log("Game Over Screen wird gerendert für:", winner);
     canvas = document.getElementById("canvas");
     canvas.classList.add("d-none");
     let endScreen = document.getElementById("startScreen");

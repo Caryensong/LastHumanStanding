@@ -10,7 +10,7 @@ class AudioHub {
     static CharJump = new Audio('./audio/jump.mp3');
     static CharHurt = new Audio('./audio/hurt.mp3');
     static CharSlash = new Audio('./audio/sword-sound-260274.mp3');
-    static CharDead = new Audio('./audio/human_pain.mp3');
+    static CharDead = new Audio('./audio/no.mp3');
     static EndbossWalk = new Audio('./audio/monster_step.mp3');
     static EndbossHurt = new Audio('./audio/monster-211717.mp3');
     static GameOverSound = new Audio('./audio/gameover.mp3');
@@ -52,8 +52,20 @@ class AudioHub {
 
         this.allSounds.forEach(sound => {
             sound.pause();
-            sound.volume = 0;
             sound.currentTime = 0;
+        });
+    }
+   
+    /**
+    * Stops Enemys amd Character sounds and mutes them.
+    */
+    static stopGameSound() {
+        this.allSounds.forEach(sound => {
+            if (sound !== this.backgroundmusic) {
+                sound.pause();
+                sound.volume = 0;
+                sound.currentTime = 0;
+            }
         });
     }
 
@@ -72,22 +84,17 @@ class AudioHub {
                 }
             });
         } else {
-            this.allSounds.forEach(sound => {
-                if (sound !== this.backgroundmusic) {
-                    sound.volume = 0;
-                    sound.pause();
-                }
-            });
-            this.backgroundmusic.pause();
+            this.stopAllSound();
         }
     }
+
 
     /**
    * Loads the saved sound state from localStorage and applies it.
    */
     static loadSoundState() {
         const savedSoundState = localStorage.getItem('soundEnabled');
-        console.log('Gespeicherter Sound-Status:', savedSoundState);
+
         if (savedSoundState === null) {
             this.soundEnabled = false;
             localStorage.setItem('soundEnabled', 'false');  // Speichert Standardwert im localStorage
@@ -105,13 +112,7 @@ class AudioHub {
                 }
             });
         } else {
-            this.allSounds.forEach(sound => {
-                if (sound !== this.backgroundmusic) {
-                    sound.volume = 0;
-                    sound.pause();
-                }
-            });
-            this.backgroundmusic.pause(); // Hintergrundmusik extra stoppen
+            this.stopAllSound();
         }
     }
 

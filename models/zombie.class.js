@@ -16,6 +16,8 @@ class Zombies extends MovableObject{
     y= 345;
     isDead = false;
     isInvulnerable = false;
+    movementInterval = null;
+    walkingInterval = null;
 
        /**
      * List of images for the animation.
@@ -95,14 +97,14 @@ class Zombies extends MovableObject{
      * @returns {void}
      */
     animation(){
-        setInterval(()=>{     
+        this.movementInterval = setInterval(() => {
             if(!this.isDead){
                 this.moveLeft();  
             }
         }, 1000/ 60);
    
 
-        setInterval(() => {
+        this.walkingInterval = setInterval(() => {
             if(!this.isDead){
                 this.playAnimation(this.Images_Walking);
                 AudioHub.playSound(AudioHub.enemyWalking_sound);
@@ -110,6 +112,12 @@ class Zombies extends MovableObject{
         }, 250);
     }
 
+     // Stoppe alle Intervalle, die für diese Instanz von Zombies gesetzt wurden
+     stopZombieIntervals() {
+        clearInterval(this.movementInterval);
+        clearInterval(this.walkingInterval);
+    }
+    
        /**
      * Plays the zombie's death animation.
      * Once the animation completes, the `onAnimationComplete` callback is triggered.

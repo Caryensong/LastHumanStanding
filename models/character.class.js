@@ -253,7 +253,6 @@ class Character extends MovableObject {
          }
 
          if (this.world.keyboard.LEFT && this.x > -100) {
-            this.x -= this.speed;
             this.moveLeft();
             AudioHub.playSound(AudioHub.CharWalk);
             this.otherDirection = true;
@@ -319,7 +318,7 @@ class Character extends MovableObject {
          } else{
             this.playAnimation(this.Images_Idle);
          }
-      }, 50);
+      }, 70);
    }
 
 }

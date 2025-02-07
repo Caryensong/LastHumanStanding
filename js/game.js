@@ -47,7 +47,6 @@ document.addEventListener("fullscreenchange", () => {
 });
 
 function restartGame() {
-    AudioHub.stopAllSound();
     let endScreen = document.getElementById("endScreenBox");
     if (endScreen) {
         endScreen.remove(); // Game Over Screen entfernen
@@ -121,10 +120,10 @@ function init() {
     }
     canvas.classList.add("d-none");
 
-    if (AudioHub.soundEnabled) {
-        AudioHub.stopAllSound(); // Stoppe alle anderen Sounds
-        AudioHub.startBackgroundMusic(); // Starte nur die Hintergrundmusik
-    }
+    // if (AudioHub.soundEnabled) {
+    //     AudioHub.stopGameSound(); // Stoppe alle anderen Sounds
+    //     AudioHub.startBackgroundMusic(); // Starte nur die Hintergrundmusik
+    // }
 
     startScreen.innerHTML = startTemplate();
 }
