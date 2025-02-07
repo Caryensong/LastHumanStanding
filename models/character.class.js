@@ -272,9 +272,8 @@ class Character extends MovableObject {
             } 
          }
 
-         if (this.world.keyboard.S) {
+         if (this.world.keyboard.S && !this.world.keyboard.S_SOLVED) {
             this.isSlashing = true;
-            this.playAnimation(this.Images_Slashing);
             AudioHub.playSound(AudioHub.CharSlash);
             this.offset = {
                   top: 30,
@@ -289,7 +288,7 @@ class Character extends MovableObject {
             setTimeout(() => {
                this.isSlashing = false;
                this.world.keyboard.S_SOLVED = false;
-            }, 200); // Slashing - character isInvulnerable
+            }, 1000); // Slashing - character isInvulnerable
          }
 
          if (this.world.keyboard.D) {
@@ -308,7 +307,9 @@ class Character extends MovableObject {
       setInterval(() => {
          if (this.isDeadAlready) return;
         
-         if (this.isHurt()) {
+         if (this.isSlashing) {
+            this.playAnimation(this.Images_Slashing);
+         }else if (this.isHurt()) {
             AudioHub.playSound(AudioHub.CharHurt);
             this.playAnimation(this.Images_Hurt);
          } else if (this.isAboveGround()) {

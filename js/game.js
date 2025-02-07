@@ -221,13 +221,9 @@ window.addEventListener("keydown", (e) => {
     if (e.keyCode == 68) {
         keyboard.D = true;
     }
-    if (e.keyCode == 83) {
+    if (e.keyCode == 83 && !keyboard.S_SOLVED) {   // Verhindert mehrfaches Auslösen des Slash-Angriffs
         keyboard.S = true;
     }
-    if (e.keyCode == 40) {
-        keyboard.DOWN = true;
-    }
-
 });
 
 window.addEventListener("keyup", (e) => {
@@ -256,9 +252,6 @@ window.addEventListener("keyup", (e) => {
     if (e.keyCode == 83) {
         keyboard.S_SOLVED = false;
         keyboard.S = false;
-    }
-    if (e.keyCode == 40) {
-        keyboard.DOWN = false;
     }
 });
 
