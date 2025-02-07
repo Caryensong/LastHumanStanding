@@ -19,6 +19,29 @@ body {
     overflow: hidden;
 }
 
+.rotateScreen {
+    background: linear-gradient(to top, black 20%, #11111141 50%, rgb(8, 223, 8) 90%);
+    width: 100%;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rotateScreen img {
+    width: 250px;
+    height: 250px;
+}
+
+span {
+    color: #FFF;
+    font-size: 20px;
+    padding: 10px;
+    font-family: 'defused';
+    text-align: center;
+}
+
 canvas {
     background: linear-gradient(to bottom, rgb(0, 5, 27) 50%, rgb(112, 112, 112) 90%, rgb(35, 75, 102) 100%);
     display: block;
@@ -44,15 +67,14 @@ button {
 button img {
     width: 30px;
     filter: brightness(1);
-    /* Standard-Helligkeit */
     transition: filter 225ms ease-in-out;
-    /* Sanfter Übergang */
 }
 
 button img:hover {
     filter: brightness(0) sepia(4) hue-rotate(30deg) saturate(15);
 }
 
+/* Startbtn  + option*/
 .startBtn_container {
     display: flex;
     justify-content: space-around;
@@ -72,33 +94,11 @@ button.startbtn:hover {
     filter: brightness(2) sepia(4) hue-rotate(30deg) saturate(15);
 }
 
-#startContent img {
-    width: 740px;
-}
+ #startContent img {
+    display: block;
+    margin: auto;
+} 
 
-.descriptionBtn_container {
-    position: relative;
-    top: -70px;
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 50px;
-}
-
-.restart_btn_container {
-    position: relative;
-    top: -50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    gap: 10px;
-}
-
-.play_again_btn {
-    background: #222121;
-    padding: 10px;
-    color: #FFF;
-}
 
 .option_btn {
     background: #222121;
@@ -110,24 +110,6 @@ button.startbtn:hover {
     background-color: #19fd24de;
     font-size: 17px;
 }
-
-
-.play_again_btn:hover {
-    color: #19fd24;
-    font-size: 18px;
-}
-
-.Winplay_again_btn {
-    background: #222121;
-    color: #FFF;
-    padding: 10px;
-}
-
-.Winplay_again_btn:hover {
-    color: #19fd24;
-    font-size: 18px;
-}
-
 /* options */
 .option_content {
     display: flex;
@@ -161,20 +143,63 @@ a {
     text-decoration: none;
 }
 
+
+/* weiter butten*/
+.descriptionBtn_container {
+    position: relative;
+    top: -70px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 150px;
+}
+
+/* play again btn */
+.restart_btn_container {
+    position: relative;
+    top: -50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    gap: 10px;
+}
+
+.play_again_btn {
+    background: #222121;
+    padding: 10px;
+    color: #FFF;
+}
+
+.play_again_btn:hover {
+    color: #19fd24;
+    font-size: 18px;
+}
+
+.Winplay_again_btn {
+    background: #222121;
+    color: #FFF;
+    padding: 10px;
+}
+
+.Winplay_again_btn:hover {
+    color: #19fd24;
+    font-size: 18px;
+}
+
 /* respnsive button */
 
-/*---panel */
+/*---panel  */
 .panel-wrapper1 {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    top: -10px;
     z-index: 100;
 }
 
+/* handy touch */
 .panel2 {
-    width: 720px;
+    width: 100vw;
     display: none;
     justify-content: space-around;
     gap: 150px;
@@ -190,118 +215,16 @@ a {
     display: none;
 }
 
-.rotateScreen {
-    background: linear-gradient(to top, black 20%, #11111141 50%, rgb(8, 223, 8) 90%);
-    width: 100%;
-    height: 100vh;
-    display: none;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-.rotateScreen img {
-    width: 250px;
-    height: 250px;
-}
-
-span {
-    color: #FFF;
-    font-size: 20px;
-    padding: 10px;
-    font-family: 'defused';
-    text-align: center;
-}
-
-
-/* Smartphone ------- */
-@media only screen and (max-width: 720px) {
-    #canvas {
-        width: 100%;
-    }
-
-    #startScreen {
-        width: 100vw;
-    }
-
-    #startContent img,
-    #descriptionBox img,
-    #howToPlayBox img,
-    #endScreenBox img {
-        width: 100%;
-    }
-
-    h1 {
-        font-size: 20px;
-    }
-
-}
-
-@media only screen and (max-width: 480px) {
-    #canvas {
-        height: 100vh;
-        display: none;
-    }
-
-    #startScreen {
-        height: 100vh;
-    }
-
-    #startContent img,
-    #descriptionBox img,
-    #howToPlayBox img,
-    #endScreenBox img {
-        height: 100vh;
-    }
-
-    h1 {
-        display: none;
-    }
-
-    .panel1,
-    #startScreen {
-        display: none;
-    }
-
-    .desktopBtn {
-        display: none;
-    }
-
-    .panel-wrapperL {
-        display: block;
-    }
-
-    .panel-wrapperR {
-        display: block;
-    }
-
-    .rotateScreen {
-        display: flex;
-    }
-
-    #sound {
-        display: none;
-    }
-
-    .panel-wrapperL {
-        display: none;
-    }
-
-    .panel-wrapperR {
-        display: none;
-    }
-
-}
-
-@media (hover: none) and (orientation:landscape) {
+@media (max-width: 1368px) and (hover: none) and (orientation:landscape) {
     .desktopBtn {
         display: none;
     }
 
     #canvas {
         height: 100vh;
+        position: fixed;
         width: 100%;
-    }
+    } 
 
     .panel-wrapperL {
         display: block;
@@ -320,6 +243,69 @@ span {
         top: 20px;
         z-index: 200;
     }
+
+    #endWinScreenBox, #endOverScreenBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #endWinScreenBox img, #endOverScreenBox img {
+        max-width: 720px;
+    }
+
+    .descriptionBtn_container {
+        position: relative;
+        top: -70px;
+        padding-right: 130px;
+    }
+
+    button img {
+            width: 50px;
+        }
+}
+
+@media (max-width: 935px) and (hover: none) and (orientation:landscape) {
+    #canvas {
+        height: 100vh;
+        position: fixed;
+        width: 80%;
+    } 
+
+    .panel-wrapper1 {
+        position: relative;
+        top: -150px;
+        z-index: 200;
+    }
+
+    #startContent img,
+    #descriptionBox img,
+    #howToPlayBox img{
+        height: 105vh;
+        /* position: fixed; */
+    } 
+
+    #endWinScreenBox, #endOverScreenBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #endWinScreenBox img, #endOverScreenBox img {
+        max-width: 720px;
+        height: 102vh;
+    }
+
+    .descriptionBtn_container {
+        position: relative;
+        top: -70px;
+        padding-right: 130px;
+}
+        button img {
+            width: 25px;
+        }
+        
+
 }
 
 @media (hover: none) and (orientation: portrait) {
@@ -351,6 +337,91 @@ span {
 
     h1 {
         display: none;
+    }
+
+    #sound {
+        display: none;
+    }
+
+    .panel-wrapperL {
+        display: none;
+    }
+
+    .panel-wrapperR {
+        display: none;
+    }
+}
+
+/* Smartphone ------- */
+
+@media only screen and (max-width: 720px) {
+    #canvas {
+        width: 100%;
+    }
+
+    #startScreen, #endWinScreenBox, #endOverScreenBox {
+        width: 100vw;
+    }
+
+    #endWinScreenBox img, #endOverScreenBox img {
+        width: 100vw;
+    }
+
+    #startContent img,
+    #descriptionBox img,
+    #howToPlayBox img{
+        width: 100vw; 
+    } 
+
+    h1 {
+        font-size: 20px;
+    }
+
+}
+
+@media only screen and (max-width: 480px) {
+    #canvas {
+        height: 100vh;
+        display: none;
+    }
+
+    #startScreen {
+        height: 100vh;
+    }
+
+    #endWinScreenBox img, #endOverScreenBox img {
+        height: 100vh;
+    }
+
+    #startContent img,
+    #descriptionBox img,
+    #howToPlayBox img{
+        height: 100vh;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    .panel1,
+    #startScreen {
+        display: none;
+    }
+
+    .desktopBtn {
+        display: none;
+    }
+
+    .panel-wrapperL {
+        display: block;
+    }
+
+    .panel-wrapperR {
+        display: block;
+    }
+
+    .rotateScreen {
+        display: flex;
     }
 
     #sound {

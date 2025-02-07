@@ -18,9 +18,9 @@ function toggleFullscreen() {
 function openFullscreen(elem) {
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) { /* Safari */
+    } else if (elem.webkitRequestFullscreen) {
         elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE11 */
+    } else if (elem.msRequestFullscreen) { 
         elem.msRequestFullscreen();
     }
 }
@@ -28,9 +28,9 @@ function openFullscreen(elem) {
 function closeFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) { /* Safari */
+    } else if (document.webkitExitFullscreen) { 
         document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { /* IE11 */
+    } else if (document.msExitFullscreen) { 
         document.msExitFullscreen();
     }
 }
@@ -40,30 +40,30 @@ document.addEventListener("fullscreenchange", () => {
     let img = fullscreenBtn.querySelector("img");
 
     if (!document.fullscreenElement) {
-        img.src = "./img/icon/fullscreen.png"; // Icon für "Fullscreen starten"
+        img.src = "./img/icon/fullscreen.png";
     } else {
-        img.src = "./img/icon/closescreen.png"; // Icon für "Fullscreen beenden"
+        img.src = "./img/icon/closescreen.png"; 
     }
 });
 
 function restartGame() {
     let endScreen = document.getElementById("endScreenBox");
     if (endScreen) {
-        endScreen.remove(); // Game Over Screen entfernen
+        endScreen.classList.add("d-none");
     }
     if (world) {
-        world = null; // Altes world-Objekt löschen, um einen Neustart zu erzwingen
+        world = null; 
     }
     canvas = document.getElementById("canvas");
-    canvas.classList.remove("d-none"); // Canvas wieder anzeigen
+    canvas.classList.remove("d-none"); 
     AudioHub.loadSoundState();
-    startGame(); // Neues Spiel starten
+    startGame();
     updateSoundIcon();
 }
 
 function startGame() {
     if (world) {
-        world = null; // Altes world-Objekt wirklich zurücksetzen
+        world = null;
     }
 
     let startScreen = document.getElementById("howToPlayBox");
@@ -72,7 +72,7 @@ function startGame() {
     }
 
     canvas = document.getElementById("canvas");
-    canvas.classList.remove("d-none"); // Stelle sicher, dass das Spielfeld sichtbar ist
+    canvas.classList.remove("d-none");
 
     let panel2 = document.querySelector(".panel2");
     if (panel2) {
@@ -80,15 +80,14 @@ function startGame() {
     }
 
     if (AudioHub.soundEnabled) {
-        AudioHub.startBackgroundMusic(); // Starte Hintergrundmusik
+        AudioHub.startBackgroundMusic();
     }
 
-    initLevel(); // Level initialisieren
-    world = new World(canvas, keyboard); // Neues Spielobjekt erstellen
+    initLevel();
+    world = new World(canvas, keyboard);
 
-    world.gameOver = false; // Spielstatus zurücksetzen
+    world.gameOver = false;
 }
-
 
 function howToPlayScreen() {
     descriptionScreen = document.getElementById("descriptionBox");
@@ -105,8 +104,7 @@ function startDescription() {
 }
 
 function init() {
-    AudioHub.loadSoundState();  // Überprüfen und Laden des gespeicherten Sound-Status
-    // Sound-Icon nach dem Status aktualisieren
+    AudioHub.loadSoundState(); 
     updateSoundIcon();
 
     let startScreen = document.getElementById("startScreen");
@@ -119,12 +117,6 @@ function init() {
         canvas.classList.remove("d-none");
     }
     canvas.classList.add("d-none");
-
-    // if (AudioHub.soundEnabled) {
-    //     AudioHub.stopGameSound(); // Stoppe alle anderen Sounds
-    //     AudioHub.startBackgroundMusic(); // Starte nur die Hintergrundmusik
-    // }
-
     startScreen.innerHTML = startTemplate();
 }
 
@@ -159,13 +151,10 @@ function bindBtsPressEvents() {
     const jumpKey = document.getElementById("jumpKey");
     const posionKey = document.getElementById("posionKey");
     const slashKey = document.getElementById("slashKey");
-
-    // Touchstart und Touchend für Buttons
     const touchHandler = (key, action) => {
         return (e) => {
-            // Check if the event can be prevented (if cancelable is true)
             if (e.cancelable) {
-                e.preventDefault();  // Prevent default only if it is allowed
+                e.preventDefault();
             }
             
             world.keyboard[key] = action;
@@ -215,13 +204,13 @@ window.addEventListener("keydown", (e) => {
         keyboard.DOWN = true;
     }
     if (e.keyCode == 32) {
-        e.preventDefault(); // Verhindert ungewolltes Verhalten
+        e.preventDefault(); 
         keyboard.SPACE = true;
     }
     if (e.keyCode == 68) {
         keyboard.D = true;
     }
-    if (e.keyCode == 83 && !keyboard.S_SOLVED) {   // Verhindert mehrfaches Auslösen des Slash-Angriffs
+    if (e.keyCode == 83 && !keyboard.S_SOLVED) {
         keyboard.S = true;
     }
 });
