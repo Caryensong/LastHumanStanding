@@ -168,8 +168,6 @@ class Endboss extends MovableObject {
         this.img = this.imageCache[this.Images_Hurt[currentFrame]];
         currentFrame++;
         AudioHub.playSound(AudioHub.EndbossHurt);
-
-
       } else {
         clearInterval(hurtAnimationInterval);
         setTimeout(() => {
@@ -203,8 +201,7 @@ class Endboss extends MovableObject {
         currentFrame++;
       } else {
         clearInterval(deadAnimationInterval);
-        console.log("Endboss ist besiegt!");
-
+        this.img = this.imageCache[this.Images_Dying[this.Images_Dying.length - 1]]; // Bleibt auf letztem Bild
       }
     }, 100);
   }

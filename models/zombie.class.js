@@ -117,7 +117,7 @@ class Zombies extends MovableObject{
      * @returns {void}
      */
     playDeadAnimation(onAnimationComplete) {
-        this.isDead = true; // Setze den Zombie-Status auf "stirbt"
+        this.isDead = true;
         let currentFrame = 0;
         this.width=90;
         this.height=50;

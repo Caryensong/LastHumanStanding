@@ -25,7 +25,6 @@ class Level {
    */
     level_end_x=2160;
 
-
       /**
    * Creates a new level with specified objects and components.
    * 

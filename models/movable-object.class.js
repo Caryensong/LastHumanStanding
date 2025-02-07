@@ -193,7 +193,6 @@ class MovableObject extends DrawableObject {
         if (this instanceof Character) {
           this.playDeathAnimation();
         } else if (this instanceof Endboss) {
-          console.log("Endboss besiegt!");
           this.playDeadAnimation();
         }
       } else {

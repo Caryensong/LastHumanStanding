@@ -214,24 +214,23 @@ class Character extends MovableObject {
    playDeathAnimation() {
       if (this.isDeadAlready) return;
   
-      console.log("Starte Todesanimation!");
       this.isDeadAlready = true;
       this.speed = 0;  
       this.world.keyboard = {}; 
-  
+
       let index = 0;
       let deathAnimation = setInterval(() => {
-          this.img = this.imageCache[this.Images_Dead[index]];
-          index++;
-  
-          if (index >= this.Images_Dead.length) {
-              clearInterval(deathAnimation);
-              console.log("Todesanimation beendet!");
-          }
-      }, 100);
+         if (index < this.Images_Dead.length) {
+             this.img = this.imageCache[this.Images_Dead[index]];
+             index++;
+             AudioHub.playSound(AudioHub.CharDead);
+         } else {
+             clearInterval(deathAnimation);
+             this.img = this.imageCache[this.Images_Dead[this.Images_Dead.length - 1]]; // Bleibt auf letztem Bild
+         }
+     }, 100);
   
       setTimeout(() => {
-          console.log("Spieler ist tot! Game Over!");
       }, this.Images_Dead.length * 100);
   }
   

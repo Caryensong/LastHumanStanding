@@ -14,7 +14,6 @@ class DrawableObject {
     width = 155;
     height = 140;
 
-
     /**
         * Loads an image from a given file path.
         * 
@@ -57,9 +56,7 @@ class DrawableObject {
         //         this.height - this.offset.top - this.offset.bottom
         //     );
             ctx.stroke();
-        
     }
-
     
     loadImages(arr) {
         arr.forEach((path) => {
@@ -68,5 +65,4 @@ class DrawableObject {
             this.imageCache[path] = img;
         });
     }
-
 }

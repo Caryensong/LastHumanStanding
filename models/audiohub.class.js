@@ -10,6 +10,7 @@ class AudioHub {
     static CharJump = new Audio('./audio/jump.mp3');
     static CharHurt = new Audio('./audio/hurt.mp3');
     static CharSlash = new Audio('./audio/sword-sound-260274.mp3');
+    static CharDead = new Audio('./audio/human_pain.mp3');
     static EndbossWalk = new Audio('./audio/monster_step.mp3');
     static EndbossHurt = new Audio('./audio/monster-211717.mp3');
     static GameOverSound = new Audio('./audio/gameover.mp3');
@@ -24,6 +25,7 @@ class AudioHub {
         AudioHub.CharWalk,
         AudioHub.CharJump,
         AudioHub.CharSlash,
+        AudioHub.CharDead,
         AudioHub.CharHurt,
         AudioHub.EndbossHurt,
         AudioHub.EndbossWalk,

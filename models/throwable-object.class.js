@@ -41,14 +41,14 @@ class ThrowableObject extends MovableObject {
      * @param {Character} character - The character who is throwing the object.
      */
     constructor(x, y, character) {
-      super().loadImage('./img/poison/1.png'); // Sets the initial image of the object
-      this.loadImages(this.Images_Explosion); // Loads the explosion images for the throwable object
+      super().loadImage('./img/poison/1.png');
+      this.loadImages(this.Images_Explosion); 
       this.x = x;
       this.y = y;
-      this.character = character; // Reference to the character object
-      this.height = 50; // Set the height of the throwable object
-      this.width = 50;  // Set the width of the throwable object
-      this.throw(); // Initiates the throwing action of the object
+      this.character = character; 
+      this.height = 50;
+      this.width = 50;
+      this.throw();
     }
   
     /**
@@ -56,14 +56,14 @@ class ThrowableObject extends MovableObject {
      * The object is thrown in the direction the character is facing (left or right).
      */
     throw() {
-      this.speedY = 30; // Initial speed in the Y-direction (upward throw)
+      this.speedY = 30;
       this.applyGravaty(); // Applies gravity to the object
       setInterval(() => {
         // Moves the object in the direction the character is facing (left or right)
         if (this.character.otherDirection === true) {
-          this.x -= 10; // Moves left if the character is facing left
+          this.x -= 10; 
         } else {
-          this.x += 10; // Moves right if the character is facing right
+          this.x += 10;
         }
       }, 40); // Updates the position of the object every 40 milliseconds
     }

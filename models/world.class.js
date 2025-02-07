@@ -141,7 +141,6 @@ class World {
  */
   handleObjectCollision(object, index) {
     if (object instanceof PoisonObjects) {
-      console.log('Poison Flasche eingesammelt');
       this.level.objects.splice(index, 1);
       this.poisonCount = Math.min(this.poisonCount + 1, 5);
       this.updatePoisonBar();
@@ -152,7 +151,6 @@ class World {
 
     }      // Life-Objekt einsammeln
     if (object instanceof LifeObjects) {
-      console.log('Leben eingesammelt');
       this.level.objects.splice(index, 1);
       this.character.energy = Math.min(this.character.energy + 20, 100);
       this.updateLifeBar();
@@ -171,7 +169,6 @@ class World {
     if (poisonBar) {
       let poisonPercentage = (this.poisonCount / 5) * 100;
       poisonBar.setPoisonPercentage(poisonPercentage);
-      console.log('Poison-Bar aktualisiert:', poisonPercentage);
     }
   }
 
@@ -182,7 +179,6 @@ class World {
     const lifeBar = this.level.statusBar.find((bar) => bar.type === 'life');
     if (lifeBar) {
       lifeBar.setPercentage(this.character.energy);
-      console.log('Life-Bar aktualisiert:', this.character.energy);
     }
   }
 
@@ -215,8 +211,6 @@ class World {
   checkEnemyAndEndbossCollisions() {
     this.level.enemies.forEach((enemy, index) => {
       if (this.character.isColliding(enemy) || this.character.isColliding(this.endboss)) {
-        console.log(this.character.isColliding(this.endboss));
-
         // Slashing-Überprüfung
         if (this.character.isSlashing) {
           this.handleSlashing();
@@ -231,7 +225,6 @@ class World {
         // Normaler Treffer
         if (!this.character.isInvulnerable) {
           this.character.hit();
-          console.log("Charakter wurde getroffen", this.character.energy);
           this.updateLifeBar();
         }
       }
@@ -266,7 +259,6 @@ class World {
   handleZombieCollision(enemy, index) {
     this.character.isInvulnerable = true;
     this.removeEnemy(enemy, index);
-    console.log("Zombie von oben getroffen!");
 
     setTimeout(() => {
       this.character.isInvulnerable = false;
@@ -281,10 +273,8 @@ class World {
   checkZombieHandCollisions() {
     this.level.zombieHands.forEach((zombieHand) => {
       if (this.character.isColliding(zombieHand)) {
-        console.log("Kollision mit Zombie-Hand erkannt!");
         if (!this.character.isInvulnerable) {
           this.character.hit(); // Charakter wird getroffen
-          console.log("Charakter wurde von der Zombie-Hand getroffen", this.character.energy);
           this.updateLifeBar();
         }
       }
@@ -310,14 +300,12 @@ class World {
   handleThrowableObjectCollision(bottle, bottleIndex) {
     this.level.enemies.forEach((enemy, enemyIndex) => {
       if (bottle.isColliding(enemy)) {
-        console.log("Poison trifft Zombie!");
         this.removeThrowableObject(bottleIndex);
         this.removeEnemy(enemy, enemyIndex);
       }
     });
 
     if (this.endboss && bottle.isColliding(this.endboss)) {
-      console.log("Poison trifft Endboss");
       this.removeThrowableObject(bottleIndex);
       this.handleEndbossCollision();
     }
@@ -348,7 +336,6 @@ class World {
   handleEndbossCollision() {
     this.endboss.playHurtAnimation();
     this.endboss.hit();
-    console.log("Endboss Life", this.endboss.energy);
     this.updateEndbossLifeBar();
   }
 
@@ -358,17 +345,14 @@ class World {
   checkSlashingCollisions() {
     if (this.endboss.isDying) return; // Falls Endboss schon stirbt, keine weitere Aktion
     if (this.character.isColliding(this.endboss) && this.character.isSlashing) {
-      console.log("Endboss wurde mit Schwert getroffen");
       this.handleEndbossCollision();
     } else if (this.character.isColliding(this.endboss)) {
       this.character.hit(); // Charakter wird getroffen
-      console.log("Charakter wurde getroffen", this.character.energy);
       this.updateLifeBar();
     }
 
     this.level.enemies.forEach((enemy, index) => {
       if (this.character.isColliding(enemy) && this.character.isSlashingColliding(enemy)) {
-        console.log("Zombie wurde vom Schwert getroffen!");
         this.removeEnemy(enemy, index);
       }
     });
@@ -378,25 +362,33 @@ class World {
  * Checks if the game is over based on the status of the character and the end boss.
  */
   checkGameOver() {
-    if (this.character.isDead() && !this.gameOver) {
-      let winner = "endboss";
-      this.gameOver = true;
-      this.stopAllIntervals();
-      this.renderGameOver(winner);
-      this.hidePanel2(); // Panel2 ausblenden
-      AudioHub.playSound(AudioHub.GameOverSound);
-      this.handleGameOver();
-
-    } else if (this.endboss.isDead() && !this.gameOver) {
-      let winner = "character";
-      this.gameOver = true;
-      this.stopAllIntervals();
-      this.renderGameOver(winner);
-      this.hidePanel2();
-      AudioHub.playSound(AudioHub.YouWinSound);
-      this.handleGameOver();
+    if (!this.gameOver) {
+        if (this.character.isDead()) {
+            this.handleGameOverSequence("endboss", this.character.playDeathAnimation.bind(this.character));
+        } else if (this.endboss.isDead()) {
+            this.handleGameOverSequence("character", this.endboss.playDeadAnimation.bind(this.endboss));
+        }
     }
-  }
+}
+
+/**
+ * Verwaltet die Game-Over-Sequenz.
+ * @param {string} winner - Der Gewinner des Spiels ("character" oder "endboss").
+ * @param {Function} playDeathAnimation - Die Todesanimation, die abgespielt werden soll.
+ */
+handleGameOverSequence(winner, playDeathAnimation) {
+    setTimeout(() => { this.gameOver = true; }, 3000);
+
+    setTimeout(() => {
+        this.renderGameOver(winner);
+        this.hidePanel2();
+        AudioHub.playSound(winner === "character" ? AudioHub.YouWinSound : AudioHub.GameOverSound);
+        this.handleGameOver();
+    }, 2000);
+
+    setTimeout(playDeathAnimation, 100); // Animation starten
+    setTimeout(() => { this.stopAllIntervals(); }, 5000); // Stoppe erst nach der Animation
+}
 
   /**
  * Handles the game over logic.
