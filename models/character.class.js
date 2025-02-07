@@ -19,6 +19,7 @@ class Character extends MovableObject {
    isInvulnerable = false;
    isDeadAlready = false; 
 
+
     /**
      * Defines the hitbox offset of the character.
      * @type {object}

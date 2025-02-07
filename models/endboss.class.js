@@ -73,12 +73,6 @@ class Endboss extends MovableObject {
   */
   isDying = false;
 
-  /**
-   * Flag to determine if the Endboss is currently hurt.
-   * 
-   * @type {boolean}
-   */
-  isHurt = false;
 
   /**
   * Creates an instance of the Endboss.
@@ -113,7 +107,7 @@ class Endboss extends MovableObject {
     if (this.walkingInterval) clearInterval(this.walkingInterval);
 
     this.movementInterval = setInterval(() => {
-      if (this.isDying || this.isHurt) return; // Stoppt Bewegung, wenn verletzt oder tot
+      if (this.isDying || this.isHurt()) return; // Stoppt Bewegung, wenn verletzt oder tot
 
       const distance = Math.abs(world.character.x - this.x);
 
@@ -121,7 +115,7 @@ class Endboss extends MovableObject {
         if (this.walkingInterval) clearInterval(this.walkingInterval);
 
         this.walkingInterval = setInterval(() => {
-          if (this.isDying || this.isHurt) {
+          if (this.isDying || this.isHurt()) {
             return;
           }
 
@@ -154,9 +148,7 @@ class Endboss extends MovableObject {
     * @returns {void}
     */
   playHurtAnimation() {
-    if (this.isHurt) return;
-
-    this.isHurt = true;  // Flag setzen, damit Animation nicht mehrfach gestartet wird
+    if (this.isHurt()) return;
 
     clearInterval(this.movementInterval);
     clearInterval(this.walkingInterval);  
@@ -171,7 +163,6 @@ class Endboss extends MovableObject {
       } else {
         clearInterval(hurtAnimationInterval);
         setTimeout(() => {
-          this.isHurt = false; 
           this.startMovement();
         }, 500);
       }

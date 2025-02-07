@@ -223,7 +223,7 @@ class World {
         }
 
         // Normaler Treffer
-        if (!this.character.isInvulnerable) {
+        if (!this.character.isInvulnerable && !this.character.isHurt()) {
           this.character.hit();
           this.updateLifeBar();
         }
@@ -333,6 +333,7 @@ class World {
    * Handles the collision between a throwable object and the end boss.
    */
   handleEndbossCollision() {
+    if (this.endboss.isHurt()) return; 
     this.endboss.playHurtAnimation();
     this.endboss.hit();
     this.updateEndbossLifeBar();
