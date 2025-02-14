@@ -208,119 +208,119 @@ class Character extends MovableObject {
       this.animate();
    }
 
-    /**
-     * Plays the character's death animation.
-     * Once played, the character is considered dead.
-     */
-   playDeathAnimation() {
-      if (this.isDeadAlready) return;
-  
-      this.isDeadAlready = true;
-      this.speed = 0;  
-      this.world.keyboard = {}; 
+   /**
+ * Triggers the death animation of the character.
+ */
+playDeathAnimation() {
+   if (this.isDeadAlready) return;
+   this.isDeadAlready = true;
+   this.speed = 0;
+   this.world.keyboard = {};
+   let index = 0;
+   let deathAnimation = setInterval(() => {
+       if (index < this.Images_Dead.length) {
+           this.img = this.imageCache[this.Images_Dead[index++]];
+           AudioHub.playSound(AudioHub.CharDead);
+       } else {
+           clearInterval(deathAnimation);
+           this.img = this.imageCache[this.Images_Dead.at(-1)];
+       }
+   }, 100);
+}
 
-      let index = 0;
-      let deathAnimation = setInterval(() => {
-         if (index < this.Images_Dead.length) {
-             this.img = this.imageCache[this.Images_Dead[index]];
-             index++;
-             AudioHub.playSound(AudioHub.CharDead);
-         } else {
-             clearInterval(deathAnimation);
-             this.img = this.imageCache[this.Images_Dead[this.Images_Dead.length - 1]];
-         }
-     }, 100);
-  
-      setTimeout(() => {
-      }, this.Images_Dead.length * 100);
-  }
-  
-    /**
-     * Handles character animations based on user input and game events.
-     */
-   animate() {
-      setInterval(() => {
-         AudioHub.CharWalk.pause();
-         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-            this.moveRight();
-            AudioHub.playSound(AudioHub.CharWalk);
-            this.otherDirection = false;
-            this.offset = {
-               top: 30,
-               left: 40,
-               right: 40,
-               bottom: 20
-            }
-         }
+/**
+* Handles character movement and actions at a fixed interval.
+*/
+animate() {
+   setInterval(() => {
+       this.handleMovement();
+       this.handleActions();
+       this.world.camera_x = -this.x + 100;
+   }, 1000 / 60);
+   setInterval(() => this.handleAnimation(), 70);
+}
 
-         if (this.world.keyboard.LEFT && this.x > -100) {
-            this.moveLeft();
-            AudioHub.playSound(AudioHub.CharWalk);
-            this.otherDirection = true;
-            this.offset = {
-               top: 30,
-               left: 40,
-               right: 40,
-               bottom: 20
-            }
-         }
-         
-         if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-            if(!this.world.keyboard.SPACE_SOLVED){
-               this.jump();
-               AudioHub.playSound(AudioHub.CharJump);
-               this.world.keyboard.SPACE_SOLVED = true;
-            } 
-         }
+/**
+* Handles character movement based on user input.
+*/
+handleMovement() {
+   AudioHub.CharWalk.pause();
+   if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) this.move("right");
+   if (this.world.keyboard.LEFT && this.x > -100) this.move("left");
+   if (this.world.keyboard.SPACE && !this.isAboveGround() && !this.world.keyboard.SPACE_SOLVED) this.jumpAction();
+}
 
-         if (this.world.keyboard.S && !this.world.keyboard.S_SOLVED) {
-            this.isSlashing = true;
-            AudioHub.playSound(AudioHub.CharSlash);
-            this.offset = {
-                  top: 30,
-                  left: 35,
-                  right: 15,
-                  bottom: 20
-               };   
-            if (!this.world.keyboard.S_SOLVED) {
-               this.world.checkSlashingCollisions();
-               this.world.keyboard.S_SOLVED = true;   
-            }
-            setTimeout(() => {
-               this.isSlashing = false;
-               this.world.keyboard.S_SOLVED = false;
-            }, 1000);
-         }
+/**
+* Handles character actions such as slashing and throwing.
+*/
+handleActions() {
+   if (this.world.keyboard.S && !this.world.keyboard.S_SOLVED) this.slashAction();
+   if (this.world.keyboard.D && !this.world.keyboard.D_SOLVED) this.throwAction();
+}
 
-         if (this.world.keyboard.D) {
-            if(!this.world.keyboard.D_SOLVED){
-              this.playAnimation(this.Images_Throwing);
-              AudioHub.playSound(AudioHub.CharJump);  
-               this.world.keyboard.D_SOLVED = true;
-            }
-           
-         }
-         this.world.camera_x = -this.x + 100;
-      }, 1000 / 60);
+/**
+* Handles character animation based on state.
+*/
+handleAnimation() {
+   if (this.isDeadAlready) return;
+   if (this.isSlashing) return this.playAnimation(this.Images_Slashing);
+   if (this.isHurt()) return this.playHurtAnimation();
+   if (this.isAboveGround()) return this.playAnimation(this.Images_Jumping);
+   if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) return this.playAnimation(this.Images_Walking);
+   this.playAnimation(this.Images_Idle);
+}
 
-   
-      setInterval(() => {
-         if (this.isDeadAlready) return;
-        
-         if (this.isSlashing) {
-            this.playAnimation(this.Images_Slashing);
-         }else if (this.isHurt()) {
-            AudioHub.playSound(AudioHub.CharHurt);
-            this.playAnimation(this.Images_Hurt);
-         } else if (this.isAboveGround()) {
-            this.playAnimation(this.Images_Jumping);
-         } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-               this.playAnimation(this.Images_Walking);
-         } else{
-            this.playAnimation(this.Images_Idle);
-         }
-      }, 70);
-   }
+/**
+* Moves the character in the specified direction.
+* @param {string} direction - The direction to move ("right" or "left").
+*/
+move(direction) {
+   this[direction === "right" ? "moveRight" : "moveLeft"]();
+   AudioHub.playSound(AudioHub.CharWalk);
+   this.otherDirection = direction !== "right";
+   this.offset = { top: 30, left: 40, right: 40, bottom: 20 };
+}
+
+/**
+* Executes the jump action for the character.
+*/
+jumpAction() {
+   this.jump();
+   AudioHub.playSound(AudioHub.CharJump);
+   this.world.keyboard.SPACE_SOLVED = true;
+}
+
+/**
+* Executes the slashing attack for the character.
+*/
+slashAction() {
+   this.isSlashing = true;
+   AudioHub.playSound(AudioHub.CharSlash);
+   this.offset = { top: 30, left: 35, right: 15, bottom: 20 };
+   this.world.checkSlashingCollisions();
+   this.world.keyboard.S_SOLVED = true;
+   setTimeout(() => {
+       this.isSlashing = false;
+       this.world.keyboard.S_SOLVED = false;
+   }, 1000);
+}
+
+/**
+* Executes the throwing action for the character.
+*/
+throwAction() {
+   this.playAnimation(this.Images_Throwing);
+   AudioHub.playSound(AudioHub.CharJump);
+   this.world.keyboard.D_SOLVED = true;
+}
+
+/**
+* Plays the hurt animation and sound effect.
+*/
+playHurtAnimation() {
+   AudioHub.playSound(AudioHub.CharHurt);
+   this.playAnimation(this.Images_Hurt);
+}
 
 }
 

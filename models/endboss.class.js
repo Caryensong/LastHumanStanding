@@ -95,106 +95,210 @@ class Endboss extends MovableObject {
     this.startMovement();
   }
 
+/**
+ * Starts the movement of the Endboss. The Endboss will walk toward the player and perform a slashing animation.
+ * The movement stops if the Endboss is hurt or dying.
+ * 
+ * @returns {void}
+ */
+startMovement() {
+  this.clearMovementIntervals();
 
-  /**
-  * Starts the movement of the Endboss. The Endboss will walk toward the player and perform a slashing animation.
-  * The movement stops if the Endboss is hurt or dying.
-  * 
-  * @returns {void}
-  */
-  startMovement() {
-    if (this.movementInterval) clearInterval(this.movementInterval);
-    if (this.walkingInterval) clearInterval(this.walkingInterval);
+  this.movementInterval = setInterval(() => {
+    if (this.isDying || this.isHurt()) return;
 
-    this.movementInterval = setInterval(() => {
-      if (this.isDying || this.isHurt()) return;
+    const distance = Math.abs(world.character.x - this.x);
+    if (distance <= 500) {
+      this.startWalking();
+    } else {
+      this.stopWalking();
+    }
+  }, 80);
+}
 
-      const distance = Math.abs(world.character.x - this.x);
+/**
+* Clears any existing movement or walking intervals.
+* This ensures that there are no overlapping intervals when starting new movements or walking cycles.
+* 
+* @returns {void}
+*/
+clearMovementIntervals() {
+  if (this.movementInterval) clearInterval(this.movementInterval);
+  if (this.walkingInterval) clearInterval(this.walkingInterval);
+}
 
-      if (distance <= 500) {
-        if (this.walkingInterval) clearInterval(this.walkingInterval);
+/**
+* Starts the walking animation and movement of the Endboss toward the player.
+* The walking interval is created, and the direction is updated in every cycle.
+* 
+* @returns {void}
+*/
+startWalking() {
+  this.clearWalkingInterval(); // Ensure no previous walking interval is running.
 
-        this.walkingInterval = setInterval(() => {
-          if (this.isDying || this.isHurt()) {
-            return;
-          }
+  this.walkingInterval = setInterval(() => {
+    if (this.isDying || this.isHurt()) return;
 
-          if (this.x <= 1200) {
-            this.otherDirection = false;
-          } else if (this.x >= 1800) {
-            this.otherDirection = true;
-          }
+    this.updateDirection();
+    this.moveCharacter();
+  }, 5);
 
-          if (this.otherDirection) {
-            this.moveLeft();
-          } else {
-            this.moveRight();
-          }
+  this.playWalkingAnimation();
+}
 
-        }, 5);
+/**
+* Clears the walking interval, stopping any active walking movement.
+* 
+* @returns {void}
+*/
+clearWalkingInterval() {
+  if (this.walkingInterval) clearInterval(this.walkingInterval);
+}
 
-        this.playAnimation(this.Images_Slashing);
-        AudioHub.playSound(AudioHub.EndbossWalk);
-      } else {
-        AudioHub.EndbossWalk.pause();
-      }
-    }, 80);
-  }
+/**
+* Updates the direction in which the Endboss is moving.
+* The direction is set based on the Endboss's x-coordinate, reversing direction if it reaches the specified limits.
+* 
+* @returns {void}
+*/
+updateDirection() {
+  this.otherDirection = this.x >= 1800 ? true : this.x <= 1200 ? false : this.otherDirection;
+}
 
-  /**
-    * Plays the hurt animation for the Endboss.
-    * The hurt animation stops after playing through all frames, then resumes the Endboss's movement.
-    * 
-    * @returns {void}
-    */
-  playHurtAnimation() {
-    if (this.isHurt()) return;
+/**
+* Moves the Endboss either left or right based on the current direction.
+* 
+* @returns {void}
+*/
+moveCharacter() {
+  this.otherDirection ? this.moveLeft() : this.moveRight();
+}
 
-    clearInterval(this.movementInterval);
-    clearInterval(this.walkingInterval);  
+/**
+* Plays the walking animation for the Endboss, including the slashing animation.
+* Additionally, it plays the walk sound effect.
+* 
+* @returns {void}
+*/
+playWalkingAnimation() {
+  this.playAnimation(this.Images_Slashing);
+  AudioHub.playSound(AudioHub.EndbossWalk);
+}
 
-    let currentFrame = 0;
+/**
+* Pauses the walking sound and stops the Endboss from walking.
+* 
+* @returns {void}
+*/
+stopWalking() {
+  AudioHub.EndbossWalk.pause();
+}
 
-    const hurtAnimationInterval = setInterval(() => {
-      if (currentFrame < this.Images_Hurt.length) {
-        this.img = this.imageCache[this.Images_Hurt[currentFrame]];
-        currentFrame++;
-        AudioHub.playSound(AudioHub.EndbossHurt);
-      } else {
-        clearInterval(hurtAnimationInterval);
-        setTimeout(() => {
-          this.startMovement();
-        }, 500);
-      }
-    }, 100); 
-  }
+/**
+* Plays the hurt animation for the Endboss.
+* The hurt animation stops after playing through all frames, then resumes the Endboss's movement.
+* 
+* @returns {void}
+*/
+playHurtAnimation() {
+  if (this.isHurt()) return;
 
-  /**
-    * Plays the dying animation for the Endboss.
-    * The animation plays through all frames and then the Endboss is considered defeated.
-    * 
-    * @returns {void}
-    */
-  playDeadAnimation() {
-    if (this.isDying) return;
-    this.isDying = true;
-    this.energy = 0;
-    clearInterval(this.movementInterval); 
-    clearInterval(this.walkingInterval); 
-    AudioHub.EndbossWalk.pause();
+  clearInterval(this.movementInterval);
+  clearInterval(this.walkingInterval);  
 
-    let currentFrame = 0;
+  let currentFrame = 0;
 
-    const deadAnimationInterval = setInterval(() => {
+  const hurtAnimationInterval = setInterval(() => {
+    if (currentFrame < this.Images_Hurt.length) {
+      this.img = this.imageCache[this.Images_Hurt[currentFrame]];
+      currentFrame++;
+      AudioHub.playSound(AudioHub.EndbossHurt);
+    } else {
+      clearInterval(hurtAnimationInterval);
+      setTimeout(() => {
+        this.startMovement();
+      }, 500);
+    }
+  }, 100); 
+}
+
+/**
+* Plays the dying animation for the Endboss.
+* The animation plays through all frames and then the Endboss is considered defeated.
+* 
+* @returns {void}
+*/
+playDeadAnimation() {
+  if (this.isDying) return;
+
+  this.startDyingSequence();
+  this.playDeadAnimationFrames();
+}
+
+/**
+* Starts the dying sequence by setting the Endboss's state to dying, clearing intervals, and reducing energy.
+* 
+* @returns {void}
+*/
+startDyingSequence() {
+  this.isDying = true;
+  this.energy = 0;
+  this.stopMovement();
+}
+
+/**
+* Clears the movement and walking intervals, halting any further movement or actions.
+* 
+* @returns {void}
+*/
+stopMovement() {
+  clearInterval(this.movementInterval);
+  clearInterval(this.walkingInterval);
+  this.stopWalking();
+}
+
+/**
+* Plays the dying animation frames for the Endboss.
+* The animation is shown frame by frame and plays a sound with each frame.
+* 
+* @returns {void}
+*/
+playDeadAnimationFrames() {
+  let currentFrame = 0;
+  const deadAnimationInterval = setInterval(() => {
       if (currentFrame < this.Images_Dying.length) {
-        AudioHub.playSound(AudioHub.EndbossHurt);
-        this.img = this.imageCache[this.Images_Dying[currentFrame]];
-        currentFrame++;
+          this.updateDeadFrame(currentFrame);
+          currentFrame++;
       } else {
-        clearInterval(deadAnimationInterval);
-        this.img = this.imageCache[this.Images_Dying[this.Images_Dying.length - 1]]; 
+          this.finishDeadAnimation(deadAnimationInterval);
       }
-    }, 100);
-  }
+  }, 100);
+}
+
+/**
+* Updates the image for each frame during the dying animation.
+* A sound is played every time a new frame is shown.
+* 
+* @param {number} frame - The index of the current frame being shown.
+* 
+* @returns {void}
+*/
+updateDeadFrame(frame) {
+  AudioHub.playSound(AudioHub.EndbossHurt);
+  this.img = this.imageCache[this.Images_Dying[frame]];
+}
+
+/**
+* Finishes the dying animation by displaying the last frame and stopping the animation interval.
+* 
+* @param {number} deadAnimationInterval - The interval ID for the dying animation.
+* 
+* @returns {void}
+*/
+finishDeadAnimation(deadAnimationInterval) {
+  clearInterval(deadAnimationInterval);
+  this.img = this.imageCache[this.Images_Dying[this.Images_Dying.length - 1]];
+}
+
 
 }
